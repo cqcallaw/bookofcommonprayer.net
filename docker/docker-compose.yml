@@ -1,3 +1,4 @@
+name: dev
 services:
   db:
     image: mariadb:10.11
@@ -23,7 +24,7 @@ services:
     ports:
       - "127.0.0.1:8090:80"
     volumes:
-      - ../orig:/var/www/html
+      - ..:/var/www/html
       - ./config.php:/var/www/html/system/cfg/config.php:ro
       - ./htaccess:/var/www/html/.htaccess:ro
     depends_on:

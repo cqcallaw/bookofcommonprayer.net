@@ -1,7 +1,7 @@
 <?php
 //////////////////////////////////////////////
-// Local overlay. The production config stays in orig/system/cfg/config.php
-// and is hidden from the container by this file.
+// Local overlay. The container mounts this over system/cfg/config.php,
+// which stays untracked because it holds the production password.
 //////////////////////////////////////////////
 define("ADMIN_EMAIL","bcpmike@bookofcommonprayer.net");
 define("APPLICATION", "");
