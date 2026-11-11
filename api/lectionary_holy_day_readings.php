@@ -50,6 +50,9 @@ foreach ($hd->ot_list as $key => $ot_reading) {
     $p = new \BCP\Parser($db, $personalizedVersion);
     // The ot_type is used in the html template during loop
     $p->parseReadings(trim($ot_reading));
+    if (!empty($hd->ot_joins[$key])) {
+        $p->join = $hd->ot_joins[$key];
+    }
     $readings['ot'][$key] = $p;
     $readings['ot_type'] = $hd->ot_type;
     // DESTROY PARSER SO DATA NOT TRANSFERRED TO NEXT READING
@@ -61,6 +64,9 @@ foreach ($hd->nt_list as $key => $nt_reading) {
     // SET UP PARSERS
     $p = new \BCP\Parser($db, $personalizedVersion);
     $p->parseReadings($nt_reading);
+    if (!empty($hd->nt_joins[$key])) {
+        $p->join = $hd->nt_joins[$key];
+    }
     $readings['nt'][$key] = $p;
     $readings['nt_type'] = $hd->nt_type;
     // DESTROY PARSER SO DATA NOT TRANSFERRED
@@ -72,6 +78,9 @@ foreach ($hd->gospel_list as $key => $gospel_reading) {
     // SET UP PARSERS
     $p = new \BCP\Parser($db, $personalizedVersion);
     $p->parseReadings($gospel_reading);
+    if (!empty($hd->gospel_joins[$key])) {
+        $p->join = $hd->gospel_joins[$key];
+    }
     $readings['gospel'][$key]= $p;
     $readings['gospel_type']= $hd->gospel_type;
     // DESTROY PARSER SO DATA NOT TRANSFERRED
@@ -83,6 +92,9 @@ foreach ($hd->psalm as $key => $psalm) {
     // SET UP PARSERS
     $p = new \BCP\Parser($db, $personalizedPsalms, $personalizedVersion);
     $p->parseReadings($psalm, true);
+    if (!empty($hd->psalm_joins[$key])) {
+        $p->join = $hd->psalm_joins[$key];
+    }
     $readings['psalm'][$key]= $p;
     $readings['psalm_type']= $hd->psalm_type;
     // DESTROY PARSER SO DATA NOT TRANSFERRED

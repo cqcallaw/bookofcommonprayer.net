@@ -23,10 +23,10 @@
 </span>
 <span ng-if="reading.bracketed_reading && reading.full_bracket"><strong>]</strong></span>
 <span ng-if="reading.paren_reading && reading.full_paren"><strong>)</strong></span>
-<span ng-if="br.parseType == 'OR' && !$last">
+<span ng-if="(reading.join || br.parseType) == 'OR' && !$last">
 	<br/><strong><em>&mdash;OR&mdash;</em></strong><br/>
 </span>
-<span ng-if="br.parseType == 'AND' && !$last">
+<span ng-if="(reading.join || br.parseType) == 'AND' && !$last">
 	<br/><strong><em>&mdash;AND&mdash;</em></strong><br/>
 </span>
 </p>

@@ -91,11 +91,11 @@ class DailyOfficeReadings
         $query->execute();
         $this->query = $query;
         $results = $query->fetchAll(PDO::FETCH_ASSOC);
-        list($this->ot_list, $this->ot_type) =
+        list($this->ot_list, $this->ot_type, $this->ot_joins) =
             self::getReadingsArray($results[0]['ot']);
-        list($this->nt_list, $this->nt_type) =
+        list($this->nt_list, $this->nt_type, $this->nt_joins) =
             self::getReadingsArray($results[0]['nt']);
-        list($this->gospel_list, $this->gospel_type) =
+        list($this->gospel_list, $this->gospel_type, $this->gospel_joins) =
             self::getReadingsArray($results[0]['gospel']);
         list($this->m_psalms,$this->e_psalms) =
             self::getPsalmsArray($results[0]['psalms']);
@@ -110,18 +110,59 @@ class DailyOfficeReadings
      */
     private function getReadingsArray($reference)
     {
-        if (strstr($reference, "&&")) {
-            $returnArray = explode("&&", $reference);
-            $reading_type = "AND";
-        } elseif (strstr($reference, " or ")) {
-            $returnArray = explode("or", $reference);
-            $reading_type = "OR";
-        } else {
-            $returnArray[] = $reference;
-            $reading_type = "NORMAL";
+        // Alternatives are split before "&&". A few Easter Vigil rows are
+        // stored as "orGenesis" with no space. "8:6-18" continues the book
+        // from the previous piece of the same alternative.
+        $reference = trim((string) $reference);
+        $alternatives = preg_split('/\s+[Oo][Rr](?:\s+|(?=[A-Z]))|(?<=\S)[Oo][Rr](?=[A-Z])/', $reference);
+        $readings = array();
+        $joins = array();
+        $altCount = count($alternatives);
+        foreach ($alternatives as $altIndex => $alternative) {
+            $parts = explode("&&", $alternative);
+            $book = null;
+            $kept = array();
+            foreach ($parts as $part) {
+                $part = trim($part);
+                if ($part === "") {
+                    continue;
+                }
+                $bare = ltrim($part, " \t[(");
+                if (preg_match('/^\d+:/', $bare)) {
+                    if ($book) {
+                        $part = $book." ".$bare;
+                    }
+                } elseif (preg_match('/^(\d\s*[A-Za-z]+(?:\s+[A-Za-z]+)*)/', $bare, $match)
+                    || preg_match('/^([A-Za-z]+(?:\s+[A-Za-z]+)*)/', $bare, $match)) {
+                    $book = $match[1];
+                }
+                $kept[] = $part;
+            }
+            $keptCount = count($kept);
+            foreach ($kept as $partIndex => $part) {
+                $readings[] = $part;
+                if ($partIndex < $keptCount - 1) {
+                    $joins[] = "AND";
+                } elseif ($altIndex < $altCount - 1) {
+                    $joins[] = "OR";
+                } else {
+                    $joins[] = null;
+                }
+            }
         }
-        $readings = array_map('trim', $returnArray);
-        return array($readings, $reading_type);
+        if (count($readings) === 0) {
+            $readings[] = $reference;
+            $joins[] = null;
+        }
+        $used = array_values(array_filter($joins));
+        if (count($readings) <= 1) {
+            $reading_type = "NORMAL";
+        } elseif (count(array_unique($used)) === 1) {
+            $reading_type = $used[0];
+        } else {
+            $reading_type = "MIXED";
+        }
+        return array($readings, $reading_type, $joins);
     }
 
     /**

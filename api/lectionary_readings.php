@@ -28,6 +28,9 @@ foreach ($lectionary->ot_list as $key => $ot_reading) {
     $p = new \BCP\Parser($db, $useBCPPsalms, $personalizedVersion);
     // The ot_type is used in the html template during loop
     $p->parseReadings($ot_reading);
+    if (!empty($lectionary->ot_joins[$key])) {
+        $p->join = $lectionary->ot_joins[$key];
+    }
     $readings['ot'][$key] = $p;
     $readings['ot_type'] = $lectionary->ot_type;
     // DESTROY PARSER SO DATA NOT TRANSFERRED TO NEXT READING
@@ -39,6 +42,9 @@ foreach ($lectionary->nt_list as $key => $nt_reading) {
     // SET UP PARSERS
     $p = new \BCP\Parser($db, $useBCPPsalms, $personalizedVersion);
     $p->parseReadings($nt_reading);
+    if (!empty($lectionary->nt_joins[$key])) {
+        $p->join = $lectionary->nt_joins[$key];
+    }
     $readings['nt'][$key] = $p;
     $readings['nt_type'] = $lectionary->nt_type;
     // DESTROY PARSER SO DATA NOT TRANSFERRED
@@ -50,6 +56,9 @@ foreach ($lectionary->gospel_list as $key => $gospel_reading) {
     // SET UP PARSERS
     $p = new \BCP\Parser($db, $useBCPPsalms, $personalizedVersion);
     $p->parseReadings($gospel_reading);
+    if (!empty($lectionary->gospel_joins[$key])) {
+        $p->join = $lectionary->gospel_joins[$key];
+    }
     $readings['gospel'][$key]= $p;
     $readings['gospel_type']= $lectionary->gospel_type;
     // DESTROY PARSER SO DATA NOT TRANSFERRED
@@ -61,6 +70,9 @@ foreach ($lectionary->psalm as $key => $psalm) {
     // SET UP PARSERS
     $p = new \BCP\Parser($db, $useBCPPsalms, $personalizedVersion);
     $p->parseReadings($psalm, true);
+    if (!empty($lectionary->psalm_joins[$key])) {
+        $p->join = $lectionary->psalm_joins[$key];
+    }
     $readings['psalm'][$key]= $p;
     $readings['psalm_type']= $lectionary->psalm_type;
     // DESTROY PARSER SO DATA NOT TRANSFERRED

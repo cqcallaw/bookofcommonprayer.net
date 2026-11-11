@@ -27,6 +27,9 @@ foreach ($dor->ot_list as $key => $ot_reading) {
     $p = new \BCP\Parser($db, $useBCPPsalms, $personalizedVersion);
     // The ot_type is used in the html template during loop
     $p->parseReadings($ot_reading);
+    if (!empty($dor->ot_joins[$key])) {
+        $p->join = $dor->ot_joins[$key];
+    }
     $readings['ot'][$key] = $p;
     $readings['ot_type'] = $dor->ot_type;
     // DESTROY PARSER SO DATA NOT TRANSFERRED TO NEXT READING
@@ -38,6 +41,9 @@ foreach ($dor->nt_list as $key => $nt_reading) {
     // SET UP PARSERS
     $p = new \BCP\Parser($db, $useBCPPsalms, $personalizedVersion);
     $p->parseReadings($nt_reading);
+    if (!empty($dor->nt_joins[$key])) {
+        $p->join = $dor->nt_joins[$key];
+    }
     $readings['nt'][$key] = $p;
     $readings['nt_type'] = $dor->nt_type;
     // DESTROY PARSER SO DATA NOT TRANSFERRED
@@ -49,6 +55,9 @@ foreach ($dor->gospel_list as $key => $gospel_reading) {
     // SET UP PARSERS
     $p = new \BCP\Parser($db, $useBCPPsalms, $personalizedVersion);
     $p->parseReadings($gospel_reading);
+    if (!empty($dor->gospel_joins[$key])) {
+        $p->join = $dor->gospel_joins[$key];
+    }
     $readings['gospel'][$key]= $p;
     $readings['gospel_type']= $dor->gospel_type;
     // DESTROY PARSER SO DATA NOT TRANSFERRED
