@@ -21,6 +21,7 @@ class Route
 	public $acceptMatched		= null;
 	public $acceptExpected		= null;	
 	public $errorType			= null;
+	public $mapped				= null;
 	/**
 	 * Initializes the attributes
 	 */

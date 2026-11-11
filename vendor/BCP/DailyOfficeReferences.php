@@ -17,6 +17,7 @@ use PDO;
  * containing the year number (numeric), the id (alpha_numeric), day of week
  * (numeric)
  */
+#[\AllowDynamicProperties]
 class DailyOfficeReferences
 {
     public $db         = null;

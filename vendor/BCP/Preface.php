@@ -4,6 +4,7 @@ namespace BCP;
 use Exception;
 use PDO;
 
+#[\AllowDynamicProperties]
 class Preface
 {
     private $db = null;

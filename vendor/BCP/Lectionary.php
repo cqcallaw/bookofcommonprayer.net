@@ -14,6 +14,7 @@ namespace BCP;
  * @param int $CL Simple flag of 1 or 0; Contemporary Lectionary prayers
  * @param int $RCL Simple flag of 1 or 0; Use Revised Common Lectionary
  */
+#[\AllowDynamicProperties]
 class Lectionary extends ChurchCalendar
 {
     public $lectionary_year;

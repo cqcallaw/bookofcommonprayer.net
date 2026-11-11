@@ -3,6 +3,7 @@ namespace BCP;
 
 use PDO;
 
+#[\AllowDynamicProperties]
 class LectionaryHolyDayReadings
 {
     public $date    = null;

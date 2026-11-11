@@ -4,6 +4,7 @@ namespace BCP;
 use PDO;
 
 // Parser Class PHP
+#[\AllowDynamicProperties]
 class Parser
 {
     public $passage             = null;

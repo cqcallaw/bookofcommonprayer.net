@@ -14,6 +14,7 @@ namespace BCP;
  * @param string $do_id The id of the daily office, as it is in the database
  * @param string $winter_collect Whether there is the additional collect during portions of the winter.
  */
+#[\AllowDynamicProperties]
 class DailyOffice
 {
     public $do_yearNo       = null;

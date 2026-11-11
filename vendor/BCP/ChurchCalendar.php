@@ -18,6 +18,7 @@ namespace BCP;
  * @param string $winter_collect Whether there is the additional collect during portions of the winter.
  * @param array $sundays An array of Sunday dates that match particular sundays (e.g. 1 Lent, Pentecost, Easter)
  */
+#[\AllowDynamicProperties]
 class ChurchCalendar
 {
     public $year                    = null;
@@ -62,7 +63,7 @@ class ChurchCalendar
         $this->ail = $isLectionary;
         $this->isLectionary = ($isLectionary == 'lectionary') ? true : false;
         $this->timezone_offset = $timezone_offset;
-        $this->time_adjust = time() + ($this->timezone_offset * 60 * 60);
+        $this->time_adjust = time() + ((int) $this->timezone_offset * 60 * 60);
         $this->year = isset($year) ? $year : date("Y", $this->time_adjust);
         $this->today_zday = isset($zday) ? $zday : date("z", $this->time_adjust);
         self::findEaster();
