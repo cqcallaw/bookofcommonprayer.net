@@ -1,0 +1,18 @@
+<p>&nbsp;</p>
+<p><a href='traditional'>Traditional</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href='contemporary'>Contemporary</a></p>
+<p><div id='top'><strong>Index:</strong></div>
+<?php if($which_collect == "C"):?>
+<a href='contemporary#contempo' target="_self">Collects: Contemporary</a><br>
+<a href='contemporary#holy_days' target="_self">Holy Days</a><br>
+<a href='contemporary#saints' target="_self">The Common of Saints</a><br>
+<a href='contemporary#various' target="_self">Various Occasions</a><br>
+<div id='contempo'><h2>Contemporary Collects</h2></div>
+<?php else:?>
+<a href='traditional#trad' target="_self">Collects: Traditional</a><br>
+<a href='traditional#holy_days' target="_self">Holy Days</a><br>
+<a href='traditional#saints' target="_self">The Common of Saints</a><br>
+<a href='traditional#various' target="_self">Various Occasions</a><br>
+<div id='trad'><h2>Traditional Collects</h2></div>
+<?php endif;?>
+<?php echo $collects;?>
+<p>&nbsp;</p>

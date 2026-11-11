@@ -1,0 +1,11 @@
+<h1>Daily Office By Date</h1>
+<form class="form-inline">
+  <div class="form-group">
+    <input type="text" class="input-lg" ui-date="dd.dateOptions" ng-model="do_date" placeholder="Click to select date">
+    <button class="btn btn-primary btn-lg" ng-click="dd.fun(do_date)">Take me to the readings</button>
+  </div>
+</form>
+<div id="dialog" title="Unavailable" style="display: none">
+  <p>Daily Office by Date has a bug and only works for the current Church Calendar year. The system breaks on dates before then. A fix is in the works.</p>
+</div>
+<p>&nbsp;</p>

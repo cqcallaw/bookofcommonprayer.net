@@ -1,0 +1,188 @@
+.content-image {
+	background-color: #ffffff;
+	padding: 0px;
+	margin: 0px;
+	border-bottom: 1px solid black;
+	z-index: 0;
+}
+/* Overwrite Bootstrap to move dropdown menus */
+#header {
+	z-index: 1000;
+}
+.content {
+	background-color: #ffffff;
+	padding: 30px;
+	margin: 0px;
+	border-bottom: 1px solid black;
+}
+
+a 
+{
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-weight: normal;
+	
+}
+a.visited
+{
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-weight: normal;
+	color: #aaaaaa;
+	text-decoration: none;
+	
+}
+a.upcoming 
+{
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-weight: bold;
+	color: #ff0000;
+}
+p
+{
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-weight: normal;
+	color: #000000;
+}
+/* THE FOLLOWING ARE THE SEPARATE COLOR FOR THE LITURGICAL SEASONS */
+p.blue
+{
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-weight: normal;
+	color: #ffffff;
+	
+	background: #0000ff;
+	width: 100%;
+	/* top right bottom left*/
+	padding: 5px 0px 5px 5px;
+}
+.white-background
+{
+	background: #ffffff;
+}
+span.white 
+{
+	color:white;
+}
+p.white
+{
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-weight: normal;
+	color: #000000;
+	
+	background: #ffffff;
+	width: 100%;
+	/* top right bottom left*/
+	padding: 5px 0px 5px 5px;
+	border: 1px solid #eaeaea;
+}
+p.purple
+{
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-weight: normal;
+	color: #ffffff;
+	
+	background: #660099;
+	width: 100%;
+	/* top right bottom left*/
+	padding: 5px 0px 5px 5px;
+}
+p.green
+{
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-weight: normal;
+	color: #ffffff;
+	
+	background: #006600;
+	width: 100%;
+	/* top right bottom left*/
+	padding: 5px 0px 5px 5px;
+}
+p.red
+{
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-weight: normal;
+	color: #ffffff;
+	
+	background: #ff0000;
+	width: 100%;
+	/* top right bottom left*/
+	padding: 5px 0px 5px 5px;
+}
+p.passion
+{
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-weight: normal;
+	color: #ffffff;
+	
+	background: #990000;
+	width: 100%;
+	/* top right bottom left*/
+	padding: 5px 0px 5px 5px;
+}
+p.pink
+{
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-weight: normal;
+	color: #000000;
+	
+	background: #ffccff;
+	width: 100%;
+	/* top right bottom left*/
+	padding: 5px 0px 5px 5px;
+}
+p.black
+{
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-weight: normal;
+	color: #ffffff;
+	
+	background: #000000;
+	width: 100%;
+	/* top right bottom left*/
+	padding: 5px 0px 5px 5px;
+}
+/* END COLORS FOR HEADERS */
+td
+{
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-weight: normal;
+	color: #000000;
+	
+}
+.copy
+{
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-weight: normal;
+	color: #7f7f7f;
+	font-size: 8pt;
+}
+.header
+{
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-weight: normal;
+	color: #000000;
+}
+.subheader
+{
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-weight: normal;
+	color: #000000;
+}
+sup {
+	font-weight: bold;
+}
+.normal
+{
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-weight: normal;
+	color: #000000;
+	
+}
+pre {
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-weight: normal;
+	color: #000000;
+	
+}
+.red {
+	color: #ff0000;
+}

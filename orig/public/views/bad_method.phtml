@@ -1,0 +1,6 @@
+<h2>Bad Method!</h2>
+<?php echo $error_msg;?>
+<p>The page you requested did not like the HTTP METHOD ("<?php echo strtoupper($req_method);?>") 
+you used to access the page.</p>
+<p>This page requires you to use the "<?php echo strtoupper($required_method);?>" method for proper 
+functioning of this resource.</p>

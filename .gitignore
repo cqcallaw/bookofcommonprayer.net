@@ -1,0 +1,11 @@
+# Production database password. Local Docker settings live in dev/config.php.
+orig/system/cfg/config.php
+
+# Full Bible text. This dump includes RSV, NRSV, and NKJV.
+orig/20271109_bcpdb.sql*
+
+# Files left by the host and the editor.
+orig/.ftpquota
+orig/.index.php.swp
+*.swp
+*~

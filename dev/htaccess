@@ -1,0 +1,17 @@
+RewriteEngine On
+
+# Local dev: no HTTPS or production-host redirect. The cPanel PHP 7.4 handler
+# is omitted so the container's PHP module serves .php files.
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteRule ^(.*)$ index.php
+
+RewriteRule \.phtml index.php?id=forbidden [L,QSA]
+RewriteRule ^public/views/(.*) index.php?id=forbidden [L,QSA]
+RewriteRule ^controllers/(.*) index.php?id=forbidden [L,QSA]
+RewriteRule ^system/(.*) index.php?id=forbidden [L,QSA]
+RewriteRule ^vendor/(.*) index.php?id=forbidden [L,QSA]
+RewriteRule ^20271109_bcpdb\.sql\.zip$ - [F,L]
+RewriteRule ^20271109_bcpdb\.sql/ - [F,L]

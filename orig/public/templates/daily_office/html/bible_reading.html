@@ -1,0 +1,32 @@
+<p ng-if="br.reading_type != 'Search'"><strong>The {{br.reading_type}} Reading</strong></p>
+<p ng-repeat="reading in br.value track by $index">
+	<span ng-if="br.reading_type != 'Gospel' && br.reading_type != 'Search'">
+		<em>Reader:</em> A Reading (Lesson) from: <strong>{{reading.reference}}</strong><br/>
+	</span>
+	<span ng-if="br.reading_type == 'Gospel'">
+		<em>Reader:</em> A Reading from the Gospel according to <strong>St. {{reading.book_name}}</strong> ({{reading.reference}})<br/>
+	</span>
+	<span ng-if="br.reading_type == 'Search'">
+		<strong>{{reading.reference}}</strong><br/>
+	</span>
+<span ng-if="reading.bracketed_reading && reading.full_bracket"><strong>[</strong></span>
+<span ng-if="reading.paren_reading && reading.full_paren"><strong>(</strong></span>
+<span ng-repeat="v in reading.passage">
+	<!-- <span ng-if="reading.first_chapter == v.chapter"><strong>{{reading.first_chapter}}</strong></span>
+	<span ng-if="reading.second_chapter == v.chapter"><strong>{{reading.second_chapter}}</strong></span>
+	<span ng-if="reading.chapter && !reading.first_chapter"><strong>{{reading.chapter}}</strong></span> -->
+	<span ng-if="v.verse == reading.paren_start"><strong>(</strong></span>
+	<span ng-if="v.verse == reading.bracket_start"><strong>[</strong></span>
+	<!--<sup>{{v.verse}}</sup>--> {{v.text}}
+	<span ng-if="v.verse == reading.paren_end"><strong>)</strong></span>
+	<span ng-if="v.verse == reading.bracket_end"><strong>]</strong></span>
+</span>
+<span ng-if="reading.bracketed_reading && reading.full_bracket"><strong>]</strong></span>
+<span ng-if="reading.paren_reading && reading.full_paren"><strong>)</strong></span>
+<span ng-if="br.parseType == 'OR' && !$last">
+	<br/><strong><em>&mdash;OR&mdash;</em></strong><br/>
+</span>
+<span ng-if="br.parseType == 'AND' && !$last">
+	<br/><strong><em>&mdash;AND&mdash;</em></strong><br/>
+</span>
+</p>

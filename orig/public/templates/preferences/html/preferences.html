@@ -1,0 +1,136 @@
+<h2>Preferences</h2>
+<!-- <p class="bg-danger" style="padding: 5px;"><strong>Please Note:</strong> There
+  seems to be an issue with Internet Explorer (all but the Edge browser) setting
+  and retaining cookies.  The Microsoft developer site says that the method I'm
+  using should work, but it seems that is incorrect.  Until I can find a
+  solution, you'll need to use the default settings or a browser such as Chrome
+  or Firefox.</p> -->
+<p><strong>A note about the preferences:</strong> Preferences are stored for 30 days
+  using cookies, but which are renewed on a <em>rolling basis</em> each time you
+  visit the site so that your preference expiration will always renew to 30 days
+  from your last visit.</p>
+<h3>Daily Office Preferences</h3>
+<p>These preferences determine what the system will pull up for you when you have
+  selected <a href="#/daily_office/today">today's office</a> from the menu.  The
+  default settings have been pre-selected for you.</p>
+<p>If you normally do only one prayer per day (e.g. Morning Prayer), select
+All readings here.  By default <a href="#/daily_office/today">today's office</a>
+will switch over to Evening Prayer after 12:00 in your selected timezone, and
+provide you with the readings appointed for Evening Prayer.  Selecting "All" here
+will make <a href="#/daily_office/today">today's office</a> use your choice for
+prayer according to your selected rite.  Choose BCP if you want the Psalms from
+the BCP Psalter, or Bible if you want the psalms in your preferred bible version.</p>
+<p>&nbsp;</p>
+<slide-switch which="prayerRite" on-label="Rite I" off-label="Rite II"
+  knob-label="o" initial='prefs.preferences.prayerRite'></slide-switch><br />
+<slide-switch which="prayerDayTime" on-label="Morning"
+  off-label="Evening" knob-label="o" initial='prefs.preferences.prayerDayTime'></slide-switch><br />
+<slide-switch which="prayerAll" on-label="All"
+  off-label="By Daytime" knob-label="o" initial='prefs.preferences.prayerAll'></slide-switch><br/>
+<slide-switch which="useBCPDO" on-label="BCP"
+  off-label="Bible" knob-label="o" initial='prefs.preferences.useBCPDO'></slide-switch><br/>
+
+<p>&nbsp;</p>
+<h3>Lectionary Preferences</h3>
+<p>These preferences determine whether the readings will come from the 1979 Book
+  of Common Prayer, or from the Revised Common Lectionary, and whether to use a
+traditional or contemporary collect and preface.  Choose BCP if you want the Psalms from
+the BCP Psalter, or Bible if you want the psalms in your preferred bible version.</p>
+<slide-switch which="lectionaryType" on-label="1979"
+  off-label="RCL" knob-label="o" initial='prefs.preferences.lectionaryType'></slide-switch><br />
+<slide-switch which="lectionaryPrayerType" on-label="Traditional"
+  off-label="Contemporary" knob-label="o" initial='prefs.preferences.lectionaryPrayerType'></slide-switch><br/>
+<slide-switch which="useBCPLect" on-label="BCP"
+  off-label="Bible" knob-label="o" initial='prefs.preferences.useBCPLect'></slide-switch><br/>
+<p>&nbsp;</p>
+<h3>Language Preference</h3>
+<p>You can choose English (Book of Common Prayer), or Spanish (El Libro de Oración Común)</p>
+<slide-switch which="language" on-label="Español"
+              off-label="English" knob-label="o"
+              initial='prefs.preferences.language'></slide-switch><br />
+
+<p>&nbsp;</p>
+<h3>Bible Version</h3>
+<p>The following bible versions are available to choose from:</p>
+  <select class="input-lg" ng-model="prefs.bibleVersion"
+    ng-change="prefs.setPrefs('bibleVersion',prefs.bibleVersion);versionSet = true;">
+    <optgroup label="English Bibles">
+      <option name="ASV" value="ASV" >American Standard Version</option>
+      <option name="BBE" value="BBE" >Bible in Basic English</option>
+      <option name="D" value="D" >Darby Translation</option>
+      <option name="DR" value="DR" >Douay-Rheims Bible</option>
+      <option name="KJV" value="KJV" >King James Version</option>
+      <option name="NKJV" value="NKJV">New King James Version</option>
+      <option name="NRSV" value="NRSV" selected>New Revised Standard Version</option>
+      <option name="RSV" value="RSV" >Revised Standard Version</option>
+      <option name="W" value="W" >Webster's Translation</option>
+      <option name="WEB" value="WEB" >World English Bible</option>
+      <option name="YLT" value="YLT" >Young's Literal Translation</option>
+    </optgroup>
+    <optgroup label="Espa&ntilde;ol">
+      <option name="RVR" value="RVR" >1909 Reina Valera</option>
+      <option name="RV" value="RV" >Reina Valera</option>
+      <option name="SE" value="SE" >Sagradas Escrituras</option>
+      <option name="SPN" value="SPN" >Spanish Modern</option>
+    </optgroup>
+    <optgroup label="French">
+      <option name="FD" value="FD" >French Darby Translation</option>
+      <option name="FLS" value="FLS" >French Louis Segond</option>
+    </optgroup>
+    <optgroup label="German">
+      <option name="LUT" value="LUT" >German Luther Bible</option>
+    </optgroup>
+    <optgroup label="Latin">
+      <option name="VUL" value="VUL" >Latin Vulgate</option>
+    </optgroup>
+  </select>
+  </form>
+  <span ng-show="versionSet" class="text-success">{{prefs.bibleVersion}} selected</span>
+<p>&nbsp;</p>
+<h3>Timezone</h3>
+<p>The server runs on Greenwich Mean Time.  Please select your timezone, so
+  that the system will behave appropriately for you.</p>
+  <select class="input-lg" ng-model="prefs.tzSelected"
+    ng-change="prefs.setPrefs('timezone',prefs.tzSelected);tzSet = true;">
+      <option value="-12.0">(GMT -12:00) Eniwetok</option>
+      <option value="-11.0">(GMT -11:00) Samoa</option>
+      <option value="-10.0">(GMT -10:00) Hawaii</option>
+      <option value="-9.0">(GMT -9:00) Alaska</option>
+      <option value="-8.0">(GMT -8:00) Pacific Time</option>
+      <option value="-7.0">(GMT -7:00) Mountain Time</option>
+      <option value="-6.0">(GMT -6:00) Central Time</option>
+      <option value="-5.0">(GMT -5:00) Eastern Time</option>
+      <option value="-4.0">(GMT -4:00) Atlantic Time</option>
+      <option value="-3.5">(GMT -3:30) Newfoundland</option>
+      <option value="-3.0">(GMT -3:00) Brazil</option>
+      <option value="-2.0">(GMT -2:00) Mid-Atlantic</option>
+      <option value="-1.0">(GMT -1:00 hour) Azores</option>
+      <option value="0.0">(GMT) Western Europe Time</option>
+      <option value="1.0">(GMT +1:00 hour) Brussels</option>
+      <option value="2.0">(GMT +2:00) Kaliningrad</option>
+      <option value="3.0">(GMT +3:00) Moscow</option>
+      <option value="3.5">(GMT +3:30) Tehran</option>
+      <option value="4.0">(GMT +4:00) Abu Dhabi</option>
+      <option value="4.5">(GMT +4:30) Kabul</option>
+      <option value="5.0">(GMT +5:00) Ekaterinburg</option>
+      <option value="5.5">(GMT +5:30) Bombay</option>
+      <option value="5.75">(GMT +5:45) Kathmandu</option>
+      <option value="6.0">(GMT +6:00) Almaty</option>
+      <option value="7.0">(GMT +7:00) Bangkok</option>
+      <option value="8.0">(GMT +8:00) Hong Kong</option>
+      <option value="9.0">(GMT +9:00) Tokyo</option>
+      <option value="9.5">(GMT +9:30) Adelaide</option>
+      <option value="10.0">(GMT +10:00) Eastern Australia</option>
+      <option value="11.0">(GMT +11:00) Magadan</option>
+      <option value="12.0">(GMT +12:00) Auckland</option>
+    </select>
+    <span ng-show="tzSet" class="text-success">Timezone set</span>
+<p>&nbsp;</p>
+<h3>Font Size</h3>
+<p>Adjust the slider to the desired size for easy reading.  You preference will
+  be saved, and all pages will be presented to you in the selected font size.</p>
+<!-- Text Size Slider Directive -->
+  <text-size-slider min="14" max="24" unit="pt" value="{{prefs.fontSize}}" step="1"></text-size-slider>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>

@@ -1,0 +1,38 @@
+<h2>Lectionary Readings - {{(l_readings.lectionary_type == 'BCP') ? '1979 Prayer Book' : 'Revised Common Lectionary'}}</h2>
+<strong>{{(l_readings.prayer_type == 'C') ? 'Contemporary' : 'Traditional'}} Prayers & Preface</strong><br/>
+<h3 ng-class="l_readings.liturgical_color">{{l_readings.CC.upcoming_sunday_name}} - Year {{l_readings.lectionary_year}}</h3>
+<strong>{{l_readings.lectionary_date}}</strong>
+<preferences></preferences>
+<p>&nbsp;</p>
+<lectionary-collect></lectionary-collect>
+<p>&nbsp;</p>
+<p><strong>The First Lesson</strong></p>
+<bible-reading
+  type="search"
+  value="l_readings.references.ot"
+  parse-type="l_readings.references.ot_type">
+</bible-reading>
+<p>&nbsp;</p>
+<p><strong>The Psalm(s)</strong></p>
+<psalm-reading
+  type="search"
+  value="l_readings.references.psalm"
+  parse-type="l_readings.references.psalm_type">
+</psalm-reading>
+<p>&nbsp;</p>
+<p><strong>The Second Lesson</strong></p>
+<bible-reading
+  type="search"
+  value="l_readings.references.nt"
+  parse-type="l_readings.references.nt_type">
+</bible-reading>
+<p>&nbsp;</p>
+<p><strong>The Gospel</strong></p>
+<bible-reading
+  type="search"
+  value="l_readings.references.gospel"
+  parse-type="l_readings.references.gospel_type">
+</bible-reading>
+<p>&nbsp;</p>
+<lectionary-preface></lectionary-preface>
+<p>&nbsp;</p>

@@ -1,0 +1,34 @@
+services:
+  db:
+    image: mariadb:10.11
+    environment:
+      MARIADB_ROOT_PASSWORD: bcp_root_local
+      MARIADB_DATABASE: n773365_bocpdb
+      MARIADB_USER: bcp
+      MARIADB_PASSWORD: bcp_local
+    command: ["--max_allowed_packet=512M"]
+    volumes:
+      - bcp-db:/var/lib/mysql
+      - ./init:/docker-entrypoint-initdb.d:ro
+      - ../orig/20271109_bcpdb.sql:/sql:ro
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 15s
+      timeout: 5s
+      retries: 40
+      start_period: 180s
+
+  web:
+    build: .
+    ports:
+      - "127.0.0.1:8090:80"
+    volumes:
+      - ../orig:/var/www/html
+      - ./config.php:/var/www/html/system/cfg/config.php:ro
+      - ./htaccess:/var/www/html/.htaccess:ro
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  bcp-db:

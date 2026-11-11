@@ -1,0 +1,60 @@
+<h2 class='centered'>Daily Office Readings</h2>
+<h3 class='centered'>{{do_readings.today_date}}</h3>
+<p><strong>Week of {{do_readings.CC.current_sunday}}</strong></p>
+<preferences></preferences>
+
+<a ng-click="do_readings.goToHash('MP');">Morning Psalms</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a ng-click="do_readings.goToHash('EP');">Evening Psalms</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a ng-click="do_readings.goToHash('OT');">Old Testament</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a ng-click="do_readings.goToHash('NT');">New Testament</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a ng-click="do_readings.goToHash('G');">Gospel</a>
+<p>&nbsp;</p>
+
+<p id="MP"><strong>The Morning Psalms</strong></p>
+<psalm-reading
+  type="search"
+  value="do_readings.references.do_readings.morning_psalms">
+</psalm-reading>
+<a target="_self" ng-click="do_readings.goToHash('theTop');">
+  <i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i>
+</a>
+<p>&nbsp;</p>
+
+<p id="EP"><strong>The Evening Psalms</strong></p>
+<psalm-reading
+  type="search"
+  value="do_readings.references.do_readings.evening_psalms">
+</psalm-reading>
+<a target="_self" ng-click="do_readings.goToHash('theTop');">
+  <i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i>
+</a>
+<p>&nbsp;</p>
+
+<p id="OT"><strong>The Old Testament</strong></p>
+<bible-reading
+  type="search"
+  value="do_readings.references.do_readings.ot"
+  parse_type="do_readings.references.do_readings.ot_type">
+</bible-reading>
+<a target="_self" ng-click="do_readings.goToHash('theTop');">
+  <i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i>
+</a>
+<p>&nbsp;</p>
+
+<p id="NT"><strong>The New Testament</strong></p>
+<bible-reading
+  type="search"
+  value="do_readings.references.do_readings.nt"
+  parse_type="do_readings.references.do_readings.nt_type">
+</bible-reading>
+<a target="_self" ng-click="do_readings.goToHash('theTop');">
+  <i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i>
+</a>
+<p>&nbsp;</p>
+
+<p id="G"><strong>The Gospel</strong></p>
+<bible-reading
+  type="search"
+  value="do_readings.references.do_readings.gospel"
+  parse_type="do_readings.references.do_readings.gospel_type">
+</bible-reading>
+<a target="_self" ng-click="do_readings.goToHash('theTop');">
+  <i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i>
+</a>
+<p>&nbsp;</p>

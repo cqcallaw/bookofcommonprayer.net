@@ -1,0 +1,122 @@
+/* COMMON STYLES FOR COMMON ELEMENTS */
+a,b,strong,i,em,li,ul,ol,td
+{
+	font-family: verdana, arial, helvetica, sans-serif;
+}
+strong.red
+{
+	color: #ff0000;
+}
+h1
+{
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-weight: bold;
+}
+h2
+{
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-weight: bold;
+}
+em
+{
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-weight: normal;
+	color: #6c6c6c;
+}
+em.response
+{
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-weight: normal;
+	color: #242424;
+}
+em a
+{
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-weight: normal;
+	color: #003366;
+}
+a 
+{
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-weight: normal;
+	/*color: #5a308d;*/
+	color: #003366;
+}
+a.visited
+{
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-weight: normal;
+	color: #000066;
+	text-decoration: underline;
+}
+a.upcoming 
+{
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-weight: bold;
+	color: #ff0000;
+}
+p
+{
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-weight: normal;
+	color: #000000;
+}
+td
+{
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-weight: normal;
+	color: #000000;
+}
+.copy
+{
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-weight: normal;
+	color: #000000;
+	font-size: 8pt;
+}
+.header
+{
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 1.4em;
+	color: #000000;
+	text-align: center;
+}
+.subheader
+{
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-weight: bold;
+	color: #000000;
+	font-size: 11pt;
+	text-align: center;
+}
+.subHeader2
+{
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-weight: bold;
+	color: #000000;
+	font-size: 10pt;
+	text-align: center;
+	border-bottom: 1px dashed;
+}
+sup {
+	font-weight: bold;
+}
+.normal
+{
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-weight: normal;
+	color: #000000;
+}
+.symbol
+{
+	font-family: symbol;
+	font-weight: normal;
+	color: #000000;
+	font-size: 11pt;
+}
+pre {
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-weight: normal;
+	color: #000000;
+}

@@ -1,0 +1,70 @@
+<h2>Daily Office Options</h2>
+<h3>{{do_options.clean_date}}</h3>
+<p>&nbsp;</p>
+
+<div ng-show="{{do_options.language == 'EN'}}">
+<p><strong>The Psalter</strong></p>
+<p><a href='#/daily_office/psalter'>Psalter - with Daily Psalm markers</a></p>
+<p>&nbsp;</p>
+
+<p><strong>Rite I</strong></p>
+<p><a href='#/daily_office/morning_prayer/rite_i/{{do_options.daily_office.DO.do_yearNo}}/{{do_options.daily_office.DO.do_id}}/{{do_options.daily_office.DO.do_dow}}/{{(do_options.daily_office.DO.winter_collect) ? do_options.daily_office.DO.winter_collect : 0}}/{{do_options.url_date}}'>Morning Prayer</a><br/>
+<a href='#/daily_office/evening_prayer/rite_i/{{do_options.daily_office.DO.do_yearNo}}/{{do_options.daily_office.DO.do_id}}/{{do_options.daily_office.DO.do_dow}}/{{(do_options.daily_office.DO.winter_collect) ? do_options.daily_office.DO.winter_collect : 0}}/{{do_options.url_date}}'>Evening Prayer</a></p>
+<p>&nbsp;</p>
+
+<p><strong>Noonday</strong></p>
+<p><a href='#/daily_office/noonday/rite_i/{{do_options.daily_office.DO.do_yearNo}}/{{do_options.daily_office.DO.do_id}}/{{do_options.daily_office.DO.do_dow}}/{{(do_options.daily_office.DO.winter_collect) ? do_options.daily_office.DO.winter_collect : 0}}/{{do_options.url_date}}'>An Order of Service for Noonday</a></p>
+<p>&nbsp;</p>
+
+<p><strong>Rite II</strong></p>
+<p><a href='#/daily_office/morning_prayer/rite_ii/{{do_options.daily_office.DO.do_yearNo}}/{{do_options.daily_office.DO.do_id}}/{{do_options.daily_office.DO.do_dow}}/{{(do_options.daily_office.DO.winter_collect) ? do_options.daily_office.DO.winter_collect : 0}}/{{do_options.url_date}}'>Morning Prayer</a><br/>
+<a href='#/daily_office/evening_prayer/rite_ii/{{do_options.daily_office.DO.do_yearNo}}/{{do_options.daily_office.DO.do_id}}/{{do_options.daily_office.DO.do_dow}}/{{(do_options.daily_office.DO.winter_collect) ? do_options.daily_office.DO.winter_collect : 0}}/{{do_options.url_date}}'>Evening Prayer</a></p>
+<p>&nbsp;</p>
+
+<p><strong>Evening Worship</strong></p>
+<p><a href='#/daily_office/order_for_evening'>An Order Of Worship for Evening</a></p>
+<p>&nbsp;</p>
+
+<p><strong>Compline</strong></p>
+<p><a href='#/daily_office/compline/rite_i/{{do_options.daily_office.DO.do_yearNo}}/{{do_options.daily_office.DO.do_id}}/{{do_options.daily_office.DO.do_dow}}/{{(do_options.daily_office.DO.winter_collect) ? do_options.daily_office.DO.winter_collect : 0}}/{{do_options.url_date}}'>An Order for Compline</a></p>
+<p>&nbsp;</p>
+
+<p><strong>Daily Devotions for Families and Individuals</strong></p>
+<p><a href='#/daily_office/daily_devotions/rite_i/{{do_options.daily_office.DO.do_yearNo}}/{{do_options.daily_office.DO.do_id}}/{{do_options.daily_office.DO.do_dow}}/{{(do_options.daily_office.DO.winter_collect) ? do_options.daily_office.DO.winter_collect : 0}}/{{do_options.url_date}}'>Daily Devotions for Families and Individuals</a></p>
+<p>&nbsp;</p>
+
+<p><strong>Just the Readings</strong></p>
+<p><a href='#/daily_office/readings/rite_i/{{do_options.daily_office.DO.do_yearNo}}/{{do_options.daily_office.DO.do_id}}/{{do_options.daily_office.DO.do_dow}}/{{(do_options.daily_office.DO.winter_collect) ? do_options.daily_office.DO.winter_collect : 0}}/{{do_options.url_date}}'>Readings only, without the Prayers</a></p>
+
+</div>
+<div ng-show="{{do_options.language == 'ES'}}">
+    <p><strong>El Salterio</strong></p>
+    <p><a href='#/daily_office/psalter'>El Salterio</a></p>
+    <p>&nbsp;</p>
+
+    <p><strong>El Oficio Diario</strong></p>
+    <p><a href='#/daily_office/morning_prayer/es/{{do_options.daily_office.DO.do_yearNo}}/{{do_options.daily_office.DO.do_id}}/{{do_options.daily_office.DO.do_dow}}/{{(do_options.daily_office.DO.winter_collect) ? do_options.daily_office.DO.winter_collect : 0}}/{{do_options.url_date}}'>Oración Matutina Diaria</a></p>
+
+    <p><a href='#/daily_office/noonday/es/{{do_options.daily_office.DO.do_yearNo}}/{{do_options.daily_office.DO.do_id}}/{{do_options.daily_office.DO.do_dow}}/{{(do_options.daily_office.DO.winter_collect) ? do_options.daily_office.DO.winter_collect : 0}}/{{do_options.url_date}}'>Oficio para el Mediodía</a></p>
+
+    <p><a href='#/daily_office/evening_prayer/es/{{do_options.daily_office.DO.do_yearNo}}/{{do_options.daily_office.DO.do_id}}/{{do_options.daily_office.DO.do_dow}}/{{(do_options.daily_office.DO.winter_collect) ? do_options.daily_office.DO.winter_collect : 0}}/{{do_options.url_date}}'>Oración Vespertina Diaria</a></p>
+
+    <p><a href='#/daily_office/compline/es/{{do_options.daily_office.DO.do_yearNo}}/{{do_options.daily_office.DO.do_id}}/{{do_options.daily_office.DO.do_dow}}/{{(do_options.daily_office.DO.winter_collect) ? do_options.daily_office.DO.winter_collect : 0}}/{{do_options.url_date}}'>Oficio de Completas</a></p>
+
+    <p>&nbsp;</p>
+
+    <!--<p><strong>Evening Worship</strong></p>-->
+    <!--<p><a href='#/daily_office/order_for_evening'>An Order Of Worship for Evening</a></p>-->
+    <!--<p>&nbsp;</p>-->
+
+    <!--<p><strong>Daily Devotions for Families and Individuals</strong></p>-->
+    <!--<p><a href='#/daily_office/daily_devotions/rite_i/{{do_options.daily_office.DO.do_yearNo}}/{{do_options.daily_office.DO.do_id}}/{{do_options.daily_office.DO.do_dow}}/{{(do_options.daily_office.DO.winter_collect) ? do_options.daily_office.DO.winter_collect : 0}}/{{do_options.url_date}}'>Daily Devotions for Families and Individuals</a></p>-->
+    <!--<p>&nbsp;</p>-->
+
+    <p><strong>Lecciones</strong></p>
+    <p><a href='#/daily_office/readings/rite_i/{{do_options.daily_office.DO.do_yearNo}}/{{do_options.daily_office.DO.do_id}}/{{do_options.daily_office.DO.do_dow}}/{{(do_options.daily_office.DO.winter_collect) ? do_options.daily_office.DO.winter_collect : 0}}/{{do_options.url_date}}'>Lecciones, sin oraciones</a></p>
+
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>

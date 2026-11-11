@@ -1,0 +1,62 @@
+<h2>{{lect.l.CC.year}} Lectionary - Year {{lect.l.CC.lectionary_year}}</h2>
+<span ng-if="lect.prefs.language == false">
+<p><strong>Lectionary:</strong> <a href="#/preferences">{{lect.prefs.lectionaryType}}</a> &nbsp;&nbsp;
+  <strong>Prayers:</strong> <a href="#/preferences">{{lect.prefs.lectionaryPrayerType}}</a> &nbsp;&nbsp;
+  <strong>Bible Version:</strong> <a href="#/preferences">{{lect.prefs.bibleVersion}}</a></p>
+</span>
+<span ng-if="lect.prefs.language == true">
+<p><strong>Leccionario:</strong> <a href="#/preferences">{{lect.prefs.lectionaryType}}</a> &nbsp;&nbsp;
+  <strong>Versión Bíblica:</strong> <a href="#/preferences">{{lect.prefs.bibleVersion}}</a></p>
+</span>
+<span ng-repeat="sunday in lect.l.CC.orderedSundays">
+  <span ng-if="sunday.date != null">
+      <span ng-if="sunday.id != 'CM' && sunday.id != 'CMII' && sunday.id != 'CMIII'
+      && sunday.id != 'PS-1'
+      && sunday.id != 'PS-2'
+      && sunday.id != 'PS-3'
+      && sunday.id != 'PS-4'
+      && sunday.id != 'PS-5'
+      && sunday.id != 'PS-6'
+      && sunday.id != 'R-1'
+      && sunday.id != 'R-2'
+      && sunday.id != 'R-3'
+      && sunday.id != 'R-4'
+      && sunday.id != 'R-5'
+      && sunday.id != 'R-6'">
+        <a ng-class="(lect.l.CC.upcoming_sunday_id == sunday.id) ? 'upcoming':''" href="#/lectionary/{{lect.readings_page}}/{{lect.l.CC.lectionary_year}}/{{sunday.id}}/{{lect.lt}}/{{lect.lpt}}/{{sunday.color}}/{{sunday.date}}">
+          {{sunday.date}} - {{sunday.name}}</a><br/>
+      </span>
+      <span ng-if="sunday.id == 'PS-1'
+      || sunday.id == 'PS-2'
+      || sunday.id == 'PS-3'
+      || sunday.id == 'PS-4'
+      || sunday.id == 'PS-5'
+      || sunday.id == 'PS-6'
+      || sunday.id == 'R-1'
+      || sunday.id == 'R-2'
+      || sunday.id == 'R-3'
+      || sunday.id == 'R-4'
+      || sunday.id == 'R-5'
+      || sunday.id == 'R-6'">
+        &nbsp;&nbsp;--&nbsp;<a ng-class="(lect.l.CC.upcoming_sunday_id == sunday.id) ? 'upcoming':''" href="#/lectionary/{{lect.readings_page}}/{{lect.l.CC.lectionary_year}}/{{sunday.id}}/{{lect.lt}}/{{lect.lpt}}/{{sunday.color}}/{{sunday.date}}">{{sunday.date}} - {{sunday.name}}</a><br/>
+      </span>
+      <span ng-if="sunday.id == 'CM'">
+        <a ng-class="(lect.l.CC.upcoming_sunday_id == sunday.id) ? 'upcoming':''" href="#/lectionary/{{lect.readings_page}}/{{lect.l.CC.lectionary_year}}/{{sunday.id}}/{{lect.lt}}/{{lect.lpt}}/{{sunday.color}}/{{sunday.date}}">{{sunday.date}} - {{sunday.name}}</a><br/>
+          <span ng-if="lect.prefs.language == false">
+        [<a href="#/lectionary/{{lect.readings_page}}/{{lect.l.CC.lectionary_year}}/CM/{{lect.lt}}/{{lect.lpt}}/{{sunday.color}}/{{sunday.date}}">Christmas Day</a>&nbsp;|&nbsp;
+        <a href="#/lectionary/{{lect.readings_page}}/{{lect.l.CC.lectionary_year}}/CMII/{{lect.lt}}/{{lect.lpt}}/{{sunday.color}}/{{sunday.date}}">Christmas Day II</a>&nbsp;|&nbsp;
+        <a href="#/lectionary/{{lect.readings_page}}/{{lect.l.CC.lectionary_year}}/CMIII/{{lect.lt}}/{{lect.lpt}}/{{sunday.color}}/{{sunday.date}}">Christmas Day III</a>]
+          </span>
+          <span ng-if="lect.prefs.language == true">
+        [<a href="#/lectionary/{{lect.readings_page}}/{{lect.l.CC.lectionary_year}}/CM/{{lect.lt}}/{{lect.lpt}}/{{sunday.color}}/{{sunday.date}}">Natividad</a>&nbsp;|&nbsp;
+        <a href="#/lectionary/{{lect.readings_page}}/{{lect.l.CC.lectionary_year}}/CMII/{{lect.lt}}/{{lect.lpt}}/{{sunday.color}}/{{sunday.date}}">Natividad II</a>&nbsp;|&nbsp;
+        <a href="#/lectionary/{{lect.readings_page}}/{{lect.l.CC.lectionary_year}}/CMIII/{{lect.lt}}/{{lect.lpt}}/{{sunday.color}}/{{sunday.date}}">Natividad III</a>]
+          </span>
+        <br/>
+      </span>
+  </span>
+</span>
+<p>&nbsp;</p>
+<a href="#/lectionary/date">Current Year</a> | <a href="#/lectionary/date/{{lect.l.CC.next_year}}">{{lect.l.CC.year}} - {{lect.l.CC.next_year}}</a>
+<p>&nbsp;</p>
+<p>&nbsp;</p>

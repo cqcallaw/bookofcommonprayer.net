@@ -1,0 +1,100 @@
+<h1>Daily Psalms</h1>
+<form class="form-inline" id="psalm_form">
+  <div class="form-group">
+    <select class="input-lg" ng-model='psalter.psalmChoice' ng-init="this">
+      <option value="">-- By Time & Day --</option>
+      <option value='1|A'>Day 1, Morning</option>
+      <option value='1|E'>Day 1, Evening</option>
+      <option value='2|A'>Day 2, Morning</option>
+      <option value='2|E'>Day 2, Evening</option>
+      <option value='3|A'>Day 3, Morning</option>
+      <option value='3|E'>Day 3, Evening</option>
+      <option value='4|A'>Day 4, Morning</option>
+      <option value='4|E'>Day 4, Evening</option>
+      <option value='5|A'>Day 5, Morning</option>
+      <option value='5|E'>Day 5, Evening</option>
+      <option value='6|A'>Day 6, Morning</option>
+      <option value='6|E'>Day 6, Evening</option>
+      <option value='7|A'>Day 7, Morning</option>
+      <option value='7|E'>Day 7, Evening</option>
+      <option value='8|A'>Day 8, Morning</option>
+      <option value='8|E'>Day 8, Evening</option>
+      <option value='9|A'>Day 9, Morning</option>
+      <option value='9|E'>Day 9, Evening</option>
+      <option value='10|A'>Day 10, Morning</option>
+      <option value='10|E'>Day 10, Evening</option>
+      <option value='11|A'>Day 11, Morning</option>
+      <option value='11|E'>Day 11, Evening</option>
+      <option value='12|A'>Day 12, Morning</option>
+      <option value='12|E'>Day 12, Evening</option>
+      <option value='13|A'>Day 13, Morning</option>
+      <option value='13|E'>Day 13, Evening</option>
+      <option value='14|A'>Day 14, Morning</option>
+      <option value='14|E'>Day 14, Evening</option>
+      <option value='15|A'>Day 15, Morning</option>
+      <option value='15|E'>Day 15, Evening</option>
+      <option value='16|A'>Day 16, Morning</option>
+      <option value='16|E'>Day 16, Evening</option>
+      <option value='17|A'>Day 17, Morning</option>
+      <option value='17|E'>Day 17, Evening</option>
+      <option value='18|A'>Day 18, Morning</option>
+      <option value='18|E'>Day 18, Evening</option>
+      <option value='19|A'>Day 19, Morning</option>
+      <option value='19|E'>Day 19, Evening</option>
+      <option value='20|A'>Day 20, Morning</option>
+      <option value='20|E'>Day 20, Evening</option>
+      <option value='21|A'>Day 21, Morning</option>
+      <option value='21|E'>Day 21, Evening</option>
+      <option value='22|A'>Day 22, Morning</option>
+      <option value='22|E'>Day 22, Evening</option>
+      <option value='23|A'>Day 23, Morning</option>
+      <option value='23|E'>Day 23, Evening</option>
+      <option value='24|A'>Day 24, Morning</option>
+      <option value='24|E'>Day 24, Evening</option>
+      <option value='25|A'>Day 25, Morning</option>
+      <option value='25|E'>Day 25, Evening</option>
+      <option value='26|A'>Day 26, Morning</option>
+      <option value='26|E'>Day 26, Evening</option>
+      <option value='27|A'>Day 27, Morning</option>
+      <option value='27|E'>Day 27, Evening</option>
+      <option value='28|A'>Day 28, Morning</option>
+      <option value='28|E'>Day 28, Evening</option>
+      <option value='29|A'>Day 29, Morning</option>
+      <option value='29|E'>Day 29, Evening</option>
+      <option value='30|A'>Day 30, Morning</option>
+      <option value='30|E'>Day 30, Evening</option>
+    </select>
+    <button class="btn btn-primary btn-lg"
+      ng-click="psalter.getPsalms(psalter.psalmChoice);">Get Psalms</button>
+  </div>
+&nbsp;&nbsp;&nbsp;&nbsp;
+  <div class="form-group">
+    <select class="input-lg" ng-model="psalter.chapter">
+      <option value="">-- By Psalm --</option>
+      <option ng-repeat="chap in psalter.psalmChapters">{{chap}}</option>
+    </select>
+    <button class="btn btn-primary btn-lg"
+      ng-click="psalter.getPsalmByChapter(psalter.chapter);">Get Psalm</button>
+  </div>
+</form>
+<p>&nbsp;</p>
+<span ng-if="psalter.psalmList.day">
+  <h2>Day {{psalter.psalmList.day}}
+    <span ng-if="psalter.psalmList.daytime">
+      {{psalter.psalmList.daytime}}
+    </span>
+  </h2>
+</span>
+<span ng-repeat="(key,psalm) in psalter.psalmList">
+  <span ng-if="key != 'day' && key != 'daytime'">
+    <h3>Psalm {{key}}</h3>
+    <span ng-repeat="verse in psalm">
+      <span ng-if="verse.verse == 0"><em>{{verse.text}}</em><br/></span>
+      <span ng-if="verse.verse != 0"><strong>{{verse.verse}}</strong>
+        <span ng-bind-html ='verse.text | star2br'></span><br/>
+      </span>
+    </span>
+  </span>
+</span>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
