@@ -1,0 +1,15 @@
+---
+layout: layout.njk
+title: Today's Office
+permalink: /office/today/
+---
+<h1>Today's Office</h1>
+<p id="today-status">Opening the office for today's date.</p>
+<noscript>
+  <p>Choose the date from the <a href="/office/">list of months</a>. This page uses the clock in your browser to find today.</p>
+</noscript>
+<form id="date-form" action="/office/">
+  <label for="office-date">Or open a date</label>
+  <input id="office-date" name="date" type="date" min="2024-01-01" max="2032-12-31" required>
+  <button type="submit">Open</button>
+</form>

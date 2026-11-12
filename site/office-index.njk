@@ -1,0 +1,22 @@
+---
+layout: layout.njk
+title: Daily Office by Date
+permalink: /office/
+---
+<h1>Daily Office by Date</h1>
+<p><a href="/office/today/">Today</a></p>
+<form id="date-form" action="/office/">
+  <label for="office-date">Date</label>
+  <input id="office-date" name="date" type="date" min="2024-01-01" max="2032-12-31" required>
+  <button type="submit">Open</button>
+</form>
+<p>The dated list below works without JavaScript. Offices are prepared from 1 January 2024 through 31 December 2032.</p>
+{% for month in officeMonths %}
+  {% if month.m == "01" %}
+    {% if not loop.first %}</ul>{% endif %}
+    <h2>{{ month.y }}</h2>
+    <ul>
+  {% endif %}
+  <li><a href="/office/{{ month.y }}/{{ month.m }}/">{{ month.name }}</a></li>
+  {% if loop.last %}</ul>{% endif %}
+{% endfor %}

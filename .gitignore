@@ -9,3 +9,10 @@ orig/.ftpquota
 orig/.index.php.swp
 *.swp
 *~
+
+# Eleventy build and the Bible chapter files it reads.
+# RSV, NRSV, and NKJV must not be committed. The other versions are
+# left out as well so the tree does not gain the chapter dump.
+node_modules/
+_site/
+site/bible/

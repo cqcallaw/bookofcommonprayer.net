@@ -1,0 +1,19 @@
+---
+layout: layout.njk
+pagination:
+  data: officeMonths
+  size: 1
+  alias: month
+permalink: "/office/{{ month.y }}/{{ month.m }}/"
+eleventyComputed:
+  title: "{{ month.name }} {{ month.y }} — Daily Office"
+---
+<h1>{{ month.name }} {{ month.y }}</h1>
+<p><a href="/office/">All years</a></p>
+<ul>
+{% for day in days %}
+  {% if day.y == month.y and day.m == month.m %}
+  <li><a href="/office/{{ day.y }}/{{ day.m }}/{{ day.d }}/">{{ day.title }}</a>{% if day.week and day.week.name %} — {{ day.week.name }}{% endif %}</li>
+  {% endif %}
+{% endfor %}
+</ul>

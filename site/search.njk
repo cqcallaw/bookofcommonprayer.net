@@ -1,0 +1,13 @@
+---
+layout: layout.njk
+title: Search
+permalink: /search/
+---
+<h1>Look up a passage</h1>
+<form id="search-form" action="/search/" method="get">
+  <label for="q">Citation</label>
+  <input id="q" name="q" type="text" size="40" placeholder="John 1:1-14">
+  <button type="submit">Read</button>
+</form>
+<div id="search-result"></div>
+<noscript><p>Looking up a passage uses JavaScript in your browser. The Daily Office pages can be read from the <a href="/office/">date list</a> without it.</p></noscript>

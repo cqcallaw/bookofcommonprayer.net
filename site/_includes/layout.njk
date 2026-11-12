@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="/">
+  <title>{{ title or "Book of Common Prayer" }}</title>
+  <meta name="description" content="The online Book of Common Prayer. Daily Office and lectionary readings, and the rites of the 1979 prayer book.">
+  <link rel="icon" href="/favicon.ico">
+  <link href="/public/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="/public/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/public/themes/bcp/css/theme-blue-2.css" rel="stylesheet">
+  <link href="/assets/site.css" rel="stylesheet">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-88R4NLBFNL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-88R4NLBFNL');
+  </script>
+</head>
+<body class="body-boxed">
+  <div class="wrapper-body">
+    <div id="header"><a id="theTop"></a>
+      <nav id="nav" class="navbar navbar-inverse">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">
+              <img class="img-responsive" src="/public/themes/bcp/images/bcp_logo.png" alt="Book of Common Prayer">
+            </a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="dropdown">
+                <a class="dropdown-toggle" href="/office/today/">Daily Offices</a>
+                <ul class="dropdown-menu">
+                  <li class="dropdown-header">The Offices</li>
+                  <li><a href="/office/today/">Today's Office</a></li>
+                  <li><a href="/office/">Daily Office by Date</a></li>
+                  <li><a href="/psalter/">The Daily Psalms</a></li>
+                  <li><a href="/holy-days/">Holy Day Readings</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a class="dropdown-toggle" href="/lectionary/today/">Lectionary</a>
+                <ul class="dropdown-menu">
+                  <li><a href="/lectionary/today/">This Sunday</a></li>
+                  <li><a href="/lectionary/">Lectionary by Week</a></li>
+                  <li><a href="/holy-days/">Holy Day Lectionary</a></li>
+                </ul>
+              </li>
+              <li><a href="/contents/">BCP Contents</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/faq/" title="Frequently Asked Questions"><em class="fa fa-question-circle" aria-hidden="true"></em></a></li>
+              <li><a href="/preferences/" title="Site Preferences"><em class="fa fa-cog" aria-hidden="true"></em></a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div class="wrapper-body">
+      <div class="container" id="maincontainer">
+        {{ content | safe }}
+      </div>
+    </div>
+    <div class="section footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <img src="/public/themes/bcp/images/cross.png" alt="">
+            <h3 class="title-xs hr-left text-uppercase">Online Book of Common Prayer</h3>
+          </div>
+          <div class="col-sm-6">
+            <h3 class="title-xs hr-left text-uppercase">Follow</h3>
+            <ul class="list-unstyled">
+              <li><a href="http://www.frmikeseiler.com" target="_blank" rel="noopener"><em class="fa fa-external-link"></em> frmikeseiler.com</a></li>
+            </ul>
+            <h3 class="title-xs hr-left text-uppercase">Support</h3>
+            <ul class="list-unstyled">
+              <li><a href="/donate/"><em class="fa fa-heartbeat"></em> How to Support this site</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section footer-bottom">
+      <div class="container">
+        <p class="copy">2006-{{ "" | buildYear }} &copy; <a href="/copyright/">BookOfCommonPrayer.net</a> All Rights Reserved.</p>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="/assets/site.js"></script>
+</body>
+</html>

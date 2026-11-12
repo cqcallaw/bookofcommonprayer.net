@@ -1,0 +1,16 @@
+---
+layout: layout.njk
+title: Lectionary by Week
+permalink: /lectionary/
+---
+<h1>Lectionary by Week</h1>
+<p><a href="/lectionary/today/">This Sunday</a>. Each Sunday shows the Revised Common Lectionary first, then the 1979 lectionary.</p>
+{% for day in sundays %}
+  {% if loop.first or day.y != sundays[loop.index0 - 1].y %}
+    {% if not loop.first %}</ul>{% endif %}
+    <h2>{{ day.y }}</h2>
+    <ul>
+  {% endif %}
+  <li><a href="/lectionary/{{ day.y }}/{{ day.m }}/{{ day.d }}/">{{ day.title }}</a>{% if day.week and day.week.name %} — {{ day.week.name }}{% endif %}{% if day.lectionaryYear %} (Year {{ day.lectionaryYear }}){% endif %}</li>
+  {% if loop.last %}</ul>{% endif %}
+{% endfor %}

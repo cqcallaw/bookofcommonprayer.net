@@ -1,19 +1,33 @@
 # bookofcommonprayer.net
 
-This tree is the PHP application.
+The PHP application in this tree is the current site. `site/` is a static build of the same offices and rites, produced with Eleventy. The published files do not need PHP or MariaDB.
 
-## License
+## Build
 
-The program is under the GNU General Public License, version 3 or any later version. The license text is `LICENSE`. This is the same grant as the 2013 header in `index.php`.
+The export reads the local database through the PHP calendar classes. Start the Docker stack first (`docker compose` in `docker/`, site on port 8090).
 
-Copyright (C) 2013 Mike Seiler
-Copyright (C) 2026 Caleb Callaway
+```sh
+npm install
+npm run export
+npm run build
+npm run serve
+```
 
-The license covers the program: the PHP framework, the scripts, and the markup written for this site.
+`npm run serve` listens on http://127.0.0.1:8091/. `npm run export` rewrites `site/_data/` and `site/bible/`.
 
-These parts are outside that grant:
+## What is generated
 
-- The English text of the 1979 Book of Common Prayer is in the public domain.
-- The Spanish text of *El Libro de Oración Común* is a separate work. Printed editions carry a 1989 Church Pension Fund copyright.
-- Bible translations in the database. The King James Version is in the public domain. RSV, NRSV, and NKJV are not covered by this license. The database dump under `orig/` is gitignored and is not in this repository.
-- Bootstrap 3.1.1 and normalize.css are under the MIT license. Font Awesome 4.6.2 is MIT for the CSS and the SIL Open Font License 1.1 for the fonts. `public/themes/bcp/css/theme-blue-2.css` is Z-Theme by mamootthemes and has no license statement in the file. The libraries under `public/js` and `vendor/` keep the license notices shipped with those files.
+- Rite pages from `public/views`, with the shared header baked in.
+- A Daily Office page for each civil date from 1 January 2024 through 31 December 2032, at `/office/YYYY/MM/DD/`. Morning and evening are anchors on that page.
+- A Sunday lectionary page for each of those Sundays, Revised Common Lectionary first and the 1979 lectionary after it.
+- Collects, prefaces, canticles, the thirty-day psalter, and a holy-day list.
+
+The date index is made by running `BCP\ChurchCalendar` and `BCP\DailyOffice` the same way `api/daily_office.php` does. It is not a new Easter calculation.
+
+Pages embed the King James Version so they can be read with scripts turned off. The browser then asks for the translation saved in preferences. NRSV is that default. Book id 67 and above is read from the RSV, which is the only copy of those books in the database.
+
+`site/bible/` and `_site/` are gitignored. RSV, NRSV, and NKJV must not be committed. A built office page can still contain an RSV excerpt when the lesson is from the Apocrypha.
+
+## Not in this build
+
+Rite I and Spanish morning and evening prayer, the antiphon and canticle rotation, and the noonday office. Compline is the rite page, not a dated office. The church-year math is still the PHP classes.

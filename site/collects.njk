@@ -1,0 +1,11 @@
+---
+layout: layout.njk
+pagination:
+  data: collectPages
+  size: 1
+  alias: page
+permalink: "/collects/{{ page.slug }}/"
+eleventyComputed:
+  title: "{{ page.title }}"
+---
+{{ page.which | collectsHtml | safe }}

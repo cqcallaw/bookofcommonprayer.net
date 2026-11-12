@@ -1,0 +1,14 @@
+---
+layout: layout.njk
+pagination:
+  data: rites
+  size: 1
+  alias: rite
+permalink: "/{{ rite.slug }}/"
+eleventyComputed:
+  title: "{{ rite.title }}"
+---
+{% if rite.hadPhp %}
+<p class="office-note">A few lines on this rite used to be filled in by the server. Those lines are omitted here.</p>
+{% endif %}
+{{ rite.html | safe }}

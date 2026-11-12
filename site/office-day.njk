@@ -1,0 +1,11 @@
+---
+layout: layout.njk
+pagination:
+  data: days
+  size: 1
+  alias: day
+permalink: "/office/{{ day.y }}/{{ day.m }}/{{ day.d }}/"
+eleventyComputed:
+  title: "{{ day.title }} — Daily Office"
+---
+{{ day | officeHtml | safe }}

@@ -1,0 +1,60 @@
+---
+layout: layout.njk
+title: Preferences
+permalink: /preferences/
+---
+<h1>Preferences</h1>
+<p>These are saved in this browser. The pages are King James Version until a script can load another translation. NRSV is the default when that text is on the server.</p>
+<form id="prefs-form">
+  <p><label>Bible version
+    <select id="bibleVersion" name="bibleVersion">
+      <option value="NRSV">New Revised Standard Version</option>
+      <option value="KJV">King James Version</option>
+      <option value="ASV">American Standard Version</option>
+      <option value="WEB">World English Bible</option>
+      <option value="YLT">Young's Literal Translation</option>
+      <option value="DR">Douay-Rheims Bible</option>
+      <option value="W">Webster's Translation</option>
+      <option value="BBE">Bible in Basic English</option>
+      <option value="D">Darby Translation</option>
+      <option value="RSV">Revised Standard Version</option>
+      <option value="NKJV">New King James Version</option>
+      <option value="RV">Reina Valera</option>
+      <option value="RVR">1909 Reina Valera</option>
+      <option value="SEV">Sagradas Escrituras</option>
+      <option value="SPN">Spanish Modern</option>
+      <option value="FD">French Darby Translation</option>
+      <option value="FLS">French Louis Segond</option>
+      <option value="LUT">German Luther Bible</option>
+      <option value="VUL">Latin Vulgate</option>
+    </select>
+  </label></p>
+  <p><label>Psalm text in the office
+    <select id="useBCPDO" name="useBCPDO">
+      <option value="false">Bible</option>
+      <option value="true">Book of Common Prayer psalter</option>
+    </select>
+  </label></p>
+  <p><label>Office rite for the collect
+    <select id="prayerRite" name="prayerRite">
+      <option value="false">Rite II</option>
+      <option value="true">Rite I</option>
+    </select>
+  </label></p>
+  <p><label>When to show the morning office
+    <select id="prayerDayTime" name="prayerDayTime">
+      <option value="true">Morning is the stored choice</option>
+      <option value="false">Evening is the stored choice</option>
+    </select>
+  </label></p>
+  <p><label><input id="prayerAll" name="prayerAll" type="checkbox"> Use the stored morning or evening choice instead of the time of day</label></p>
+  <p><label>Sunday lectionary named first
+    <select id="lectionaryType" name="lectionaryType">
+      <option value="false">Revised Common Lectionary</option>
+      <option value="true">1979 Lectionary</option>
+    </select>
+  </label></p>
+  <p><label>Text size <input id="fontSize" name="fontSize" type="number" min="12" max="28" value="14"></label></p>
+  <p><button type="submit">Save</button></p>
+</form>
+<p>Spanish Daily Offices are not in this build. The Spanish collects, prefaces, and canticles have their own pages.</p>

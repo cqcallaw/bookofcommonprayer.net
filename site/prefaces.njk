@@ -1,0 +1,11 @@
+---
+layout: layout.njk
+pagination:
+  data: prefacePages
+  size: 1
+  alias: page
+permalink: "/prefaces/{{ page.slug }}/"
+eleventyComputed:
+  title: "{{ page.title }}"
+---
+{{ page.which | prefacesHtml | safe }}
