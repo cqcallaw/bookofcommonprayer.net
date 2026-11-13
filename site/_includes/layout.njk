@@ -1,8 +1,11 @@
+{# Chrome: this file. Office wording: office.njk and rite-ii.njk. Lectionary: lectionary.njk. Menu entries: site/_data/catalog.json. Theme: public/themes/bcp/css/theme-blue-2.css and assets/site.css. #}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  {# "/" lets a rite link to another rite by slug. A bare "#morning" is resolved
+     against this base and opens the home page, so in-page links include their path. #}
   <base href="/">
   <title>{{ title or "Book of Common Prayer" }}</title>
   <meta name="description" content="The online Book of Common Prayer. Daily Office and lectionary readings, and the rites of the 1979 prayer book.">
@@ -41,25 +44,29 @@
                 <a class="dropdown-toggle" href="/office/today/">Daily Offices</a>
                 <ul class="dropdown-menu">
                   <li class="dropdown-header">The Offices</li>
-                  <li><a href="/office/today/">Today's Office</a></li>
-                  <li><a href="/office/">Daily Office by Date</a></li>
-                  <li><a href="/psalter/">The Daily Psalms</a></li>
-                  <li><a href="/holy-days/">Holy Day Readings</a></li>
+                  {% for office in catalog.offices %}
+                  {% if office.href %}
+                  <li><a href="{{ office.href }}">{{ office.label }}</a></li>
+                  {% endif %}
+                  {% endfor %}
                 </ul>
               </li>
               <li class="dropdown">
                 <a class="dropdown-toggle" href="/lectionary/today/">Lectionary</a>
                 <ul class="dropdown-menu">
-                  <li><a href="/lectionary/today/">This Sunday</a></li>
-                  <li><a href="/lectionary/">Lectionary by Week</a></li>
-                  <li><a href="/holy-days/">Holy Day Lectionary</a></li>
+                  {% for item in catalog.lectionary %}
+                  <li><a href="{{ item.href }}">{{ item.label }}</a></li>
+                  {% endfor %}
                 </ul>
               </li>
-              <li><a href="/contents/">BCP Contents</a></li>
+              {% for link in catalog.links %}
+              <li><a href="{{ link.href }}">{{ link.label }}</a></li>
+              {% endfor %}
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="/faq/" title="Frequently Asked Questions"><em class="fa fa-question-circle" aria-hidden="true"></em></a></li>
-              <li><a href="/preferences/" title="Site Preferences"><em class="fa fa-cog" aria-hidden="true"></em></a></li>
+              {% for tool in catalog.tools %}
+              <li><a href="{{ tool.href }}" title="{{ tool.title }}"><em class="fa {{ tool.icon }}" aria-hidden="true"></em></a></li>
+              {% endfor %}
             </ul>
           </div>
         </div>
@@ -96,6 +103,7 @@
       </div>
     </div>
   </div>
+  <script type="application/json" id="bcp-policy">{{ policy | json | safe }}</script>
   <script type="module" src="/assets/site.js"></script>
 </body>
 </html>

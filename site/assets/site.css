@@ -1,3 +1,6 @@
+/* Small adjustments on top of public/themes/bcp/css/theme-blue-2.css.
+   The header and footer are site/_includes/layout.njk. */
+
 .office-note {
   border-left: 4px solid #777;
   padding-left: 0.75rem;

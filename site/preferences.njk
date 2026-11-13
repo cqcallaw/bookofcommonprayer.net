@@ -3,30 +3,16 @@ layout: layout.njk
 title: Preferences
 permalink: /preferences/
 ---
+{% set defaultVersion = translations | selectattr("readerDefault") | first %}
+{% set embedded = translations | selectattr("embedded") | first %}
 <h1>Preferences</h1>
-<p>These are saved in this browser. The pages are King James Version until a script can load another translation. NRSV is the default when that text is on the server.</p>
+<p>These are saved in this browser. Pages embed {{ embedded.name }} so they can be read with scripts off. {{ defaultVersion.name }} is the default when that text is on the server.</p>
 <form id="prefs-form">
   <p><label>Bible version
     <select id="bibleVersion" name="bibleVersion">
-      <option value="NRSV">New Revised Standard Version</option>
-      <option value="KJV">King James Version</option>
-      <option value="ASV">American Standard Version</option>
-      <option value="WEB">World English Bible</option>
-      <option value="YLT">Young's Literal Translation</option>
-      <option value="DR">Douay-Rheims Bible</option>
-      <option value="W">Webster's Translation</option>
-      <option value="BBE">Bible in Basic English</option>
-      <option value="D">Darby Translation</option>
-      <option value="RSV">Revised Standard Version</option>
-      <option value="NKJV">New King James Version</option>
-      <option value="RV">Reina Valera</option>
-      <option value="RVR">1909 Reina Valera</option>
-      <option value="SEV">Sagradas Escrituras</option>
-      <option value="SPN">Spanish Modern</option>
-      <option value="FD">French Darby Translation</option>
-      <option value="FLS">French Louis Segond</option>
-      <option value="LUT">German Luther Bible</option>
-      <option value="VUL">Latin Vulgate</option>
+      {% for version in translations %}
+      <option value="{{ version.id }}"{% if version.readerDefault %} selected{% endif %}{% if version.copyrighted %} data-copyright="1"{% endif %}>{{ version.name }}</option>
+      {% endfor %}
     </select>
   </label></p>
   <p><label>Psalm text in the office
@@ -57,4 +43,12 @@ permalink: /preferences/
   <p><label>Text size <input id="fontSize" name="fontSize" type="number" min="12" max="28" value="14"></label></p>
   <p><button type="submit">Save</button></p>
 </form>
-<p>Spanish Daily Offices are not in this build. The Spanish collects, prefaces, and canticles have their own pages.</p>
+{% for language in catalog.languages %}
+{% if language.note %}
+<p>{{ language.note }}
+{% for page in language.pages %}
+<a href="{{ page.href }}">{{ page.title }}</a>{% if not loop.last %} &nbsp;|&nbsp; {% endif %}
+{% endfor %}
+</p>
+{% endif %}
+{% endfor %}

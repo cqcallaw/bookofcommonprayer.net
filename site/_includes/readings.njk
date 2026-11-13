@@ -1,0 +1,28 @@
+{# Psalms and lessons only. Spoken prayer stays in office.njk. #}
+{% if office.missing %}
+<h1>{{ office.title }}</h1>
+<p>No daily office readings are stored for {{ office.week }} (year {{ office.year }}, id {{ office.id }}).</p>
+{% else %}
+<h1>Daily Office Readings</h1>
+<h2>{{ office.title }}</h2>
+<p class="week season-{{ office.color }}"><strong>{{ office.week }}</strong></p>
+<p>Week of {{ office.sunday }}. Daily Office year {{ office.year }}. Lectionary year {{ office.lectionaryYear }}.</p>
+<p>Lessons for the morning and the evening are both listed here. The prayers are on the <a href="{{ office.path }}">Daily Office</a> page.</p>
+<p>
+  <a href="{{ office.path }}readings/#MP">Morning Psalms</a> &nbsp;|&nbsp;
+  <a href="{{ office.path }}readings/#EP">Evening Psalms</a> &nbsp;|&nbsp;
+  <a href="{{ office.path }}readings/#OT">Old Testament</a> &nbsp;|&nbsp;
+  <a href="{{ office.path }}readings/#NT">New Testament</a> &nbsp;|&nbsp;
+  <a href="{{ office.path }}readings/#G">Gospel</a>
+</p>
+<h3 id="MP">The Morning Psalms</h3>
+{% if office.readings.morningPsalms %}{{ office.readings.morningPsalms | safe }}{% else %}<p><em>No reading.</em></p>{% endif %}
+<h3 id="EP">The Evening Psalms</h3>
+{% if office.readings.eveningPsalms %}{{ office.readings.eveningPsalms | safe }}{% else %}<p><em>No reading.</em></p>{% endif %}
+<h3 id="OT">The Old Testament</h3>
+{% if office.readings.ot %}{{ office.readings.ot | safe }}{% else %}<p><em>No reading.</em></p>{% endif %}
+<h3 id="NT">The New Testament</h3>
+{% if office.readings.nt %}{{ office.readings.nt | safe }}{% else %}<p><em>No reading.</em></p>{% endif %}
+<h3 id="G">The Gospel</h3>
+{% if office.readings.gospel %}{{ office.readings.gospel | safe }}{% else %}<p><em>No reading.</em></p>{% endif %}
+{% endif %}

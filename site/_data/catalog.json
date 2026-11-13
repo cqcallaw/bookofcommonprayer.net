@@ -1,0 +1,107 @@
+{
+  "howTo": "Daily Offices in the menu are the entries below that have an href. Morning and evening wording is site/_includes/office.njk. Spoken Rite II is site/_includes/rite-ii.njk. A new language lists its pages here and adds a template beside office.njk. Lesson citations stay in site/_data/daily_office.json.",
+  "offices": [
+    {
+      "id": "today",
+      "label": "Today's Office",
+      "href": "/office/today/",
+      "status": "dated",
+      "template": "site/office-today.njk"
+    },
+    {
+      "id": "today-readings",
+      "label": "Today's Office: Readings Only",
+      "href": "/office/today/readings/",
+      "status": "dated",
+      "template": "site/office-readings.njk",
+      "next": "Psalms and lessons for the date, without the prayers. The live readings page is the model: Morning Psalms, Evening Psalms, Old Testament, New Testament, Gospel."
+    },
+    {
+      "id": "by-date",
+      "label": "Daily Office by Date",
+      "href": "/office/",
+      "status": "index",
+      "template": "site/office-index.njk"
+    },
+    {
+      "id": "morning",
+      "label": "Morning Prayer",
+      "status": "dated",
+      "template": "site/_includes/office.njk",
+      "anchor": "#morning"
+    },
+    {
+      "id": "evening",
+      "label": "Evening Prayer",
+      "status": "dated",
+      "template": "site/_includes/office.njk",
+      "anchor": "#evening"
+    },
+    {
+      "id": "psalter",
+      "label": "The Daily Psalms",
+      "href": "/psalter/",
+      "status": "page",
+      "template": "site/psalter.njk"
+    },
+    {
+      "id": "holy-days",
+      "label": "Holy Day Readings",
+      "href": "/holy-days/",
+      "status": "page",
+      "template": "site/holy-days.njk"
+    },
+    {
+      "id": "compline",
+      "label": "Compline",
+      "href": "/compline/",
+      "status": "rite",
+      "template": "public/views/compline.phtml",
+      "next": "This is the prayer-book rite, copied into the static site as /compline/. A dated Compline is a new template next to site/_includes/office.njk plus a permalink of its own. The four scripture sentences are the array in api/daily_office_compline_scripture.php. They are not a database table."
+    },
+    {
+      "id": "noonday",
+      "label": "Noonday Prayer",
+      "status": "not-built",
+      "next": "There is no noonday page under public/views. The sentences and collects are the arrays in api/daily_office_noonday_scripture.php and api/daily_office_noonday_collect.php. Add site/_includes/noonday.njk, give this entry an href, and add a page template under site/."
+    }
+  ],
+  "lectionary": [
+    {"label": "This Sunday", "href": "/lectionary/today/"},
+    {"label": "Lectionary by Week", "href": "/lectionary/"},
+    {"label": "Holy Day Lectionary", "href": "/holy-days/"}
+  ],
+  "links": [
+    {"label": "BCP Contents", "href": "/contents/"}
+  ],
+  "tools": [
+    {"href": "/faq/", "title": "Frequently Asked Questions", "icon": "fa-question-circle"},
+    {"href": "/preferences/", "title": "Site Preferences", "icon": "fa-cog"}
+  ],
+  "languages": [
+    {
+      "id": "en",
+      "name": "English",
+      "offices": ["morning", "evening"],
+      "pages": [
+        {"title": "Traditional collects", "href": "/collects/traditional/"},
+        {"title": "Contemporary collects", "href": "/collects/contemporary/"},
+        {"title": "Canticles", "href": "/canticles/"},
+        {"title": "Traditional prefaces", "href": "/prefaces/traditional/"},
+        {"title": "Contemporary prefaces", "href": "/prefaces/contemporary/"}
+      ]
+    },
+    {
+      "id": "es",
+      "name": "Español",
+      "offices": [],
+      "note": "Spanish collects, prefaces, and canticles are published. Spanish morning and evening prayer are not.",
+      "next": "Add site/_includes/office-es.njk for the spoken text. The lesson citations in daily_office.json are the English book names either way. Contemporary Spanish prefaces are already in site/_data/prefaces_contemporary_es.json; add a row to site/_data/prefacePages.js with which set to CES to publish them.",
+      "pages": [
+        {"title": "Colectas", "href": "/collects/spanish/"},
+        {"title": "Cánticos", "href": "/canticles/spanish/"},
+        {"title": "Prefacios", "href": "/prefaces/spanish/"}
+      ]
+    }
+  ]
+}

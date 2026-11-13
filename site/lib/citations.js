@@ -184,7 +184,8 @@ export function resolveCitation(reference, options = {}) {
     return { display: cleaned, error: "unknown book", intention: intentionOf(reference), marks: [] };
   }
   let version = options.version || "KJV";
-  if (book.bookId >= 67) version = "RSV";
+  const apocryphaFrom = Number.isFinite(options.apocryphaFromBook) ? options.apocryphaFromBook : 67;
+  if (book.bookId >= apocryphaFrom) version = options.apocryphaVersion || "RSV";
   if (options.useBcp && book.isPsalm) version = "BCP";
   let rest = book.rest.trim();
   let fullWrap = "";

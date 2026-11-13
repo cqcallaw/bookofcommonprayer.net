@@ -8,4 +8,5 @@ permalink: "/lectionary/{{ day.y }}/{{ day.m }}/{{ day.d }}/"
 eleventyComputed:
   title: "{{ day.title }} — Lectionary"
 ---
-{{ day | lectionaryHtml | safe }}
+{% set lectionary = day | lectionaryView %}
+{% include "lectionary.njk" %}

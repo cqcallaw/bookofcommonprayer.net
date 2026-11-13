@@ -1,0 +1,8 @@
+{
+  "readerDefault": "NRSV",
+  "embedded": "KJV",
+  "apocrypha": "RSV",
+  "apocryphaFromBook": 67,
+  "fontSize": 14,
+  "copyrighted": ["NRSV", "RSV", "NKJV"]
+}

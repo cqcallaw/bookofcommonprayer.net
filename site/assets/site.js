@@ -2,15 +2,43 @@ import { splitReadings, resolveCitation, passageText } from "/lib/citations.js";
 
 const PREFS_KEY = "bcp.prefs";
 
+function readPolicy() {
+  const fallback = {
+    readerDefault: "NRSV",
+    embedded: "KJV",
+    apocrypha: "RSV",
+    apocryphaFromBook: 67,
+    fontSize: 14,
+  };
+  const node = document.getElementById("bcp-policy");
+  if (!node) return fallback;
+  try {
+    return { ...fallback, ...JSON.parse(node.textContent) };
+  } catch {
+    return fallback;
+  }
+}
+
+const policy = readPolicy();
+
 const defaults = {
-  bibleVersion: "NRSV",
+  bibleVersion: policy.readerDefault,
   prayerRite: false,
   prayerDayTime: true,
   prayerAll: false,
   lectionaryType: false,
   useBCPDO: false,
-  fontSize: 14,
+  fontSize: policy.fontSize || 14,
 };
+
+function citationOptions(prefs, extra = {}) {
+  return {
+    version: prefs.bibleVersion || policy.embedded,
+    apocryphaVersion: policy.apocrypha,
+    apocryphaFromBook: policy.apocryphaFromBook,
+    ...extra,
+  };
+}
 
 function loadPrefs() {
   try {
@@ -51,11 +79,7 @@ function loadChapter(version, bookId, chapter) {
 async function fillPassage(node, prefs) {
   const isPsalm = node.dataset.psalm === "1";
   const useBcp = isPsalm && !!prefs.useBCPDO;
-  const spec = resolveCitation(node.dataset.ref || "", {
-    isPsalm,
-    version: prefs.bibleVersion || "KJV",
-    useBcp,
-  });
+  const spec = resolveCitation(node.dataset.ref || "", citationOptions(prefs, { isPsalm, useBcp }));
   if (!spec.marks || spec.marks.length === 0 || spec.error) return;
   const loaded = new Map();
   await Promise.all(spec.marks.map(async (mark) => {
@@ -110,10 +134,12 @@ function wireChrome() {
 function wireToday(prefs) {
   const path = location.pathname.replace(/\/$/, "");
   const status = document.getElementById("today-status");
-  if (path === "/office/today") {
+  if (path === "/office/today" || path === "/office/today/readings") {
     const url = officeUrl(new Date(), prefs);
-    if (url) location.replace(url);
-    else if (status) status.textContent = "Today is outside the prepared years, 2024 through 2032.";
+    if (url) {
+      const page = url.split("#")[0];
+      location.replace(path.endsWith("/readings") ? `${page}readings/` : url);
+    } else if (status) status.textContent = "Today is outside the prepared years, 2024 through 2032.";
   }
   if (path === "/lectionary/today") {
     const now = new Date();
@@ -137,7 +163,10 @@ function wireDateForm(prefs) {
     const [year, month, day] = String(value).split("-").map(Number);
     const chosen = new Date(year, month - 1, day, new Date().getHours(), 0, 0);
     const morning = prefs.prayerAll ? !!prefs.prayerDayTime : chosen.getHours() < 12;
-    location.href = `/office/${year}/${pad(month)}/${pad(day)}/#${morning ? "morning" : "evening"}`;
+    const page = `/office/${year}/${pad(month)}/${pad(day)}/`;
+    location.href = form.dataset.target === "readings"
+      ? `${page}readings/`
+      : `${page}#${morning ? "morning" : "evening"}`;
   });
 }
 
@@ -157,7 +186,7 @@ function wireSearch(prefs) {
     const pieces = splitReadings(trimmed).pieces;
     const html = [];
     for (const piece of pieces) {
-      const spec = resolveCitation(piece.text, { version: prefs.bibleVersion, isPsalm: /psalm/i.test(piece.text) });
+      const spec = resolveCitation(piece.text, citationOptions(prefs, { isPsalm: /psalm/i.test(piece.text) }));
       const loaded = new Map();
       if (spec.marks) {
         await Promise.all(spec.marks.map(async (mark) => {

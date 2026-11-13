@@ -1,0 +1,4 @@
+{
+  "how": "For a translation that is not in the database, add an id and name to translations, then put one file per chapter at site/bible/ID/bookId/chapter.json. Each file is {\"verses\":[{\"verse\":1,\"text\":\"...\"}]}. A friendly name for a database translation belongs in version-names.json instead.",
+  "translations": []
+}

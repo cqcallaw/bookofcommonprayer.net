@@ -105,30 +105,12 @@ ksort($byId);
 write_json("$dataDir/books.json", array_values($byId));
 echo "wrote books.json (" . count($byId) . ")\n";
 
-$versions = array(
-    "ASV" => "American Standard Version",
-    "BBE" => "Bible in Basic English",
-    "D" => "Darby Translation",
-    "DR" => "Douay-Rheims Bible",
-    "FD" => "French Darby Translation",
-    "FLS" => "French Louis Segond",
-    "KJV" => "King James Version",
-    "LUT" => "German Luther Bible",
-    "NKJV" => "New King James Version",
-    "NRSV" => "New Revised Standard Version",
-    "RSV" => "Revised Standard Version",
-    "RV" => "Reina Valera",
-    "RVR" => "1909 Reina Valera",
-    "SEV" => "Sagradas Escrituras Version Antigua",
-    "SPN" => "Spanish Modern",
-    "VUL" => "Latin Vulgate",
-    "W" => "Webster's Translation",
-    "WEB" => "World English Bible",
-    "YLT" => "Young's Literal Translation",
-);
-$versionRows = array();
-foreach ($versions as $code => $label) {
-    $versionRows[] = array("id" => $code, "name" => $label);
+// Display names live in site/_data/version-names.json. Add a row there
+// when the database gains a translation. Chapter files are written for
+// every version in the bible table, whether or not it has a name yet.
+$versionRows = json_decode(file_get_contents($dataDir . "/version-names.json"), true);
+if (!is_array($versionRows)) {
+    throw new RuntimeException("site/_data/version-names.json must be a list of id and name");
 }
 write_json("$dataDir/versions.json", $versionRows);
 

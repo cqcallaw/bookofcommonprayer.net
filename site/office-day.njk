@@ -8,4 +8,5 @@ permalink: "/office/{{ day.y }}/{{ day.m }}/{{ day.d }}/"
 eleventyComputed:
   title: "{{ day.title }} — Daily Office"
 ---
-{{ day | officeHtml | safe }}
+{% set office = day | officeView %}
+{% include "office.njk" %}

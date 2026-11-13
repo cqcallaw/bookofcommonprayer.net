@@ -1,0 +1,21 @@
+{# Sunday readings. Which passages appear is site/lib/render.js. #}
+<h1>{{ lectionary.week }}</h1>
+<p>{{ lectionary.title }}. Lectionary year {{ lectionary.year }}.</p>
+{% for block in lectionary.blocks %}
+<div class="lectionary" data-lectionary="{{ block.id }}">
+<h2>{{ block.heading }}</h2>
+{% if block.empty %}
+<p><em>No readings for this Sunday in this lectionary.</em></p>
+{% else %}
+<p><strong>{{ block.name }}</strong></p>
+<h3>Psalm</h3>
+{{ block.psalm | safe }}
+<h3>Old Testament</h3>
+{{ block.ot | safe }}
+<h3>New Testament</h3>
+{{ block.nt | safe }}
+<h3>Gospel</h3>
+{{ block.gospel | safe }}
+{% endif %}
+</div>
+{% endfor %}

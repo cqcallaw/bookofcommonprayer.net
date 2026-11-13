@@ -1,7 +1,6 @@
-// Build-time HTML for offices, lectionary Sundays, collects, and the psalter.
-// Verse text is read from site/bible. The default pages embed KJV.
-// Apocrypha (book id 67 and up) is read from RSV, which is the only
-// translation that has those books in this database.
+// Build-time readings for offices, lectionary Sundays, collects, and the psalter.
+// Spoken office text is site/_includes/office.njk. Which translation is
+// embedded is site/_data/policy.json. Verse text is read from site/bible.
 
 import { readFileSync, existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
@@ -22,6 +21,7 @@ function loadJson(name) {
   return JSON.parse(readFileSync(dataDir + name, "utf8"));
 }
 
+const policy = loadJson("policy.json");
 const books = new Map(loadJson("books.json").map((book) => [book.id, book.name]));
 const dailyOffice = loadJson("daily_office.json");
 const collects = {
@@ -112,7 +112,9 @@ function piecesHtml(pieces, options) {
     }
     const spec = resolveCitation(piece.text, {
       isPsalm: options.isPsalm,
-      version: "KJV",
+      version: policy.embedded,
+      apocryphaVersion: policy.apocrypha,
+      apocryphaFromBook: policy.apocryphaFromBook,
       useBcp: false,
     });
     if (spec.bookId) spec.display = spec.isPsalm && !/^psalm/i.test(spec.display) ? `Psalm ${spec.display}` : spec.display;
@@ -138,143 +140,97 @@ function piecesHtml(pieces, options) {
   return blocks.join("\n");
 }
 
-const CONFESSION = `<p>Let us confess our sins against God and our neighbor.</p>
-<p>Most merciful God,<br>
-we confess that we have sinned against you<br>
-in thought, word, and deed,<br>
-by what we have done,<br>
-and by what we have left undone.<br>
-We have not loved you with our whole heart;<br>
-we have not loved our neighbors as ourselves.<br>
-We are truly sorry and we humbly repent.<br>
-For the sake of your Son Jesus Christ,<br>
-have mercy on us and forgive us;<br>
-that we may delight in your will,<br>
-and walk in your ways,<br>
-to the glory of your Name. Amen.</p>
-<p>Almighty God have mercy on you, forgive you all your sins
-through our Lord Jesus Christ, strengthen you in all
-goodness, and by the power of the Holy Spirit keep you in
-eternal life. <em class="response">Amen.</em></p>`;
-
-const CREED = `<p>I believe in God, the Father almighty,<br>
-creator of heaven and earth.<br>
-I believe in Jesus Christ, his only Son, our Lord.<br>
-He was conceived by the power of the Holy Spirit<br>
-and born of the Virgin Mary.<br>
-He suffered under Pontius Pilate,<br>
-was crucified, died, and was buried.<br>
-He descended to the dead.<br>
-On the third day he rose again.<br>
-He ascended into heaven,<br>
-and is seated at the right hand of the Father.<br>
-He will come again to judge the living and the dead.<br>
-I believe in the Holy Spirit,<br>
-the holy catholic Church,<br>
-the communion of saints,<br>
-the forgiveness of sins,<br>
-the resurrection of the body,<br>
-and the life everlasting. Amen.</p>`;
-
-const LORDS_PRAYER = `<p>Our Father in heaven,<br>
-hallowed be your Name,<br>
-your kingdom come,<br>
-your will be done,<br>
-on earth as in heaven.<br>
-Give us today our daily bread.<br>
-Forgive us our sins<br>
-as we forgive those who sin against us.<br>
-Save us from the time of trial,<br>
-and deliver us from evil.<br>
-For the kingdom, the power, and the glory are yours,<br>
-now and for ever. Amen.</p>`;
-
-function officeSection(id, title, opening, readings) {
-  return `<section id="${id}">
-<h2>${title}</h2>
-${opening}
-<h3>Confession of Sin</h3>
-${CONFESSION}
-<h3 id="${id}-psalms">The Psalms</h3>
-${readings.psalms || "<p><em>No psalms.</em></p>"}
-<h3 id="${id}-lessons">The Lessons</h3>
-${readings.lessons || "<p><em>No lessons.</em></p>"}
-<p>The canticles appointed after the lessons are on the <a href="/canticles/">Canticle</a> page. This page does not rotate them.</p>
-<h3>The Apostles' Creed</h3>
-${CREED}
-<h3>The Lord's Prayer</h3>
-${LORDS_PRAYER}
-<h3>The Collect of the Day</h3>
-<div class="collect" data-rite="ii">${readings.collectIi}</div>
-<div class="collect" data-rite="i" hidden>${readings.collectI}</div>
-</section>`;
+function lessonPieces(reference, office, kind) {
+  const pieces = splitReadings(reference).pieces;
+  return piecesHtml(office ? visiblePieces(pieces, office) : pieces, { kind });
 }
 
-export function renderOffice(day) {
-  const row = findReadings(day.office.year, day.office.id, day.office.dow);
+function sectionReadings(row, office) {
+  const psalms = splitPsalms(row.do_psalms);
+  const side = office === "morning" ? psalms.morning : psalms.evening;
+  return {
+    id: office,
+    title: office === "morning" ? "Morning Prayer" : "Evening Prayer",
+    psalms: piecesHtml(side, { isPsalm: true, kind: "psalm" }),
+    lessons: [
+      lessonPieces(row.do_ot, office, "lesson"),
+      lessonPieces(row.do_nt, office, "lesson"),
+      lessonPieces(row.do_gospel, office, "gospel"),
+    ].join("\n"),
+  };
+}
+
+function readingsBlocks(row) {
+  const psalms = splitPsalms(row.do_psalms);
+  return {
+    morningPsalms: piecesHtml(psalms.morning, { isPsalm: true, kind: "psalm" }),
+    eveningPsalms: piecesHtml(psalms.evening, { isPsalm: true, kind: "psalm" }),
+    ot: lessonPieces(row.do_ot, null, "lesson"),
+    nt: lessonPieces(row.do_nt, null, "lesson"),
+    gospel: lessonPieces(row.do_gospel, null, "gospel"),
+  };
+}
+
+export function officeView(day) {
   const week = day.week && day.week.name ? day.week.name : "Daily Office";
   const color = day.week && day.week.color ? day.week.color : "";
+  const row = findReadings(day.office.year, day.office.id, day.office.dow);
   if (!row) {
-    return `<h1>${escapeHtml(day.title)}</h1><p>No daily office readings are stored for ${escapeHtml(week)} (year ${escapeHtml(day.office.year)}, id ${escapeHtml(day.office.id)}).</p>`;
+    return {
+      missing: true,
+      title: day.title,
+      week,
+      year: day.office.year,
+      id: day.office.id,
+    };
   }
-  const psalms = splitPsalms(row.do_psalms);
-  const ot = splitReadings(row.do_ot).pieces;
-  const nt = splitReadings(row.do_nt).pieces;
-  const gospel = splitReadings(row.do_gospel).pieces;
   const collectKey = collectIdFor(day);
   const collectIi = collectHtml(collects.rite_ii.get(collectKey));
   const collectI = collectHtml(collects.rite_i.get(collectKey));
-  const section = (office) => ({
-    psalms: piecesHtml(office === "morning" ? psalms.morning : psalms.evening, { isPsalm: true, kind: "psalm" }),
-    lessons: [
-      piecesHtml(visiblePieces(ot, office), { kind: "lesson" }),
-      piecesHtml(visiblePieces(nt, office), { kind: "lesson" }),
-      piecesHtml(visiblePieces(gospel, office), { kind: "gospel" }),
-    ].join("\n"),
+  const sections = ["morning", "evening"].map((office) => ({
+    ...sectionReadings(row, office),
     collectIi,
     collectI,
-  });
-  return `<p class="office-note">Readings for this date, with the Rite II confession, creed, Lord's Prayer, and collect. A lesson marked for the morning or the evening is shown in that office. Rite I spoken text, the Spanish offices, antiphons, and canticle rotation are not on this page.</p>
-<h1>${escapeHtml(day.title)}</h1>
-<p class="week season-${escapeHtml(color)}"><strong>${escapeHtml(week)}</strong></p>
-<p>Week of ${escapeHtml(day.sunday)}. Daily Office year ${escapeHtml(day.office.year)}. Lectionary year ${escapeHtml(day.lectionaryYear || "")}.</p>
-<p><a href="#morning">Morning Prayer</a> &nbsp;|&nbsp; <a href="#evening">Evening Prayer</a></p>
-${officeSection("morning", "Morning Prayer", "<p>Lord, open our lips.<br><em class=\"response\">And our mouth shall proclaim your praise.</em></p>", section("morning"))}
-${officeSection("evening", "Evening Prayer", "<p>O God, make speed to save us.<br><em class=\"response\">O Lord, make haste to help us.</em></p>", section("evening"))}`;
+  }));
+  return {
+    missing: false,
+    title: day.title,
+    week,
+    color,
+    sunday: day.sunday,
+    year: day.office.year,
+    lectionaryYear: day.lectionaryYear || "",
+    path: `/office/${day.y}/${day.m}/${day.d}/`,
+    readings: readingsBlocks(row),
+    sections,
+  };
 }
 
-function lectionaryBlock(title, row) {
-  if (!row) return `<h2>${escapeHtml(title)}</h2><p><em>No readings for this Sunday in this lectionary.</em></p>`;
+function lectionaryBlock(row) {
+  if (!row) return { empty: true };
   const psalm = splitReadings(row.sl_psalm).pieces.map((piece) => ({ ...piece, intention: "both" }));
-  const ot = splitReadings(row.sl_ot).pieces;
-  const nt = splitReadings(row.sl_nt).pieces;
-  const gospel = splitReadings(row.sl_gospel).pieces;
-  return `<h2>${escapeHtml(title)}</h2>
-<p><strong>${escapeHtml(row.sl_name || "")}</strong></p>
-<h3>Psalm</h3>
-${piecesHtml(psalm, { isPsalm: true, kind: "psalm" })}
-<h3>Old Testament</h3>
-${piecesHtml(ot, { kind: "lesson" })}
-<h3>New Testament</h3>
-${piecesHtml(nt, { kind: "lesson" })}
-<h3>Gospel</h3>
-${piecesHtml(gospel, { kind: "gospel" })}`;
+  return {
+    empty: false,
+    name: row.sl_name || "",
+    psalm: piecesHtml(psalm, { isPsalm: true, kind: "psalm" }),
+    ot: piecesHtml(splitReadings(row.sl_ot).pieces, { kind: "lesson" }),
+    nt: piecesHtml(splitReadings(row.sl_nt).pieces, { kind: "lesson" }),
+    gospel: piecesHtml(splitReadings(row.sl_gospel).pieces, { kind: "gospel" }),
+  };
 }
 
-export function renderLectionary(day) {
-  const year = day.lectionaryYear;
+export function lectionaryView(day) {
+  const year = day.lectionaryYear || "";
   const id = day.lectionaryId;
-  const week = day.week && day.week.name ? day.week.name : day.title;
-  const rcl = findLectionary(lectionaries.rcl, year, id);
-  const bcp = findLectionary(lectionaries.bcp, year, id);
-  return `<h1>${escapeHtml(week)}</h1>
-<p>${escapeHtml(day.title)}. Lectionary year ${escapeHtml(year || "")}.</p>
-<div class="lectionary" data-lectionary="rcl">
-${lectionaryBlock(`Revised Common Lectionary, Year ${year || ""}`, rcl)}
-</div>
-<div class="lectionary" data-lectionary="1979">
-${lectionaryBlock(`1979 Lectionary, Year ${year || ""}`, bcp)}
-</div>`;
+  return {
+    week: day.week && day.week.name ? day.week.name : day.title,
+    title: day.title,
+    year,
+    blocks: [
+      { id: "rcl", heading: `Revised Common Lectionary, Year ${year}`, ...lectionaryBlock(findLectionary(lectionaries.rcl, year, id)) },
+      { id: "1979", heading: `1979 Lectionary, Year ${year}`, ...lectionaryBlock(findLectionary(lectionaries.bcp, year, id)) },
+    ],
+  };
 }
 
 const COLLECT_ORDER = ["1A","2A","3A","4A","CM","1C","HN","2C","E","1E","2E","3E","4E",
@@ -291,13 +247,12 @@ const COLLECT_ORDER = ["1A","2A","3A","4A","CM","1C","HN","2C","E","1E","2E","3E
 
 export function renderCollects(which) {
   const table = which === "C" ? collects.rite_ii : which === "ES" ? collects.es : collects.rite_i;
-  const traditional = which === "C" ? "" : "traditional";
-  const head = which === "ES"
-    ? `<p><a href="/collects/traditional/">Traditional</a> &nbsp;|&nbsp; <a href="/collects/contemporary/">Contemporary</a> &nbsp;|&nbsp; <a href="/collects/spanish/">Español</a></p>`
-    : `<p><a href="/collects/traditional/">Traditional</a> &nbsp;|&nbsp; <a href="/collects/contemporary/">Contemporary</a> &nbsp;|&nbsp; <a href="/collects/spanish/">Español</a></p>`;
+  const slug = which === "C" ? "contemporary" : which === "ES" ? "spanish" : "traditional";
+  const here = `/collects/${slug}/`;
+  const head = `<p><a href="/collects/traditional/">Traditional</a> &nbsp;|&nbsp; <a href="/collects/contemporary/">Contemporary</a> &nbsp;|&nbsp; <a href="/collects/spanish/">Español</a></p>`;
   let inHolyDays = false;
   const parts = [head, `<div id="top"><strong>Index</strong></div>`,
-    `<p><a href="#season">The Season</a><br><a href="#holy_days">Holy Days</a><br><a href="#saints">The Common of Saints</a><br><a href="#various">Various Occasions</a></p>`,
+    `<p><a href="${here}#season">The Season</a><br><a href="${here}#holy_days">Holy Days</a><br><a href="${here}#saints">The Common of Saints</a><br><a href="${here}#various">Various Occasions</a></p>`,
     `<div id="season"><h2>${which === "C" ? "Contemporary Collects" : which === "ES" ? "Colectas" : "Traditional Collects"}</h2></div>`];
   const ids = which === "ES" ? [...table.keys()] : COLLECT_ORDER;
   for (const id of ids) {
@@ -348,7 +303,13 @@ export function renderPsalter(index) {
   const parts = [`<h1>The Daily Psalms</h1>`, `<p>The thirty-day psalter from the Book of Common Prayer. Morning is marked A in the tables, evening E.</p>`];
   for (const day of index) {
     const block = (chapters) => chapters.map((chapter) => {
-      const spec = resolveCitation(String(chapter), { isPsalm: true, version: "KJV", useBcp: true });
+      const spec = resolveCitation(String(chapter), {
+        isPsalm: true,
+        version: policy.embedded,
+        useBcp: true,
+        apocryphaVersion: policy.apocrypha,
+        apocryphaFromBook: policy.apocryphaFromBook,
+      });
       return `<h3>Psalm ${chapter}</h3><div class="passage" data-ref="${chapter}" data-psalm="1" data-kind="psalm"><div class="passage-body">${passageText(spec, getVerses)}</div></div>`;
     }).join("\n");
     parts.push(`<h2 id="day-${day.day}">Day ${day.day}</h2>`);

@@ -1,4 +1,4 @@
-import { renderOffice, renderLectionary, renderCollects, renderCanticles, renderPrefaces, renderPsalter, renderHolyDays } from "./site/lib/render.js";
+import { officeView, lectionaryView, renderCollects, renderCanticles, renderPrefaces, renderPsalter, renderHolyDays } from "./site/lib/render.js";
 import { readFileSync } from "node:fs";
 
 const psalterIndex = JSON.parse(readFileSync(new URL("./site/_data/psalter_index.json", import.meta.url), "utf8"));
@@ -14,8 +14,9 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("robots.txt");
 
   eleventyConfig.addFilter("buildYear", () => String(new Date().getFullYear()));
-  eleventyConfig.addFilter("officeHtml", (day) => renderOffice(day));
-  eleventyConfig.addFilter("lectionaryHtml", (day) => renderLectionary(day));
+  eleventyConfig.addFilter("json", (value) => JSON.stringify(value));
+  eleventyConfig.addFilter("officeView", (day) => officeView(day));
+  eleventyConfig.addFilter("lectionaryView", (day) => lectionaryView(day));
   eleventyConfig.addFilter("collectsHtml", (which) => renderCollects(which));
   eleventyConfig.addFilter("canticlesHtml", (which) => renderCanticles(which));
   eleventyConfig.addFilter("prefacesHtml", (which) => renderPrefaces(which));

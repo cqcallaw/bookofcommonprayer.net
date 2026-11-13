@@ -1,0 +1,78 @@
+[
+    {
+        "id": "ASV",
+        "name": "American Standard Version"
+    },
+    {
+        "id": "BBE",
+        "name": "Bible in Basic English"
+    },
+    {
+        "id": "D",
+        "name": "Darby Translation"
+    },
+    {
+        "id": "DR",
+        "name": "Douay-Rheims Bible"
+    },
+    {
+        "id": "FD",
+        "name": "French Darby Translation"
+    },
+    {
+        "id": "FLS",
+        "name": "French Louis Segond"
+    },
+    {
+        "id": "KJV",
+        "name": "King James Version"
+    },
+    {
+        "id": "LUT",
+        "name": "German Luther Bible"
+    },
+    {
+        "id": "NKJV",
+        "name": "New King James Version"
+    },
+    {
+        "id": "NRSV",
+        "name": "New Revised Standard Version"
+    },
+    {
+        "id": "RSV",
+        "name": "Revised Standard Version"
+    },
+    {
+        "id": "RV",
+        "name": "Reina Valera"
+    },
+    {
+        "id": "RVR",
+        "name": "1909 Reina Valera"
+    },
+    {
+        "id": "SEV",
+        "name": "Sagradas Escrituras Version Antigua"
+    },
+    {
+        "id": "SPN",
+        "name": "Spanish Modern"
+    },
+    {
+        "id": "VUL",
+        "name": "Latin Vulgate"
+    },
+    {
+        "id": "W",
+        "name": "Webster's Translation"
+    },
+    {
+        "id": "WEB",
+        "name": "World English Bible"
+    },
+    {
+        "id": "YLT",
+        "name": "Young's Literal Translation"
+    }
+]

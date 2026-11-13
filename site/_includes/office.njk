@@ -1,0 +1,36 @@
+{# Dated morning and evening prayer. Readings are prepared in site/lib/render.js. #}
+{% import "rite-ii.njk" as rite %}
+{% if office.missing %}
+<h1>{{ office.title }}</h1>
+<p>No daily office readings are stored for {{ office.week }} (year {{ office.year }}, id {{ office.id }}).</p>
+{% else %}
+<p class="office-note">Readings for this date, with the Rite II confession, creed, Lord's Prayer, and collect. A lesson marked for the morning or the evening is shown in that office. Rite I spoken text, the Spanish offices, antiphons, and canticle rotation are not on this page.</p>
+<h1>{{ office.title }}</h1>
+<p class="week season-{{ office.color }}"><strong>{{ office.week }}</strong></p>
+<p>Week of {{ office.sunday }}. Daily Office year {{ office.year }}. Lectionary year {{ office.lectionaryYear }}.</p>
+<p><a href="{{ office.path }}#morning">Morning Prayer</a> &nbsp;|&nbsp; <a href="{{ office.path }}#evening">Evening Prayer</a> &nbsp;|&nbsp; <a href="{{ office.path }}readings/">Readings only</a></p>
+{% for section in office.sections %}
+<section id="{{ section.id }}">
+<h2>{{ section.title }}</h2>
+{% if section.id == "morning" %}
+<p>Lord, open our lips.<br><em class="response">And our mouth shall proclaim your praise.</em></p>
+{% else %}
+<p>O God, make speed to save us.<br><em class="response">O Lord, make haste to help us.</em></p>
+{% endif %}
+<h3>Confession of Sin</h3>
+{{ rite.confession() }}
+<h3 id="{{ section.id }}-psalms">The Psalms</h3>
+{% if section.psalms %}{{ section.psalms | safe }}{% else %}<p><em>No psalms.</em></p>{% endif %}
+<h3 id="{{ section.id }}-lessons">The Lessons</h3>
+{% if section.lessons %}{{ section.lessons | safe }}{% else %}<p><em>No lessons.</em></p>{% endif %}
+<p>The canticles appointed after the lessons are on the <a href="/canticles/">Canticle</a> page. This page does not rotate them.</p>
+<h3>The Apostles' Creed</h3>
+{{ rite.creed() }}
+<h3>The Lord's Prayer</h3>
+{{ rite.lordsPrayer() }}
+<h3>The Collect of the Day</h3>
+<div class="collect" data-rite="ii">{{ section.collectIi | safe }}</div>
+<div class="collect" data-rite="i" hidden>{{ section.collectI | safe }}</div>
+</section>
+{% endfor %}
+{% endif %}
