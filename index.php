@@ -14,6 +14,8 @@ session_start();
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details: <http://www.gnu.org/licenses/>
+
+    The license text is the file LICENSE in this tree.
 */
 // QUICKSHELL INDEX PAGE (FRONTCONTROLLER)
 // FIRST, GET THE GENERAL CONFIGURATION ITEMS
