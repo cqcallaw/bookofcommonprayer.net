@@ -9,6 +9,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "site/assets": "assets" });
   eleventyConfig.addPassthroughCopy({ "site/lib/books.js": "lib/books.js" });
   eleventyConfig.addPassthroughCopy({ "site/lib/citations.js": "lib/citations.js" });
+  // CSS, fonts, and images linked from the layout. Rite sources live in rites/ and are not copied.
   eleventyConfig.addPassthroughCopy("public");
   eleventyConfig.addPassthroughCopy("favicon.ico");
   eleventyConfig.addPassthroughCopy("robots.txt");

@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 
-const views = fileURLToPath(new URL("../../public/views/", import.meta.url));
+const views = fileURLToPath(new URL("../../rites/", import.meta.url));
 const skip = new Set([
   "welcome",
   "collects",

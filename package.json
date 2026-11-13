@@ -3,7 +3,6 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "export": "sg docker -c \"docker exec -w /var/www/html dev-web-1 php tools/export.php\"",
     "build": "eleventy",
     "serve": "eleventy --serve --port=8091"
   },

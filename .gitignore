@@ -1,12 +1,8 @@
-# Production database password. The container mounts docker/config.php over this.
-system/cfg/config.php
+# The November 2026 database dump is not part of the site.
+# It includes RSV, NRSV, and NKJV, so the whole directory stays out of git.
+orig/
 
-# Database dumps stay in orig/. The Bible dump includes RSV, NRSV, and NKJV.
-orig/20271109_bcpdb.sql*
-
-# Files left by the host and the editor.
-orig/.ftpquota
-orig/.index.php.swp
+# Files left by the editor.
 *.swp
 *~
 

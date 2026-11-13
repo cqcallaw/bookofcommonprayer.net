@@ -56,14 +56,14 @@
       "label": "Compline",
       "href": "/compline/",
       "status": "rite",
-      "template": "public/views/compline.phtml",
-      "next": "This is the prayer-book rite, copied into the static site as /compline/. A dated Compline is a new template next to site/_includes/office.njk plus a permalink of its own. The four scripture sentences are the array in api/daily_office_compline_scripture.php. They are not a database table."
+      "template": "rites/compline.phtml",
+      "next": "This is the prayer-book rite at /compline/. A dated Compline is a new template next to site/_includes/office.njk plus a permalink of its own. The old app returned one of four sentences at random. Those sentences are not a page in this build."
     },
     {
       "id": "noonday",
       "label": "Noonday Prayer",
       "status": "not-built",
-      "next": "There is no noonday page under public/views. The sentences and collects are the arrays in api/daily_office_noonday_scripture.php and api/daily_office_noonday_collect.php. Add site/_includes/noonday.njk, give this entry an href, and add a page template under site/."
+      "next": "Noonday has no page in this build. Add site/_includes/noonday.njk, give this entry an href, and add a page template under site/."
     }
   ],
   "lectionary": [
