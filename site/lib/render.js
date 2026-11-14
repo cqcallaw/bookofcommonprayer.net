@@ -33,6 +33,28 @@ const lectionaries = {
   bcp: loadJson("sunday_lectionary.json"),
   rcl: loadJson("rcl_sunday_lectionary.json"),
 };
+const canticleById = new Map(loadJson("canticles.json").map((row) => [String(row.id), row]));
+
+// Same weekday table as BCP\CanticlesByPrayerType for Rite II.
+// first/second are the canticles after the first and second lessons.
+const riteIiCanticles = {
+  lent: {
+    morning: { first: ["14", "9", "13", "14", "8", "14", "12"], second: ["16", "19", "18", "16", "19", "18", "19"] },
+    evening: { first: ["3", "14", "10", "12", "11", "13", "9"], second: ["5", "5", "3", "5", "3", "5", "3"] },
+  },
+  advent: {
+    morning: { first: ["11", "9", "13", "11", "8", "10", "12"], second: ["21", "19", "18", "16", "20", "18", "19"] },
+    evening: { first: ["3", "8", "10", "12", "11", "13", "9"], second: ["5", "5", "3", "5", "3", "5", "3"] },
+  },
+  easter: {
+    morning: { first: ["8", "9", "13", "11", "8", "10", "12"], second: ["21", "19", "18", "16", "20", "18", "19"] },
+    evening: { first: ["3", "8", "10", "12", "11", "13", "9"], second: ["5", "5", "3", "5", "3", "5", "3"] },
+  },
+  ordinary: {
+    morning: { first: ["16", "9", "13", "11", "8", "10", "12"], second: ["21", "19", "18", "16", "20", "18", "19"] },
+    evening: { first: ["3", "8", "10", "12", "11", "13", "9"], second: ["5", "5", "3", "5", "3", "5", "3"] },
+  },
+};
 
 const chapterCache = new Map();
 
@@ -145,18 +167,46 @@ function lessonPieces(reference, office, kind) {
   return piecesHtml(office ? visiblePieces(pieces, office) : pieces, { kind });
 }
 
-function sectionReadings(row, office) {
+function canticleHtml(id) {
+  const row = canticleById.get(String(id));
+  if (!row) return "";
+  const ref = row.ref ? `<br><em>${escapeHtml(row.ref)}</em>` : "";
+  const instr = row.instr ? `<br><em>${escapeHtml(row.instr)}</em>` : "";
+  return `<p><strong>${escapeHtml(row.title)}</strong> <em>${escapeHtml(row.latin || "")}</em>${ref}${instr}</p><pre>${escapeHtml(row.cont || "")}</pre>`;
+}
+
+function canticleBucket(day) {
+  const id = String(day.office.id || "");
+  const season = day.season || "";
+  if (season === "Lent" || season === "Holy_Week" || /^(LE|PS|[1-5]L)$/.test(id)) return "lent";
+  if (/^[1-4]A$/.test(id)) return "advent";
+  if (season === "Easter" || /^(R|[2-7]R)$/.test(id)) return "easter";
+  return "ordinary";
+}
+
+function weekdayNumber(day) {
+  const raw = day.office && day.office.dow;
+  if (raw !== null && raw !== undefined && raw !== "" && raw !== "null") return String(raw);
+  if (day.dow !== null && day.dow !== undefined && day.dow !== "" && day.dow !== "null") return String(day.dow);
+  const [year, month, date] = String(day.date || "").split("-").map(Number);
+  if (!year || !month || !date) return "0";
+  return String(new Date(Date.UTC(year, month - 1, date)).getUTCDay());
+}
+
+function sectionReadings(row, office, appointed) {
   const psalms = splitPsalms(row.do_psalms);
   const side = office === "morning" ? psalms.morning : psalms.evening;
+  const other = office === "morning" ? psalms.evening : psalms.morning;
   return {
     id: office,
     title: office === "morning" ? "Morning Prayer" : "Evening Prayer",
     psalms: piecesHtml(side, { isPsalm: true, kind: "psalm" }),
-    lessons: [
-      lessonPieces(row.do_ot, office, "lesson"),
-      lessonPieces(row.do_nt, office, "lesson"),
-      lessonPieces(row.do_gospel, office, "gospel"),
-    ].join("\n"),
+    otherPsalms: piecesHtml(other, { isPsalm: true, kind: "psalm" }),
+    ot: lessonPieces(row.do_ot, office, "lesson"),
+    nt: lessonPieces(row.do_nt, office, "lesson"),
+    gospel: lessonPieces(row.do_gospel, office, "gospel"),
+    canticleFirst: appointed.first,
+    canticleSecond: appointed.second,
   };
 }
 
@@ -187,10 +237,21 @@ export function officeView(day) {
   const collectKey = collectIdFor(day);
   const collectIi = collectHtml(collects.rite_ii.get(collectKey));
   const collectI = collectHtml(collects.rite_i.get(collectKey));
+  const bucket = canticleBucket(day);
+  const dow = weekdayNumber(day);
+  const table = riteIiCanticles[bucket];
+  const dayIndex = Number(dow);
   const sections = ["morning", "evening"].map((office) => ({
-    ...sectionReadings(row, office),
+    ...sectionReadings(row, office, {
+      first: canticleHtml(table[office].first[dayIndex]),
+      second: canticleHtml(table[office].second[dayIndex]),
+    }),
     collectIi,
     collectI,
+    dow,
+    proper: /^[0-9]{1,2}$/.test(String(day.office.id || "")),
+    lent: bucket === "lent",
+    easter: bucket === "easter",
   }));
   return {
     missing: false,

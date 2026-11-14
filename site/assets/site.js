@@ -110,6 +110,12 @@ function applyPrefs(prefs) {
     const parent = older && older.parentElement;
     if (older && parent) parent.insertBefore(older, parent.firstChild);
   }
+  document.querySelectorAll("[data-when='all']").forEach((node) => {
+    node.hidden = !prefs.prayerAll;
+  });
+  document.querySelectorAll("[data-when='time']").forEach((node) => {
+    node.hidden = !!prefs.prayerAll;
+  });
   const passages = document.querySelectorAll(".passage");
   if (passages.length) {
     Promise.all([...passages].map((node) => fillPassage(node, prefs)));

@@ -14,8 +14,8 @@
   text-align: center;
 }
 
-.collect[hidden] {
-  display: none;
+[hidden] {
+  display: none !important;
 }
 
 .season-blue { border-left: 4px solid #2a4d8f; padding-left: 0.75rem; }

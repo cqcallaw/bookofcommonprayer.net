@@ -1,7 +1,53 @@
-{# Spoken Rite II. A Rite I confession would be rite-i.njk, shown beside this one. #}
+{# Spoken Rite II. The live office prints one random choice for the opening
+   sentences, the weekday collect, the prayer for mission, and the closing
+   sentence. This page prints every choice those slots can return. #}
 
-{% macro confession() %}
+{% macro gloria() %}
+<p><em>Officiant and People</em></p>
+<pre>Glory to the Father, and to the Son, and to the Holy Spirit: *
+  as it was in the beginning, is now, and will be for ever. Amen.</pre>
+<p><em>or this</em></p>
+<pre>Glory be to the Father, and to the Son, and to the Holy Spirit:
+  as it was in the beginning, is now, and ever shall be,
+    world without end. Amen.</pre>
+{% endmacro %}
+
+{% macro word() %}
+<p><em>Reader</em> The Word of the Lord.<br>
+<em class="response">Thanks be to God.</em></p>
+{% endmacro %}
+
+{% macro eveningSentences() %}
+<p><em>Officiant begins with one of the following</em></p>
+<p>Let my prayer be set forth in your sight as incense, the lifting up of my hands as an evening sacrifice. <em>Psalm 141:2</em></p>
+<p><em>or this</em></p>
+<p>Grace to you and peace from God our Father and the Lord Jesus Christ. <em>Philippians 1:2</em></p>
+<p><em>or this</em></p>
+<p>Worship the Lord in the beauty of holiness; let the whole earth tremble before him. <em>Psalm 96:9</em></p>
+<p><em>or this</em></p>
+<p>Yours is the day, O God, yours also the night; you established the moon and the sun. You fixed all the boundaries of the earth; you made both summer and winter. <em>Psalm 74:15, 16</em></p>
+<p><em>or this</em></p>
+<p>I will bless the Lord who gives me counsel; my heart teaches me, night after night. I have set the Lord always before me; because he is at my right hand, I shall not fall. <em>Psalm 16:7, 8</em></p>
+<p><em>or this</em></p>
+<p>Seek him who made the Pleiades and Orion, and turns deep darkness into the morning, and darkens the day into night; who calls for the waters of the sea and pours them out upon the surface of the earth: The Lord is his Name. <em>Amos 5:8</em></p>
+<p><em>or this</em></p>
+<p>If I say, "Surely the darkness will cover me, and the light around me turn to night," darkness is not dark to you, O Lord; the night is as bright as the day; darkness and light to you are both alike. <em>Psalm 139:10, 11</em></p>
+<p><em>or this</em></p>
+<p>Jesus said, "I am the light of the world; whoever follows me will not walk in darkness, but will have the light of life." <em>John 8:12</em></p>
+{% endmacro %}
+
+{% macro confession(which) %}
+<h3>Confession of Sin</h3>
+{% if which == "morning" %}
+<p>Dearly beloved, we have come together in the presence of Almighty God our heavenly Father, to set forth his praise, to hear his holy Word, and to ask, for ourselves and on behalf of others, those things that are necessary for our life and our salvation. And so that we may prepare ourselves in heart and mind to worship him, let us kneel in silence, and with penitent and obedient hearts confess our sins, that we may obtain forgiveness by his infinite goodness and mercy.</p>
+{% else %}
+<p><em>Officiant says to the people</em></p>
+<p>Dear friends in Christ, here in the presence of Almighty God, let us kneel in silence, and with penitent and obedient hearts confess our sins, so that we may obtain forgiveness by his infinite goodness and mercy.</p>
+{% endif %}
+<p><em>or this</em></p>
 <p>Let us confess our sins against God and our neighbor.</p>
+<p><em>Silence may be kept.</em><br>
+<em>Officiant and People together, all kneeling</em></p>
 <p>Most merciful God,<br>
 we confess that we have sinned against you<br>
 in thought, word, and deed,<br>
@@ -14,45 +60,330 @@ For the sake of your Son Jesus Christ,<br>
 have mercy on us and forgive us;<br>
 that we may delight in your will,<br>
 and walk in your ways,<br>
-to the glory of your Name. Amen.</p>
-<p>Almighty God have mercy on you, forgive you all your sins
-through our Lord Jesus Christ, strengthen you in all
-goodness, and by the power of the Holy Spirit keep you in
-eternal life. <em class="response">Amen.</em></p>
+to the glory of your Name. <em class="response">Amen.</em></p>
+<p><em>The Priest alone stands and says</em></p>
+<p>Almighty God have mercy on you, forgive you all your sins through our Lord Jesus Christ, strengthen you in all goodness, and by the power of the Holy Spirit keep you in eternal life. <em class="response">Amen.</em></p>
+<p><em>A deacon or lay person using the preceding form remains kneeling and substitutes "us" for "you" and "our" for "your."</em></p>
+{% endmacro %}
+
+{% macro phos() %}
+<p><strong>O Gracious Light</strong> <em>Phos hilaron</em></p>
+<pre>O gracious Light,
+pure brightness of the everliving Father in heaven,
+O Jesus Christ, holy and blessed!
+
+Now as we come to the setting of the sun,
+and our eyes behold the vesper light,
+we sing your praises, O God: Father, Son, and Holy Spirit.
+
+You are worthy at all times to be praised by happy voices,
+O Son of God, O Giver of life,
+and to be glorified through all the worlds.</pre>
+{% endmacro %}
+
+{% macro venite() %}
+<p><em>Then follows one of the Invitatory Psalms, Venite or Jubilate.</em></p>
+<p><strong>Venite</strong> <em>Psalm 95:1-7</em></p>
+<pre>Come, let us sing to the Lord; *
+ let us shout for joy to the Rock of our salvation.
+Let us come before his presence with thanksgiving *
+ and raise a loud shout to him with psalms.
+
+For the Lord is a great God, *
+ and a great King above all gods.
+In his hand are the caverns of the earth, *
+ and the heights of the hills are his also.
+The sea is his, for he made it, *
+ and his hands have molded the dry land.
+
+Come, let us bow down, and bend the knee, *
+ and kneel before the Lord our Maker.
+For he is our God,
+and we are the people of his pasture and the sheep of his hand. *
+ Oh, that today you would hearken to his voice!</pre>
+<p><em>or this</em></p>
+<p><strong>Jubilate</strong> <em>Psalm 100</em></p>
+<pre>Be joyful in the Lord, all you lands; *
+ serve the Lord with gladness
+ and come before his presence with a song.
+
+Know this: The Lord himself is God; *
+ he himself has made us, and we are his;
+ we are his people and the sheep of his pasture.
+
+Enter his gates with thanksgiving;
+go into his courts with praise; *
+ give thanks to him and call upon his Name.
+
+For the Lord is good;
+his mercy is everlasting; *
+ and his faithfulness endures from age to age.</pre>
+{% endmacro %}
+
+{% macro properAntiphons() %}
+<p><em>On ordinary weekdays the invitatory antiphon is one of the following.</em></p>
+<p>The earth is the Lord's for he made it: Come, let us adore him.</p>
+<p><em>or this</em></p>
+<p>Worship the Lord in the beauty of holiness: Come, let us adore him.</p>
+<p><em>or this</em></p>
+<p>The mercy of the Lord is everlasting: Come, let us adore him.</p>
+{% endmacro %}
+
+{% macro magnificatOrNunc() %}
+<p><strong>The Song of Mary</strong> <em>Magnificat</em><br>
+<em>Luke 1:46-55</em></p>
+<pre>My soul proclaims the greatness of the Lord,
+my spirit rejoices in God my Savior; *
+ for he has looked with favor on his lowly servant.
+
+From this day all generations will call me blessed: *
+ the Almighty has done great things for me,
+ and holy is his Name.
+
+He has mercy on those who fear him *
+ in every generation.
+
+He has shown the strength of his arm, *
+ he has scattered the proud in their conceit.
+
+He has cast down the mighty from their thrones, *
+ and has lifted up the lowly.
+
+He has filled the hungry with good things, *
+ and the rich he has sent away empty.
+
+He has come to the help of his servant Israel, *
+ for he has remembered his promise of mercy,
+
+The promise he made to our fathers, *
+ to Abraham and his children for ever.
+
+Glory to the Father, and to the Son, and to the Holy Spirit: *
+ as it was in the beginning, is now, and will be for ever. Amen.</pre>
+<p><em>-OR-</em></p>
+<p><strong>The Song of Simeon</strong> <em>Nunc dimittis</em><br>
+<em>Luke 2:29-32</em></p>
+<pre>Lord, you now have set your servant free *
+ to go in peace as you have promised;
+
+For these eyes of mine have seen the Savior, *
+ whom you have prepared for all the world to see:
+
+A Light to enlighten the nations, *
+ and the glory of your people Israel.
+
+Glory to the Father, and to the Son, and to the Holy Spirit: *
+ as it was in the beginning, is now, and will be for ever. Amen.</pre>
 {% endmacro %}
 
 {% macro creed() %}
-<p>I believe in God, the Father almighty,<br>
-creator of heaven and earth.<br>
-I believe in Jesus Christ, his only Son, our Lord.<br>
-He was conceived by the power of the Holy Spirit<br>
-and born of the Virgin Mary.<br>
-He suffered under Pontius Pilate,<br>
-was crucified, died, and was buried.<br>
-He descended to the dead.<br>
-On the third day he rose again.<br>
-He ascended into heaven,<br>
-and is seated at the right hand of the Father.<br>
-He will come again to judge the living and the dead.<br>
-I believe in the Holy Spirit,<br>
-the holy catholic Church,<br>
-the communion of saints,<br>
-the forgiveness of sins,<br>
-the resurrection of the body,<br>
-and the life everlasting. Amen.</p>
+<h3>The Apostles' Creed</h3>
+<p><em>Officiant and People together, all standing</em></p>
+<pre>I believe in God, the Father almighty,
+ creator of heaven and earth.
+I believe in Jesus Christ, his only Son, our Lord.
+ He was conceived by the power of the Holy Spirit
+  and born of the Virgin Mary.
+ He suffered under Pontius Pilate,
+  was crucified, died, and was buried.
+ He descended to the dead.
+ On the third day he rose again.
+ He ascended into heaven,
+  and is seated at the right hand of the Father.
+ He will come again to judge the living and the dead.
+I believe in the Holy Spirit,
+ the holy catholic Church,
+ the communion of saints,
+ the forgiveness of sins,
+ the resurrection of the body,
+ and the life everlasting. Amen.</pre>
 {% endmacro %}
 
-{% macro lordsPrayer() %}
-<p>Our Father in heaven,<br>
-hallowed be your Name,<br>
-your kingdom come,<br>
-your will be done,<br>
-on earth as in heaven.<br>
-Give us today our daily bread.<br>
-Forgive us our sins<br>
-as we forgive those who sin against us.<br>
-Save us from the time of trial,<br>
-and deliver us from evil.<br>
-For the kingdom, the power, and the glory are yours,<br>
-now and for ever. Amen.</p>
+{% macro lordsPrayers() %}
+<h3>The Lord's Prayer</h3>
+<p><em>Officiant</em> The Lord be with you.<br>
+<em class="response">And also with you.</em><br>
+<em>Officiant</em> Let us pray.</p>
+<p><em>Officiant and People</em></p>
+<pre>Our Father, who art in heaven,
+ hallowed be thy Name,
+ thy kingdom come,
+ thy will be done,
+ on earth as it is in heaven.
+Give us this day our daily bread.
+And forgive us our trespasses,
+ as we forgive those
+ who trespass against us.
+And lead us not into temptation,
+ but deliver us from evil.
+For thine is the kingdom,
+ and the power, and the glory,
+ for ever and ever. Amen.</pre>
+<p><em>-OR-</em></p>
+<pre>Our Father in heaven,
+ hallowed be your Name,
+ your kingdom come,
+ your will be done,
+ on earth as in heaven.
+Give us today our daily bread.
+Forgive us our sins
+ as we forgive those
+ who sin against us.
+Save us from the time of trial,
+ and deliver us from evil.
+For the kingdom, the power,
+ and the glory are yours,
+ now and for ever. Amen.</pre>
+{% endmacro %}
+
+{% macro suffrages(which) %}
+<p><em>Then follows one of these sets of Suffrages</em></p>
+<p><strong>A</strong><br>
+V. Show us your mercy, O Lord;<br>
+<em class="response">And grant us your salvation.</em><br>
+V. Clothe your ministers with righteousness;<br>
+<em class="response">Let your people sing with joy.</em><br>
+V. Give peace, O Lord, in all the world;<br>
+<em class="response">For only in you can we live in safety.</em><br>
+V. Lord, keep this nation under your care;<br>
+<em class="response">And guide us in the way of justice and truth.</em><br>
+V. Let your way be known upon earth;<br>
+<em class="response">Your saving health among all nations.</em><br>
+V. Let not the needy, O Lord, be forgotten;<br>
+<em class="response">Nor the hope of the poor be taken away.</em><br>
+V. Create in us clean hearts, O God;<br>
+<em class="response">And sustain us by your Holy Spirit.</em></p>
+<p><em>or this</em></p>
+{% if which == "morning" %}
+<p><strong>B</strong><br>
+V. Save your people, Lord, and bless your inheritance;<br>
+<em class="response">Govern and uphold them, now and always.</em><br>
+V. Day by day we bless you;<br>
+<em class="response">We praise your Name for ever.</em><br>
+V. Lord, keep us from all sin today;<br>
+<em class="response">Have mercy on us, Lord, have mercy.</em><br>
+V. Lord, show us your love and mercy;<br>
+<em class="response">For we put our trust in you.</em><br>
+V. In you, Lord, is our hope;<br>
+<em class="response">And we shall never hope in vain.</em></p>
+{% else %}
+<p><strong>B</strong><br>
+That this evening may be holy, good, and peaceful,<br>
+<em class="response">We entreat you, O Lord.</em></p>
+<p>That your holy angels may lead us in paths of peace and goodwill,<br>
+<em class="response">We entreat you, O Lord.</em></p>
+<p>That we may be pardoned and forgiven for our sins and offenses,<br>
+<em class="response">We entreat you, O Lord.</em></p>
+<p>That there may be peace to your Church and to the whole world,<br>
+<em class="response">We entreat you, O Lord.</em></p>
+<p>That we may depart this life in your faith and fear, and not be condemned before the great judgment seat of Christ,<br>
+<em class="response">We entreat you, O Lord.</em></p>
+<p>That we may be bound together by your Holy Spirit in the communion of [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; and] all your saints, entrusting one another and all our life to Christ,<br>
+<em class="response">We entreat you, O Lord.</em></p>
+{% endif %}
+{% endmacro %}
+
+{% macro namedCollect(name, text) %}
+<p><strong>{{ name }}</strong><br>
+{{ text }} <em class="response">Amen.</em></p>
+{% endmacro %}
+
+{% macro weekdayCollects(which) %}
+{% if which == "morning" %}
+{{ namedCollect("A Collect for the Renewal of Life", "O God, the King eternal, whose light divides the day from the night and turns the shadow of death into the morning: Drive far from us all wrong desires, incline our hearts to keep your law, and guide our feet into the way of peace; that, having done your will with cheerfulness during the day, we may, when night comes, rejoice to give you thanks; through Jesus Christ our Lord.") }}
+<p><em>or this</em></p>
+{{ namedCollect("A Collect for Peace", "O God, the author of peace and lover of concord, to know you is eternal life and to serve you is perfect freedom: Defend us, your humble servants, in all assaults of our enemies; that we, surely trusting in your defense, may not fear the power of any adversaries; through the might of Jesus Christ our Lord.") }}
+<p><em>or this</em></p>
+{{ namedCollect("A Collect for Grace", "Lord God, almighty and everlasting Father, you have brought us in safety to this new day: Preserve us with your mighty power, that we may not fall into sin, nor be overcome by adversity; and in all we do, direct us to the fulfilling of your purpose; through Jesus Christ our Lord.") }}
+<p><em>or this</em></p>
+{{ namedCollect("A Collect for Guidance", "Heavenly Father, in you we live and move and have our being: We humbly pray you so to guide and govern us by your Holy Spirit, that in all the cares and occupations of our life we may not forget you, but may remember that we are ever walking in your sight; through Jesus Christ our Lord.") }}
+{% else %}
+{{ namedCollect("A Collect for Aid against Perils", "Be our light in the darkness, O Lord, and in your great mercy defend us from all perils and dangers of this night; for the love of your only Son, our Savior Jesus Christ.") }}
+<p><em>or this</em></p>
+{{ namedCollect("A Collect for Peace", "Most holy God, the source of all good desires, all right judgments, and all just works: Give to us, your servants, that peace which the world cannot give, so that our minds may be fixed on the doing of your will, and that we, being delivered from the fear of all enemies, may live in peace and quietness; through the mercies of Christ Jesus our Savior.") }}
+<p><em>or this</em></p>
+{{ namedCollect("A Collect for Protection", "O God, the life of all who live, the light of the faithful, the strength of those who labor, and the repose of the dead: We thank you for the blessings of the day that is past, and humbly ask for your protection through the coming night. Bring us in safety to the morning hours; through him who died and rose again for us, your Son our Savior Jesus Christ.") }}
+<p><em>or this</em></p>
+{{ namedCollect("A Collect for the Presence of Christ", "Lord Jesus, stay with us, for evening is at hand and the day is past; be our companion in the way, kindle our hearts, and awaken hope, that we may know you as you are revealed in Scripture and the breaking of bread. Grant this for the sake of your love.") }}
+{% endif %}
+{% endmacro %}
+
+{% macro fixedCollect(which, dow) %}
+{% if dow == "0" and which == "evening" %}
+{{ namedCollect("A Collect for Sundays", "Lord God, whose Son our Savior Jesus Christ triumphed over the powers of death and prepared for us our place in the new Jerusalem: Grant that we, who have this day given thanks for his resurrection, may praise you in that City of which he is the light, and where he lives and reigns for ever and ever.") }}
+{% elif dow == "0" %}
+{{ namedCollect("A Collect for Sundays", "O God, you make us glad with the weekly remembrance of the glorious resurrection of your Son our Lord: Give us this day such blessing through our worship of you, that the week to come may be spent in your favor; through Jesus Christ our Lord.") }}
+{% elif dow == "5" and which == "evening" %}
+{{ namedCollect("A Collect for Fridays", "O Lord Jesus Christ, by your death you took away the sting of death: Grant to us your servants so to follow in faith where you have led the way, that we may at length fall asleep peacefully in you and awake up in your likeness; for your tender mercies' sake.") }}
+{% elif dow == "5" %}
+{{ namedCollect("A Collect for Fridays", "Almighty God, whose most dear Son went not up to joy but first he suffered pain, and entered not into glory before he was crucified: Mercifully grant that we, walking in the way of the cross, may find it none other than the way of life and peace; through Jesus Christ our Lord.") }}
+{% elif dow == "6" and which == "evening" %}
+{{ namedCollect("A Collect for Saturdays", "O God, the source of eternal light: Shed forth your unending day upon us who watch for you, that our lips may praise you, our lives may bless you, and our worship on the morrow may give you glory; through Jesus Christ our Lord.") }}
+{% elif dow == "6" %}
+{{ namedCollect("A Collect for Saturdays", "Almighty God, who after the creation of the world rested from all your works and sanctified a day of rest for all your creatures: Grant that we, putting away all earthly anxieties, may be duly prepared for the service of your sanctuary, and that our rest here upon earth may be a preparation for the eternal rest promised to your people in heaven; through Jesus Christ our Lord.") }}
+{% else %}
+{{ weekdayCollects(which) }}
+{% endif %}
+{% endmacro %}
+
+{% macro mission(which) %}
+<p><em>Then, unless the Eucharist or a form of general intercession is to follow, one of the following prayers for mission is added.</em></p>
+<p><strong>Prayer for Mission</strong></p>
+{% if which == "morning" %}
+<p>Almighty and everlasting God, by whose Spirit the whole body of your faithful people is governed and sanctified: Receive our supplications and prayers which we offer before you for all members of your holy Church, that in their vocation and ministry they may truly and devoutly serve you; through our Lord and Savior Jesus Christ. <em class="response">Amen.</em></p>
+<p><em>or this</em></p>
+<p>O God, you have made of one blood all the peoples of the earth, and sent your blessed Son to preach peace to those who are far off and to those who are near: Grant that people everywhere may seek after you and find you; bring the nations into your fold; pour out your Spirit upon all flesh; and hasten the coming of your kingdom; through Jesus Christ our Lord. <em class="response">Amen.</em></p>
+<p><em>or this</em></p>
+<p>Lord Jesus Christ, you stretched out your arms of love on the hard wood of the cross that everyone might come within the reach of your saving embrace: So clothe us in your Spirit that we, reaching forth our hands in love, may bring those who do not know you to the knowledge and love of you; for the honor of your Name. <em class="response">Amen.</em></p>
+{% else %}
+<p>O God and Father of all, whom the whole heavens adore: Let the whole earth also worship you, all nations obey you, all tongues confess and bless you, and men and women everywhere love you and serve you in peace; through Jesus Christ our Lord. <em class="response">Amen.</em></p>
+<p><em>or this</em></p>
+<p>Keep watch, dear Lord, with those who work, or watch, or weep this night, and give your angels charge over those who sleep. Tend the sick, Lord Christ; give rest to the weary, bless the dying, soothe the suffering, pity the afflicted, shield the joyous; and all for your love's sake. <em class="response">Amen.</em></p>
+<p><em>or this</em></p>
+<p>O God, you manifest in your servants the signs of your presence: Send forth upon us the spirit of love, that in companionship with one another your abounding grace may increase among us; through Jesus Christ our Lord. <em class="response">Amen.</em></p>
+{% endif %}
+{% endmacro %}
+
+{% macro closing(easter) %}
+<p><em>Here may be sung a hymn or anthem.</em></p>
+<p><em><a href="/prayers_and_thanksgivings/">Authorized intercessions</a> and thanksgivings may follow.</em></p>
+<p><em>Before the close of the Office one or both of the following may be used.</em></p>
+<p><strong>The General Thanksgiving</strong><br>
+<em>Officiant and People</em></p>
+<pre>Almighty God, Father of all mercies,
+we your unworthy servants give you humble thanks
+for all your goodness and loving-kindness
+to us and to all whom you have made.
+We bless you for our creation, preservation,
+and all the blessings of this life;
+but above all for your immeasurable love
+in the redemption of the world by our Lord Jesus Christ;
+for the means of grace, and for the hope of glory.
+And, we pray, give us such an awareness of your mercies,
+that with truly thankful hearts we may show forth your praise,
+not only with our lips, but in our lives,
+by giving up our selves to your service,
+and by walking before you
+in holiness and righteousness all our days;
+through Jesus Christ our Lord,
+to whom, with you and the Holy Spirit,
+be honor and glory throughout all ages. Amen.</pre>
+<p><strong>A Prayer of St. Chrysostom</strong></p>
+<pre>Almighty God, you have given us grace at this time with one
+accord to make our common supplication to you; and you
+have promised through your well-beloved Son that when two
+or three are gathered together in his Name you will be in the
+midst of them: Fulfill now, O Lord, our desires and petitions
+as may be best for us; granting us in this world knowledge of
+your truth, and in the age to come life everlasting. Amen.</pre>
+<p><em>Then may be said</em><br>
+Let us bless the Lord.<br>
+<em class="response">Thanks be to God.</em></p>
+{% if easter %}<p><strong>Alleluia, alleluia.</strong></p>{% endif %}
+<p><em>The Officiant may then conclude with one of the following.</em></p>
+<p>The grace of our Lord Jesus Christ, and the love of God, and the fellowship of the Holy Spirit, be with us all evermore. <em class="response">Amen.</em> <em>2 Corinthians 13:14</em></p>
+<p><em>or this</em></p>
+<p>May the God of hope fill us with all joy and peace in believing through the power of the Holy Spirit. <em class="response">Amen.</em> <em>Romans 15:13</em></p>
+<p><em>or this</em></p>
+<p>Glory to God whose power, working in us, can do infinitely more than we can ask or imagine: Glory to him from generation to generation in the Church, and in Christ Jesus for ever and ever. <em class="response">Amen.</em> <em>Ephesians 3:20, 21</em></p>
 {% endmacro %}
