@@ -15,14 +15,15 @@
 {% if section.id == "evening" %}
 {{ rite.openingSentences("evening") }}
 {{ rite.confession("evening") }}
-<p><strong>The Invitatory and Psalter</strong><br>
+<h3>The Invitatory and Psalter</h3>
 <em>All stand</em><br>
-<em>Officiant:</em> O God, make speed to save us.<br>
-<em>People:</em> O Lord, make haste to help us.</em></p>
+<em>Officiant:</em> O God, make speed to save us.<br/>
+<em>People:</em> O Lord, make haste to help us.</em><br/>
+<em>Officiant and People:</em></p>
 {{ rite.gloria() }}
 {{ rite.phos() }}
 <p><em>then follows</em></p>
-<h3 id="evening-psalms">The Psalm or Psalms Appointed</h3>
+<h4>The Psalm or Psalms Appointed</h4>
 <div data-when="all" hidden>
 {% if section.otherPsalms %}{{ section.otherPsalms | safe }}{% endif %}
 </div>
