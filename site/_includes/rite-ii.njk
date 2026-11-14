@@ -407,19 +407,21 @@ That this evening may be holy, good, and peaceful,<br>
 {% macro mission(which) %}
 <p><em>Then, unless the Eucharist or a form of general intercession is to follow, one of the following prayers for mission is added.</em></p>
 <p><strong>Prayer for Mission</strong></p>
+<div data-opening="mission">
 {% if which == "morning" %}
-<p>Almighty and everlasting God, by whose Spirit the whole body of your faithful people is governed and sanctified: Receive our supplications and prayers which we offer before you for all members of your holy Church, that in their vocation and ministry they may truly and devoutly serve you; through our Lord and Savior Jesus Christ. <em class="response">Amen.</em></p>
-<p><em>or this</em></p>
-<p>O God, you have made of one blood all the peoples of the earth, and sent your blessed Son to preach peace to those who are far off and to those who are near: Grant that people everywhere may seek after you and find you; bring the nations into your fold; pour out your Spirit upon all flesh; and hasten the coming of your kingdom; through Jesus Christ our Lord. <em class="response">Amen.</em></p>
-<p><em>or this</em></p>
-<p>Lord Jesus Christ, you stretched out your arms of love on the hard wood of the cross that everyone might come within the reach of your saving embrace: So clothe us in your Spirit that we, reaching forth our hands in love, may bring those who do not know you to the knowledge and love of you; for the honor of your Name. <em class="response">Amen.</em></p>
+<p data-sentence>Almighty and everlasting God, by whose Spirit the whole body of your faithful people is governed and sanctified: Receive our supplications and prayers which we offer before you for all members of your holy Church, that in their vocation and ministry they may truly and devoutly serve you; through our Lord and Savior Jesus Christ. <em class="response">Amen.</em></p>
+<p data-sentence-or><em>or this</em></p>
+<p data-sentence>O God, you have made of one blood all the peoples of the earth, and sent your blessed Son to preach peace to those who are far off and to those who are near: Grant that people everywhere may seek after you and find you; bring the nations into your fold; pour out your Spirit upon all flesh; and hasten the coming of your kingdom; through Jesus Christ our Lord. <em class="response">Amen.</em></p>
+<p data-sentence-or><em>or this</em></p>
+<p data-sentence>Lord Jesus Christ, you stretched out your arms of love on the hard wood of the cross that everyone might come within the reach of your saving embrace: So clothe us in your Spirit that we, reaching forth our hands in love, may bring those who do not know you to the knowledge and love of you; for the honor of your Name. <em class="response">Amen.</em></p>
 {% else %}
-<p>O God and Father of all, whom the whole heavens adore: Let the whole earth also worship you, all nations obey you, all tongues confess and bless you, and men and women everywhere love you and serve you in peace; through Jesus Christ our Lord. <em class="response">Amen.</em></p>
-<p><em>or this</em></p>
-<p>Keep watch, dear Lord, with those who work, or watch, or weep this night, and give your angels charge over those who sleep. Tend the sick, Lord Christ; give rest to the weary, bless the dying, soothe the suffering, pity the afflicted, shield the joyous; and all for your love's sake. <em class="response">Amen.</em></p>
-<p><em>or this</em></p>
-<p>O God, you manifest in your servants the signs of your presence: Send forth upon us the spirit of love, that in companionship with one another your abounding grace may increase among us; through Jesus Christ our Lord. <em class="response">Amen.</em></p>
+<p data-sentence>O God and Father of all, whom the whole heavens adore: Let the whole earth also worship you, all nations obey you, all tongues confess and bless you, and men and women everywhere love you and serve you in peace; through Jesus Christ our Lord. <em class="response">Amen.</em></p>
+<p data-sentence-or><em>or this</em></p>
+<p data-sentence>Keep watch, dear Lord, with those who work, or watch, or weep this night, and give your angels charge over those who sleep. Tend the sick, Lord Christ; give rest to the weary, bless the dying, soothe the suffering, pity the afflicted, shield the joyous; and all for your love's sake. <em class="response">Amen.</em></p>
+<p data-sentence-or><em>or this</em></p>
+<p data-sentence>O God, you manifest in your servants the signs of your presence: Send forth upon us the spirit of love, that in companionship with one another your abounding grace may increase among us; through Jesus Christ our Lord. <em class="response">Amen.</em></p>
 {% endif %}
+</div>
 {% endmacro %}
 
 {% macro closing(easter) %}
@@ -460,10 +462,12 @@ your truth, and in the age to come life everlasting. Amen.</pre>
   <em>People:</em> Thanks be to God.</em>
 </p>
 {% if easter %}<p><strong>Alleluia, alleluia.</strong></p>{% endif %}
-<p><em>The Officiant may then conclude with one of the following.</em></p>
-<p>The grace of our Lord Jesus Christ, and the love of God, and the fellowship of the Holy Spirit, be with us all evermore. <em class="response">Amen.</em> <em>2 Corinthians 13:14</em></p>
-<p><em>or this</em></p>
-<p>May the God of hope fill us with all joy and peace in believing through the power of the Holy Spirit. <em class="response">Amen.</em> <em>Romans 15:13</em></p>
-<p><em>or this</em></p>
-<p>Glory to God whose power, working in us, can do infinitely more than we can ask or imagine: Glory to him from generation to generation in the Church, and in Christ Jesus for ever and ever. <em class="response">Amen.</em> <em>Ephesians 3:20, 21</em></p>
+<p><em>The Officiant concludes with:</em></p>
+<div data-opening="closing">
+<p data-sentence>The grace of our Lord Jesus Christ, and the love of God, and the fellowship of the Holy Spirit, be with us all evermore. <em class="response">Amen.</em> <em>2 Corinthians 13:14</em></p>
+<p data-sentence-or><em>or this</em></p>
+<p data-sentence>May the God of hope fill us with all joy and peace in believing through the power of the Holy Spirit. <em class="response">Amen.</em> <em>Romans 15:13</em></p>
+<p data-sentence-or><em>or this</em></p>
+<p data-sentence>Glory to God whose power, working in us, can do infinitely more than we can ask or imagine: Glory to him from generation to generation in the Church, and in Christ Jesus for ever and ever. <em class="response">Amen.</em> <em>Ephesians 3:20, 21</em></p>
+</div>
 {% endmacro %}
