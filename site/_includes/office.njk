@@ -37,6 +37,7 @@
 {{ section.canticleSecond | safe }}
 </div>
 <div id="evening-lessons">
+<h3 id="evening-gospel">The Gospel Reading</h3>
 {% if section.gospel %}{{ section.gospel | safe }}{% else %}<p><em>No gospel.</em></p>{% endif %}
 {{ rite.word() }}
 </div>
@@ -67,6 +68,7 @@
 {% if section.nt %}{{ section.nt | safe }}{{ rite.word() }}{% endif %}
 {{ section.canticleSecond | safe }}
 <div data-when="all" hidden>
+<p><strong>The Gospel Reading</strong></p>
 {% if section.gospel %}{{ section.gospel | safe }}{{ rite.word() }}{% endif %}
 </div>
 {% endif %}
