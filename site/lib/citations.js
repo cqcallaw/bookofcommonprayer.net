@@ -233,10 +233,24 @@ export function passageText(spec, getVerses) {
       continue;
     }
     for (const verse of chosen) {
-      if (mark.open && verse.verse === mark.start) chunks.push(`<strong>${mark.open}</strong>`);
-      chunks.push(`${escapeHtml(verse.text)} `);
-      if (mark.close && verse.verse === mark.end) chunks.push(`<strong>${mark.close}</strong>`);
+      if (spec.isPsalm) {
+        let line = "";
+        if (mark.open && verse.verse === mark.start) line += `<strong>${mark.open}</strong>`;
+        const text = escapeHtml(verse.text).replace(/\s*\n\s*/g, " ");
+        line += Number(verse.verse) === 0
+          ? `<em>${text}</em>`
+          : `<sup>${Number(verse.verse)}</sup> ${text}`;
+        if (mark.close && verse.verse === mark.end) line += `<strong>${mark.close}</strong>`;
+        chunks.push(`${line}<br>`);
+      } else {
+        if (mark.open && verse.verse === mark.start) chunks.push(`<strong>${mark.open}</strong>`);
+        chunks.push(`${escapeHtml(verse.text)} `);
+        if (mark.close && verse.verse === mark.end) chunks.push(`<strong>${mark.close}</strong>`);
+      }
     }
+  }
+  if (spec.isPsalm && typeof chunks[chunks.length - 1] === "string" && chunks[chunks.length - 1].endsWith("<br>")) {
+    chunks[chunks.length - 1] = chunks[chunks.length - 1].slice(0, -4);
   }
   if (spec.fullWrap === "[") chunks.push("<strong>]</strong>");
   if (spec.fullWrap === "(") chunks.push("<strong>)</strong>");
