@@ -145,7 +145,7 @@ function piecesHtml(pieces, options) {
     if (options.kind === "gospel" && spec.bookId) {
       heading = `A Reading from the Gospel according to St. ${escapeHtml(bookName(spec.bookId))} (${escapeHtml(spec.display)})`;
     } else if (options.isPsalm) {
-      heading = escapeHtml(spec.display || cleaned);
+      heading = `A Reading (Lesson) from Psalm: <strong>${escapeHtml(cleaned)}</strong>`;
     } else {
       heading = `A Reading (Lesson) from: ${escapeHtml(spec.display || cleaned)}`;
     }
