@@ -1,4 +1,4 @@
-import { splitReadings, resolveCitation, passageText } from "/lib/citations.js";
+import { passageText, resolveCitation, splitReadings } from "/lib/citations.js";
 
 const PREFS_KEY = "bcp.prefs";
 
@@ -68,10 +68,15 @@ const chapterCache = new Map();
 function loadChapter(version, bookId, chapter) {
   const key = `${version}/${bookId}/${chapter}`;
   if (!chapterCache.has(key)) {
-    chapterCache.set(key, fetch(`/bible/${version}/${bookId}/${chapter}.json`).then((response) => {
-      if (!response.ok) return null;
-      return response.json().then((data) => data.verses);
-    }).catch(() => null));
+    chapterCache.set(
+      key,
+      fetch(`/bible/${version}/${bookId}/${chapter}.json`)
+        .then((response) => {
+          if (!response.ok) return null;
+          return response.json().then((data) => data.verses);
+        })
+        .catch(() => null),
+    );
   }
   return chapterCache.get(key);
 }
@@ -82,10 +87,13 @@ async function fillPassage(node, prefs) {
   const spec = resolveCitation(node.dataset.ref || "", citationOptions(prefs, { isPsalm, useBcp }));
   if (!spec.marks || spec.marks.length === 0 || spec.error) return;
   const loaded = new Map();
-  await Promise.all(spec.marks.map(async (mark) => {
-    const key = `${spec.version}/${spec.bookId}/${mark.chapter}`;
-    if (!loaded.has(key)) loaded.set(key, await loadChapter(spec.version, spec.bookId, mark.chapter));
-  }));
+  await Promise.all(
+    spec.marks.map(async (mark) => {
+      const key = `${spec.version}/${spec.bookId}/${mark.chapter}`;
+      if (!loaded.has(key))
+        loaded.set(key, await loadChapter(spec.version, spec.bookId, mark.chapter));
+    }),
+  );
   let missing = false;
   const html = passageText(spec, (version, bookId, chapter) => {
     const verses = loaded.get(`${version}/${bookId}/${chapter}`);
@@ -121,7 +129,7 @@ function applyPrefs(prefs) {
   });
   if (prefs.lectionaryType) {
     const older = document.querySelector('.lectionary[data-lectionary="1979"]');
-    const parent = older && older.parentElement;
+    const parent = older?.parentElement;
     if (older && parent) parent.insertBefore(older, parent.firstChild);
   }
   document.querySelectorAll("[data-when='all']").forEach((node) => {
@@ -159,14 +167,16 @@ function wireToday(prefs) {
     if (url) {
       const page = url.split("#")[0];
       location.replace(path.endsWith("/readings") ? `${page}readings/` : url);
-    } else if (status) status.textContent = "Today is outside the prepared years, 2024 through 2032.";
+    } else if (status)
+      status.textContent = "Today is outside the prepared years, 2024 through 2032.";
   }
   if (path === "/lectionary/today") {
     const now = new Date();
     const sunday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - now.getDay());
     const year = sunday.getFullYear();
     if (year < 2024 || year > 2032) {
-      if (status) status.textContent = "This Sunday is outside the prepared years, 2024 through 2032.";
+      if (status)
+        status.textContent = "This Sunday is outside the prepared years, 2024 through 2032.";
       return;
     }
     location.replace(`/lectionary/${year}/${pad(sunday.getMonth() + 1)}/${pad(sunday.getDate())}/`);
@@ -184,9 +194,10 @@ function wireDateForm(prefs) {
     const chosen = new Date(year, month - 1, day, new Date().getHours(), 0, 0);
     const morning = prefs.prayerAll ? !!prefs.prayerDayTime : chosen.getHours() < 12;
     const page = `/office/${year}/${pad(month)}/${pad(day)}/`;
-    location.href = form.dataset.target === "readings"
-      ? `${page}readings/`
-      : `${page}#${morning ? "morning" : "evening"}`;
+    location.href =
+      form.dataset.target === "readings"
+        ? `${page}readings/`
+        : `${page}#${morning ? "morning" : "evening"}`;
   });
 }
 
@@ -206,13 +217,19 @@ function wireSearch(prefs) {
     const pieces = splitReadings(trimmed).pieces;
     const html = [];
     for (const piece of pieces) {
-      const spec = resolveCitation(piece.text, citationOptions(prefs, { isPsalm: /psalm/i.test(piece.text) }));
+      const spec = resolveCitation(
+        piece.text,
+        citationOptions(prefs, { isPsalm: /psalm/i.test(piece.text) }),
+      );
       const loaded = new Map();
       if (spec.marks) {
-        await Promise.all(spec.marks.map(async (mark) => {
-          const key = `${spec.version}/${spec.bookId}/${mark.chapter}`;
-          if (!loaded.has(key)) loaded.set(key, await loadChapter(spec.version, spec.bookId, mark.chapter));
-        }));
+        await Promise.all(
+          spec.marks.map(async (mark) => {
+            const key = `${spec.version}/${spec.bookId}/${mark.chapter}`;
+            if (!loaded.has(key))
+              loaded.set(key, await loadChapter(spec.version, spec.bookId, mark.chapter));
+          }),
+        );
       }
       let missing = false;
       const body = passageText(spec, (version, bookId, chapter) => {
@@ -221,7 +238,11 @@ function wireSearch(prefs) {
         return verses;
       });
       html.push(`<h2>${piece.text.replace(/\*/g, "")}</h2>`);
-      html.push(missing ? "<p><em>That passage is not in the selected translation on this server.</em></p>" : body);
+      html.push(
+        missing
+          ? "<p><em>That passage is not in the selected translation on this server.</em></p>"
+          : body,
+      );
       if (piece.join) html.push(`<p class="join"><strong><em>—${piece.join}—</em></strong></p>`);
     }
     result.innerHTML = html.join("");
@@ -264,7 +285,7 @@ function wirePreferences(prefs) {
       fontSize: Number(document.getElementById("fontSize").value) || 14,
     };
     savePrefs(next);
-    form.insertAdjacentHTML("beforeend", "<p id=\"prefs-saved\">Saved in this browser.</p>");
+    form.insertAdjacentHTML("beforeend", '<p id="prefs-saved">Saved in this browser.</p>');
   });
 }
 

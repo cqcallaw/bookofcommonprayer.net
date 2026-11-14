@@ -82,7 +82,9 @@ export const BOOKS = {
 const KEYS = Object.keys(BOOKS).sort((a, b) => b.length - a.length);
 
 export function matchBook(reference, isPsalm) {
-  let ref = String(reference || "").replace(/\*/g, "").trim();
+  const ref = String(reference || "")
+    .replace(/\*/g, "")
+    .trim();
   if (isPsalm || /^(psalms?)\b/i.test(ref)) {
     const rest = ref.replace(/^(psalms?)\s*/i, "");
     return { bookId: 19, bookName: "Psalm", rest, isPsalm: true };
@@ -92,7 +94,15 @@ export function matchBook(reference, isPsalm) {
   for (let i = 0; i < tokens.length; i++) {
     compact += tokens[i].toUpperCase();
     if (BOOKS[compact]) {
-      const longer = KEYS.some((key) => key.startsWith(compact) && key.length > compact.length && tokens.slice(0, i + 2).join("").toUpperCase() === key);
+      const longer = KEYS.some(
+        (key) =>
+          key.startsWith(compact) &&
+          key.length > compact.length &&
+          tokens
+            .slice(0, i + 2)
+            .join("")
+            .toUpperCase() === key,
+      );
       if (longer) {
         continue;
       }

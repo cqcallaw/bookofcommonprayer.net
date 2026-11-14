@@ -23,13 +23,34 @@
   display: none !important;
 }
 
-.season-blue { border-left: 4px solid #2a4d8f; padding-left: 0.75rem; }
-.season-rose { border-left: 4px solid #b85c7a; padding-left: 0.75rem; }
-.season-white { border-left: 4px solid #999; padding-left: 0.75rem; }
-.season-green { border-left: 4px solid #2f6b3a; padding-left: 0.75rem; }
-.season-purple { border-left: 4px solid #5c3d7a; padding-left: 0.75rem; }
-.season-passion { border-left: 4px solid #7a2030; padding-left: 0.75rem; }
-.season-red { border-left: 4px solid #a32020; padding-left: 0.75rem; }
+.season-blue {
+  border-left: 4px solid #2a4d8f;
+  padding-left: 0.75rem;
+}
+.season-rose {
+  border-left: 4px solid #b85c7a;
+  padding-left: 0.75rem;
+}
+.season-white {
+  border-left: 4px solid #999;
+  padding-left: 0.75rem;
+}
+.season-green {
+  border-left: 4px solid #2f6b3a;
+  padding-left: 0.75rem;
+}
+.season-purple {
+  border-left: 4px solid #5c3d7a;
+  padding-left: 0.75rem;
+}
+.season-passion {
+  border-left: 4px solid #7a2030;
+  padding-left: 0.75rem;
+}
+.season-red {
+  border-left: 4px solid #a32020;
+  padding-left: 0.75rem;
+}
 
 #prefs-form label,
 #search-form label,

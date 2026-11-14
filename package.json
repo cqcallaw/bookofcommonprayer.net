@@ -5,9 +5,12 @@
   "type": "module",
   "scripts": {
     "build": "eleventy",
-    "serve": "eleventy --serve --port=8091"
+    "serve": "eleventy --serve --port=8091",
+    "check": "biome check",
+    "format": "biome check --write"
   },
   "devDependencies": {
-    "@11ty/eleventy": "3.1.8"
+    "@11ty/eleventy": "3.1.8",
+    "@biomejs/biome": "2.6.7"
   }
 }

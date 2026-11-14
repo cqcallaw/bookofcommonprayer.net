@@ -1,8 +1,23 @@
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 
-const days = JSON.parse(readFileSync(fileURLToPath(new URL("./days.json", import.meta.url)), "utf8"));
-const names = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const days = JSON.parse(
+  readFileSync(fileURLToPath(new URL("./days.json", import.meta.url)), "utf8"),
+);
+const names = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 const months = [];
 const seen = new Set();
 for (const day of days) {

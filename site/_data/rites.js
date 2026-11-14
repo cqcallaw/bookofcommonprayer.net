@@ -18,11 +18,12 @@ const skip = new Set([
 function rewrite(html) {
   let text = html.replace(
     /<\?php\s+echo\s+SERVER;\s*\?>#\/search\/display\/([^"'<>]+)/g,
-    (_, citation) => `/search/?q=${encodeURIComponent(citation.trim())}`
+    (_, citation) => `/search/?q=${encodeURIComponent(citation.trim())}`,
   );
   text = text.replace(
     /href=(["'])search\?passage=([^"']+)\1/g,
-    (_, quote, citation) => `href=${quote}/search/?q=${encodeURIComponent(citation.trim())}${quote}`
+    (_, quote, citation) =>
+      `href=${quote}/search/?q=${encodeURIComponent(citation.trim())}${quote}`,
   );
   text = text.replace(/href=(["'])canticles#/g, "href=$1/canticles/#");
   const hadPhp = /<\?php/.test(text);
@@ -37,7 +38,10 @@ for (const file of readdirSync(views).sort()) {
   if (skip.has(slug)) continue;
   const source = readFileSync(views + file, "utf8");
   const { html, hadPhp } = rewrite(source);
-  const words = html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+  const words = html
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
   if (words.length < 40) continue;
   rites.push({ slug, title: slug.replace(/_/g, " "), html, hadPhp });
 }

@@ -26,7 +26,7 @@ export function splitReadings(reference) {
     for (let part of parts) {
       part = part.trim();
       if (part === "") continue;
-      const bare = part.replace(/^[ \t\[(]+/, "");
+      const bare = part.replace(/^[ \t[(]+/, "");
       if (/^\d+:/.test(bare)) {
         if (book) part = `${book} ${bare}`;
       } else {
@@ -150,10 +150,7 @@ function parseRest(rest, isPsalm) {
   const text = String(rest || "").trim();
   const simple = text.match(/^(\d+):(\d+)\s*-\s*(\d+):(\d+)\s*$/);
   if (simple) {
-    return [
-      range(simple[1], `${simple[2]}-177`),
-      range(simple[3], `1-${simple[4]}`),
-    ];
+    return [range(simple[1], `${simple[2]}-177`), range(simple[3], `1-${simple[4]}`)];
   }
   const parenSpan = text.match(/^(\d+):(\d+)-(\d+)\((\d+)-(\d+):(\d+)\)\s*$/);
   if (parenSpan) {
@@ -178,10 +175,17 @@ function parseRest(rest, isPsalm) {
 }
 
 export function resolveCitation(reference, options = {}) {
-  const cleaned = String(reference || "").replace(/\*/g, "").trim();
+  const cleaned = String(reference || "")
+    .replace(/\*/g, "")
+    .trim();
   const book = matchBook(cleaned, !!options.isPsalm);
   if (!book) {
-    return { display: cleaned, error: "unknown book", intention: intentionOf(reference), marks: [] };
+    return {
+      display: cleaned,
+      error: "unknown book",
+      intention: intentionOf(reference),
+      marks: [],
+    };
   }
   let version = options.version || "KJV";
   const apocryphaFrom = Number.isFinite(options.apocryphaFromBook) ? options.apocryphaFromBook : 67;
@@ -217,19 +221,25 @@ export function escapeHtml(value) {
 
 export function passageText(spec, getVerses) {
   if (!spec || spec.error || !spec.marks || spec.marks.length === 0) {
-    return `<p><strong>${escapeHtml(spec && spec.display ? spec.display : "")}</strong></p>`;
+    return `<p><strong>${escapeHtml(spec?.display ? spec.display : "")}</strong></p>`;
   }
   const chunks = [];
   if (spec.fullWrap === "[") chunks.push("<strong>[</strong>");
   if (spec.fullWrap === "(") chunks.push("<strong>(</strong>");
   for (const mark of spec.marks) {
-    if (!Number.isFinite(mark.chapter) || !Number.isFinite(mark.start) || !Number.isFinite(mark.end)) {
+    if (
+      !Number.isFinite(mark.chapter) ||
+      !Number.isFinite(mark.start) ||
+      !Number.isFinite(mark.end)
+    ) {
       continue;
     }
     const verses = getVerses(spec.version, spec.bookId, mark.chapter) || [];
     const chosen = verses.filter((verse) => verse.verse >= mark.start && verse.verse <= mark.end);
     if (chosen.length === 0) {
-      chunks.push(`<em>(${escapeHtml(spec.version)} text for this passage is not on this server)</em> `);
+      chunks.push(
+        `<em>(${escapeHtml(spec.version)} text for this passage is not on this server)</em> `,
+      );
       continue;
     }
     for (const verse of chosen) {
@@ -237,9 +247,10 @@ export function passageText(spec, getVerses) {
         let line = "";
         if (mark.open && verse.verse === mark.start) line += `<strong>${mark.open}</strong>`;
         const text = escapeHtml(verse.text).replace(/\s*\n\s*/g, " ");
-        line += Number(verse.verse) === 0
-          ? `<em>${text}</em>`
-          : `<sup>${Number(verse.verse)}</sup> ${text}`;
+        line +=
+          Number(verse.verse) === 0
+            ? `<em>${text}</em>`
+            : `<sup>${Number(verse.verse)}</sup> ${text}`;
         if (mark.close && verse.verse === mark.end) line += `<strong>${mark.close}</strong>`;
         chunks.push(`${line}<br>`);
       } else {
@@ -249,7 +260,11 @@ export function passageText(spec, getVerses) {
       }
     }
   }
-  if (spec.isPsalm && typeof chunks[chunks.length - 1] === "string" && chunks[chunks.length - 1].endsWith("<br>")) {
+  if (
+    spec.isPsalm &&
+    typeof chunks[chunks.length - 1] === "string" &&
+    chunks[chunks.length - 1].endsWith("<br>")
+  ) {
     chunks[chunks.length - 1] = chunks[chunks.length - 1].slice(0, -4);
   }
   if (spec.fullWrap === "[") chunks.push("<strong>]</strong>");
@@ -258,7 +273,7 @@ export function passageText(spec, getVerses) {
 }
 
 export function countVerses(spec, getVerses) {
-  if (!spec || !spec.marks) return 0;
+  if (!spec?.marks) return 0;
   let count = 0;
   for (const mark of spec.marks) {
     const verses = getVerses(spec.version, spec.bookId, mark.chapter) || [];

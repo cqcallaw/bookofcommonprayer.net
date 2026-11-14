@@ -16,7 +16,7 @@ const extra = Array.isArray(extraFile) ? extraFile : extraFile.translations || [
 
 const names = new Map();
 for (const row of [...named, ...extra]) {
-  if (row && row.id && !names.has(row.id)) names.set(row.id, row.name || row.id);
+  if (row?.id && !names.has(row.id)) names.set(row.id, row.name || row.id);
 }
 
 const bibleDir = fileURLToPath(new URL("../bible/", import.meta.url));

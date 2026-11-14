@@ -28,6 +28,23 @@ npm run serve
 
 `npm run serve` listens on http://127.0.0.1:8091/.
 
+## Checks
+
+`npm` scripts are the task runner for this project.
+
+```sh
+npm run check
+npm run format
+```
+
+`npm run check` runs Biome 2.6.7. It checks formatting and the recommended lint rules for `eleventy.config.js`, the JavaScript under `site/`, and `site/assets/site.css`. `npm run format` writes the fixes Biome can apply.
+
+Biome does not read the Nunjucks templates, the rite sources, the JSON data, or the built HTML. Those files hold the liturgy, and a formatter would rewrap it.
+
+`.editorconfig` tells an editor to use UTF-8, LF, and two-space indents. It does not rewrite files by itself.
+
+The `[hidden]` rule in `site/assets/site.css` keeps `!important`. Bootstrap would otherwise display those blocks. That one Biome rule is turned off in `biome.json`.
+
 ## What is generated
 
 - Rite pages from `rites/`, with the shared header baked in.

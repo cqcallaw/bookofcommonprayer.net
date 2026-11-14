@@ -1,7 +1,17 @@
-import { officeView, lectionaryView, renderCollects, renderCanticles, renderPrefaces, renderPsalter, renderHolyDays } from "./site/lib/render.js";
 import { readFileSync } from "node:fs";
+import {
+  lectionaryView,
+  officeView,
+  renderCanticles,
+  renderCollects,
+  renderHolyDays,
+  renderPrefaces,
+  renderPsalter,
+} from "./site/lib/render.js";
 
-const psalterIndex = JSON.parse(readFileSync(new URL("./site/_data/psalter_index.json", import.meta.url), "utf8"));
+const psalterIndex = JSON.parse(
+  readFileSync(new URL("./site/_data/psalter_index.json", import.meta.url), "utf8"),
+);
 
 export default function (eleventyConfig) {
   eleventyConfig.ignores.add("site/bible/**");
@@ -34,4 +44,4 @@ export default function (eleventyConfig) {
     htmlTemplateEngine: "njk",
     markdownTemplateEngine: "njk",
   };
-};
+}
