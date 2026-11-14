@@ -143,7 +143,7 @@ function piecesHtml(pieces, options) {
     const body = passageText(spec, getVerses);
     let heading;
     if (options.kind === "gospel" && spec.bookId) {
-      heading = `A Reading from the Gospel according to St. ${escapeHtml(bookName(spec.bookId))} (${escapeHtml(spec.display)})`;
+      heading = `A Reading from the Gospel according to <strong>St. ${escapeHtml(bookName(spec.bookId))}</strong> (${escapeHtml(spec.display)})`;
     } else if (options.isPsalm) {
       heading = `A Reading (Lesson) from Psalm: <strong>${escapeHtml(cleaned)}</strong>`;
     } else {
