@@ -17,23 +17,101 @@
 <em class="response">Thanks be to God.</em></p>
 {% endmacro %}
 
-{% macro eveningSentences() %}
-<p><em>Officiant begins with one of the following</em></p>
-<p>Let my prayer be set forth in your sight as incense, the lifting up of my hands as an evening sacrifice. <em>Psalm 141:2</em></p>
-<p><em>or this</em></p>
-<p>Grace to you and peace from God our Father and the Lord Jesus Christ. <em>Philippians 1:2</em></p>
-<p><em>or this</em></p>
-<p>Worship the Lord in the beauty of holiness; let the whole earth tremble before him. <em>Psalm 96:9</em></p>
-<p><em>or this</em></p>
-<p>Yours is the day, O God, yours also the night; you established the moon and the sun. You fixed all the boundaries of the earth; you made both summer and winter. <em>Psalm 74:15, 16</em></p>
-<p><em>or this</em></p>
-<p>I will bless the Lord who gives me counsel; my heart teaches me, night after night. I have set the Lord always before me; because he is at my right hand, I shall not fall. <em>Psalm 16:7, 8</em></p>
-<p><em>or this</em></p>
-<p>Seek him who made the Pleiades and Orion, and turns deep darkness into the morning, and darkens the day into night; who calls for the waters of the sea and pours them out upon the surface of the earth: The Lord is his Name. <em>Amos 5:8</em></p>
-<p><em>or this</em></p>
-<p>If I say, "Surely the darkness will cover me, and the light around me turn to night," darkness is not dark to you, O Lord; the night is as bright as the day; darkness and light to you are both alike. <em>Psalm 139:10, 11</em></p>
-<p><em>or this</em></p>
-<p>Jesus said, "I am the light of the world; whoever follows me will not walk in darkness, but will have the light of life." <em>John 8:12</em></p>
+{% macro openingSentences(which) %}
+<p><em>Officiant begins with the following:</em></p>
+{% if which == "evening" %}
+<div data-opening="evening">
+<p data-sentence>Let my prayer be set forth in your sight as incense, the lifting up of my hands as an evening sacrifice. <em>Psalm 141:2</em></p>
+<p data-sentence-or><em>or this</em></p>
+<p data-sentence>Grace to you and peace from God our Father and the Lord Jesus Christ. <em>Philippians 1:2</em></p>
+<p data-sentence-or><em>or this</em></p>
+<p data-sentence>Worship the Lord in the beauty of holiness; let the whole earth tremble before him. <em>Psalm 96:9</em></p>
+<p data-sentence-or><em>or this</em></p>
+<p data-sentence>Yours is the day, O God, yours also the night; you established the moon and the sun. You fixed all the boundaries of the earth; you made both summer and winter. <em>Psalm 74:15, 16</em></p>
+<p data-sentence-or><em>or this</em></p>
+<p data-sentence>I will bless the Lord who gives me counsel; my heart teaches me, night after night. I have set the Lord always before me; because he is at my right hand, I shall not fall. <em>Psalm 16:7, 8</em></p>
+<p data-sentence-or><em>or this</em></p>
+<p data-sentence>Seek him who made the Pleiades and Orion, and turns deep darkness into the morning, and darkens the day into night; who calls for the waters of the sea and pours them out upon the surface of the earth: The Lord is his Name. <em>Amos 5:8</em></p>
+<p data-sentence-or><em>or this</em></p>
+<p data-sentence>If I say, "Surely the darkness will cover me, and the light around me turn to night," darkness is not dark to you, O Lord; the night is as bright as the day; darkness and light to you are both alike. <em>Psalm 139:10, 11</em></p>
+<p data-sentence-or><em>or this</em></p>
+<p data-sentence>Jesus said, "I am the light of the world; whoever follows me will not walk in darkness, but will have the light of life." <em>John 8:12</em></p>
+</div>
+{% elif which == "advent" %}
+<div data-opening="morning">
+<p data-sentence>Watch, for you do not know when the master of the house will come, in the evening, or at midnight, or at cockcrow, or in the morning, lest he come suddenly and find you asleep. <em>Mark 13:35, 36</em></p>
+<p data-sentence-or><em>or this</em></p>
+<p data-sentence>In the wilderness prepare the way of the Lord, make straight in the desert a highway for our God. <em>Isaiah 40:3</em></p>
+<p data-sentence-or><em>or this</em></p>
+<p data-sentence>The glory of the Lord shall be revealed, and all flesh shall see it together. <em>Isaiah 40:5</em></p>
+</div>
+{% elif which == "christmas" %}
+<div data-opening="morning">
+<p data-sentence>Behold, I bring you good news of a great joy which will come to all the people; for to you is born this day in the city of David, a Savior, who is Christ the Lord. <em>Luke 2:10, 11</em></p>
+<p data-sentence-or><em>or this</em></p>
+<p data-sentence>Behold, the dwelling of God is with mankind. He will dwell with them, and they shall be his people, and God himself will be with them, and be their God. <em>Revelation 21:3</em></p>
+</div>
+{% elif which == "epiphany" %}
+<div data-opening="morning">
+<p data-sentence>Nations shall come to your light, and kings to the brightness of your rising. <em>Isaiah 60:3</em></p>
+<p data-sentence-or><em>or this</em></p>
+<p data-sentence>I will give you as a light to the nations, that my salvation may reach to the end of the earth. <em>Isaiah 49:6b</em></p>
+<p data-sentence-or><em>or this</em></p>
+<p data-sentence>From the rising of the sun to its setting my Name shall be great among the nations, and in every place incense shall be offered to my Name, and a pure offering; for my Name shall be great among the nations, says the Lord of hosts. <em>Malachi 1:11</em></p>
+</div>
+{% elif which == "lent" %}
+<div data-opening="morning">
+<p data-sentence>If we say we have no sin, we deceive ourselves, and the truth is not in us, but if we confess our sins, God, who is faithful and just, will forgive our sins and cleanse us from all unrighteousness. <em>1 John 1:8, 9</em></p>
+<p data-sentence-or><em>or this</em></p>
+<p data-sentence>Rend your hearts and not your garments. Return to the Lord your God, for he is gracious and merciful, slow to anger and abounding in steadfast love, and repents of evil. <em>Joel 2:13</em></p>
+<p data-sentence-or><em>or this</em></p>
+<p data-sentence>I will arise and go to my father, and I will say to him, "Father, I have sinned against heaven and before you; I am no longer worthy to be called your son." <em>Luke 15:18, 19</em></p>
+<p data-sentence-or><em>or this</em></p>
+<p data-sentence>To the Lord our God belong mercy and forgiveness, because we have rebelled against him and have not obeyed the voice of the Lord our God by following his laws which he set before us. <em>Daniel 9:9, 10</em></p>
+<p data-sentence-or><em>or this</em></p>
+<p data-sentence>Jesus said, "If anyone would come after me, let him deny himself and take up his cross and follow me." <em>Mark 8:34</em></p>
+</div>
+{% elif which == "holyweek" %}
+<div data-opening="morning">
+<p data-sentence>All we like sheep have gone astray; we have turned every one to his own way; and the Lord has laid on him the iniquity of us all. <em>Isaiah 53:6</em></p>
+<p data-sentence-or><em>or this</em></p>
+<p data-sentence>Is it nothing to you, all you who pass by? Look and see if there is any sorrow like my sorrow which was brought upon me, whom the Lord has afflicted. <em>Lamentations 1:12</em></p>
+</div>
+{% elif which == "easter" %}
+<div data-opening="morning">
+<p data-sentence>Alleluia! Christ is risen. The Lord is risen indeed. Alleluia!</p>
+<p data-sentence-or><em>or this</em></p>
+<p data-sentence>On this day the Lord has acted; we will rejoice and be glad in it. <em>Psalm 118:24</em></p>
+<p data-sentence-or><em>or this</em></p>
+<p data-sentence>Thanks be to God, who gives us the victory through our Lord Jesus Christ. <em>1 Corinthians 15:57</em></p>
+<p data-sentence-or><em>or this</em></p>
+<p data-sentence>If then you have been raised with Christ, seek the things that are above, where Christ is, seated at the right hand of God. <em>Colossians 3:1</em></p>
+<p data-sentence-or><em>or this</em></p>
+<p data-sentence>Christ has entered, not into a sanctuary made with hands, a copy of the true one, but into heaven itself, now to appear in the presence of God on our behalf. <em>Hebrews 9:24</em></p>
+<p data-sentence-or><em>or this</em></p>
+<p data-sentence>You shall receive power when the Holy Spirit has come upon you; and you shall be my witnesses in Jerusalem, and in all Judea and Samaria, and to the end of the earth. <em>Acts 1:8</em></p>
+</div>
+{% elif which == "trinity" %}
+<div data-opening="morning">
+<p data-sentence>Holy, holy, holy is the Lord God Almighty, who was and is and is to come! <em>Revelation 4:8</em></p>
+</div>
+{% else %}
+<div data-opening="morning">
+<p data-sentence>Grace to you and peace from God our Father and the Lord Jesus Christ. <em>Philippians 1:2</em></p>
+<p data-sentence-or><em>or this</em></p>
+<p data-sentence>I was glad when they said to me, "Let us go to the house of the Lord." <em>Psalm 122:1</em></p>
+<p data-sentence-or><em>or this</em></p>
+<p data-sentence>Let the words of my mouth and the meditation of my heart be acceptable in your sight, O Lord, my strength and my redeemer. <em>Psalm 19:14</em></p>
+<p data-sentence-or><em>or this</em></p>
+<p data-sentence>Send out your light and your truth, that they may lead me, and bring me to your holy hill and to your dwelling. <em>Psalm 43:3</em></p>
+<p data-sentence-or><em>or this</em></p>
+<p data-sentence>The Lord is in his holy temple; let all the earth keep silence before him. <em>Habakkuk 2:20</em></p>
+<p data-sentence-or><em>or this</em></p>
+<p data-sentence>The hour is coming, and now is, when the true worshipers will worship the Father in spirit and truth, for such the Father seeks to worship him. <em>John 4:23</em></p>
+<p data-sentence-or><em>or this</em></p>
+<p data-sentence>Thus says the high and lofty One who inhabits eternity, whose name is Holy, "I dwell in the high and holy place and also with the one who has a contrite and humble spirit, to revive the spirit of the humble and to revive the heart of the contrite." <em>Isaiah 57:15</em></p>
+</div>
+{% endif %}
 {% endmacro %}
 
 {% macro confession(which) %}

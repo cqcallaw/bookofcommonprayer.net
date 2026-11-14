@@ -184,6 +184,24 @@ function canticleBucket(day) {
   return "ordinary";
 }
 
+// Same groups as api/daily_office_comfortable_words.php for Rite II morning.
+// Evening uses one set on every day. Christmas week (1C, 2C) and Epiphany
+// Day (E) are blank in that script; they take the seasonal sentences here.
+function openingKey(day) {
+  let id = String(day.office.id || "");
+  const dow = Number(weekdayNumber(day));
+  if (id === "LE" && dow >= 3) id = "1L";
+  if (["STST", "STJE", "HI", "12-29", "12-30", "12-31", "1-2", "1-3", "1-4", "1-5", "1-7", "1-8", "1-9", "1-10", "1-11", "1-12", "HN"].includes(id)) return "ordinary";
+  if (/^[1-4]A$/.test(id)) return "advent";
+  if (id === "CM" || id === "CMII" || id === "CMIII" || id === "1C" || id === "2C") return "christmas";
+  if (/^[1-8]E$/.test(id) || id === "E" || id === "LE") return "epiphany";
+  if (/^[1-5]L$/.test(id)) return "lent";
+  if (id === "PS") return "holyweek";
+  if (id === "R" || /^[2-7]R$/.test(id) || id === "P" || id === "AD") return "easter";
+  if (id === "T") return "trinity";
+  return "ordinary";
+}
+
 function weekdayNumber(day) {
   const raw = day.office && day.office.dow;
   if (raw !== null && raw !== undefined && raw !== "" && raw !== "null") return String(raw);
@@ -249,6 +267,7 @@ export function officeView(day) {
     collectIi,
     collectI,
     dow,
+    opening: office === "evening" ? "evening" : openingKey(day),
     proper: /^[0-9]{1,2}$/.test(String(day.office.id || "")),
     lent: bucket === "lent",
     easter: bucket === "easter",

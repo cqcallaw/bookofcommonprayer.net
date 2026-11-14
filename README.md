@@ -81,4 +81,4 @@ Spanish collects, prefaces, and canticles are already pages. Spanish morning and
 
 ## Not in this build
 
-Rite I and Spanish morning and evening prayer, the morning opening sentences, feast and seasonal invitatory antiphons, and the noonday office. Evening Prayer prints every opening sentence. An ordinary weekday prints the three invitatory antiphons. Canticle rotation follows the Rite II table when all readings are shown; the evening default is the Song of Mary or the Song of Simeon. Compline is the rite page, not a dated office. Church-year dates are the exported index in `site/_data/days.json`.
+Rite I and Spanish morning and evening prayer, feast and seasonal invitatory antiphons, and the noonday office. Morning and Evening Prayer keep every opening sentence for the day in the page and, when scripts run, show one of them, chosen on each load. An ordinary weekday prints the three invitatory antiphons. Canticle rotation follows the Rite II table when all readings are shown; the evening default is the Song of Mary or the Song of Simeon. Compline is the rite page, not a dated office. Church-year dates are the exported index in `site/_data/days.json`.

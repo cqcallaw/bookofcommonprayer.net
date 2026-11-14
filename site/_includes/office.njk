@@ -13,7 +13,7 @@
 <section id="{{ section.id }}">
 <h2>{{ section.title }}</h2>
 {% if section.id == "evening" %}
-{{ rite.eveningSentences() }}
+{{ rite.openingSentences("evening") }}
 {{ rite.confession("evening") }}
 <p><strong>The Invitatory and Psalter</strong><br>
 <em>All stand</em><br>
@@ -44,6 +44,7 @@
 {{ rite.magnificatOrNunc() }}
 </div>
 {% else %}
+{{ rite.openingSentences(section.opening) }}
 {{ rite.confession("morning") }}
 <p><strong>The Invitatory and Psalter</strong></p>
 <p><em>All stand</em><br>

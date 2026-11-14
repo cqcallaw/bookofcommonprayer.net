@@ -98,6 +98,20 @@ async function fillPassage(node, prefs) {
   }
 }
 
+function chooseOpeningSentence() {
+  document.querySelectorAll("[data-opening]").forEach((block) => {
+    const sentences = [...block.querySelectorAll("[data-sentence]")];
+    if (sentences.length === 0) return;
+    const pick = Math.floor(Math.random() * sentences.length);
+    sentences.forEach((node, index) => {
+      node.hidden = index !== pick;
+    });
+    block.querySelectorAll("[data-sentence-or]").forEach((node) => {
+      node.hidden = true;
+    });
+  });
+}
+
 function applyPrefs(prefs) {
   const container = document.getElementById("maincontainer");
   if (container && prefs.fontSize) container.style.fontSize = `${prefs.fontSize}px`;
@@ -256,6 +270,7 @@ function wirePreferences(prefs) {
 
 const prefs = loadPrefs();
 wireChrome();
+chooseOpeningSentence();
 applyPrefs(prefs);
 wireToday(prefs);
 wireDateForm(prefs);
