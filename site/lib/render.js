@@ -80,6 +80,50 @@ const riteIiCanticles = {
   },
 };
 
+// Same weekday table as BCP\CanticlesByPrayerType for Rite I.
+const riteICanticles = {
+  lent: {
+    morning: {
+      first: ["14", "9", "2", "14", "8", "14", "1"],
+      second: ["4", "19", "18", "4", "19", "18", "19"],
+    },
+    evening: {
+      first: ["3", "14", "10", "1", "11", "2", "9"],
+      second: ["5", "5", "3", "5", "3", "5", "3"],
+    },
+  },
+  advent: {
+    morning: {
+      first: ["11", "9", "2", "11", "8", "14", "1"],
+      second: ["4", "19", "18", "4", "19", "18", "19"],
+    },
+    evening: {
+      first: ["3", "14", "10", "1", "11", "2", "9"],
+      second: ["5", "5", "3", "5", "3", "5", "3"],
+    },
+  },
+  easter: {
+    morning: {
+      first: ["8", "9", "2", "11", "8", "10", "1"],
+      second: ["7", "19", "18", "4", "6", "18", "19"],
+    },
+    evening: {
+      first: ["3", "8", "10", "1", "11", "2", "9"],
+      second: ["5", "5", "3", "5", "3", "5", "3"],
+    },
+  },
+  ordinary: {
+    morning: {
+      first: ["4", "9", "2", "11", "8", "10", "1"],
+      second: ["7", "19", "18", "4", "6", "18", "19"],
+    },
+    evening: {
+      first: ["3", "8", "10", "1", "11", "2", "9"],
+      second: ["5", "5", "3", "5", "3", "5", "3"],
+    },
+  },
+};
+
 const chapterCache = new Map();
 
 function indexBy(rows, key) {
@@ -279,6 +323,8 @@ function sectionReadings(row, office, appointed) {
     gospel: lessonPieces(row.do_gospel, office, "gospel"),
     canticleFirst: appointed.first,
     canticleSecond: appointed.second,
+    canticleFirstI: appointed.firstI,
+    canticleSecondI: appointed.secondI,
   };
 }
 
@@ -312,11 +358,14 @@ export function officeView(day) {
   const bucket = canticleBucket(day);
   const dow = weekdayNumber(day);
   const table = riteIiCanticles[bucket];
+  const tableI = riteICanticles[bucket];
   const dayIndex = Number(dow);
   const sections = ["morning", "evening"].map((office) => ({
     ...sectionReadings(row, office, {
       first: canticleHtml(table[office].first[dayIndex]),
       second: canticleHtml(table[office].second[dayIndex]),
+      firstI: canticleHtml(tableI[office].first[dayIndex]),
+      secondI: canticleHtml(tableI[office].second[dayIndex]),
     }),
     collectIi,
     collectI,

@@ -1,10 +1,11 @@
 {# Dated morning and evening prayer. Readings are prepared in site/lib/render.js. #}
 {% import "rite-ii.njk" as rite %}
+{% import "rite-i.njk" as ritei %}
 {% if office.missing %}
 <h1>{{ office.title }}</h1>
 <p>No daily office readings are stored for {{ office.week }} (year {{ office.year }}, id {{ office.id }}).</p>
 {% else %}
-{#Rite II for this date. Evening Prayer opens on the evening psalms and the Gospel. Morning Prayer opens on the morning psalms and the first two lessons. The preference “all readings” shows the rest and, in the evening, replaces the Song of Mary or Simeon with the rotated canticles. Opening sentences, the weekday collect, the prayer for mission, and the closing sentence are printed in full. Rite I and the Spanish offices are not on this page.#}
+{#Both rites for this date. Rite II is what a browser shows when scripts are off. Rite I is in the same page and is shown when the preference is Rite I. Evening Prayer opens on the evening psalms and the Gospel. Morning Prayer opens on the morning psalms and the first two lessons. The preference “all readings” shows the rest and, in the evening, replaces the Song of Mary or Simeon with the rotated canticles. Opening sentences, the prayer for mission, and the closing sentence are printed in full. Spanish offices are not on this page.#}
 <h1>{{ office.title }}</h1>
 <p class="week season-{{ office.color }}"><strong>{{ office.week }}</strong></p>
 <p>Week of {{ office.sunday }}. Daily Office Year {{ office.year }}. Lectionary Year {{ office.lectionaryYear }}.</p>
@@ -13,15 +14,19 @@
 <section id="{{ section.id }}">
 <h2>{{ section.title }}</h2>
 {% if section.id == "evening" %}
-{{ rite.openingSentences("evening") }}
-{{ rite.confession("evening") }}
+<div data-rite="ii">{{ rite.openingSentences("evening") }}</div>
+<div data-rite="i" hidden>{{ ritei.openingSentences("evening") }}</div>
+<div data-rite="ii">{{ rite.confession("evening") }}</div>
+<div data-rite="i" hidden>{{ ritei.confession("evening") }}</div>
 <h3>The Invitatory and Psalter</h3>
 <em>All stand</em><br>
 <em>Officiant:</em> O God, make speed to save us.<br/>
 <em>People:</em> O Lord, make haste to help us.</em><br/>
 <em>Officiant and People:</em></p>
-{{ rite.gloria() }}
-{{ rite.phos() }}
+<div data-rite="ii">{{ rite.gloria() }}</div>
+<div data-rite="i" hidden>{{ ritei.gloria() }}</div>
+<div data-rite="ii">{{ rite.phos() }}</div>
+<div data-rite="i" hidden>{{ ritei.phos() }}</div>
 <p><em>then follows</em></p>
 <h4>The Psalm or Psalms Appointed</h4>
 <div data-when="all" hidden>
@@ -29,13 +34,16 @@
 </div>
 {% if section.psalms %}{{ section.psalms | safe }}{% else %}<p><em>No psalms.</em></p>{% endif %}
 <p><em>At the end of the Psalms is sung or said</em></p>
-{{ rite.gloria() }}
+<div data-rite="ii">{{ rite.gloria() }}</div>
+<div data-rite="i" hidden>{{ ritei.gloria() }}</div>
 <div data-when="all" hidden>
 <h3>The Lessons</h3>
 {% if section.ot %}{{ section.ot | safe }}{{ rite.word() }}{% endif %}
-{{ section.canticleFirst | safe }}
+<div data-rite="ii">{{ section.canticleFirst | safe }}</div>
+<div data-rite="i" hidden>{{ section.canticleFirstI | safe }}</div>
 {% if section.nt %}{{ section.nt | safe }}{{ rite.word() }}{% endif %}
-{{ section.canticleSecond | safe }}
+<div data-rite="ii">{{ section.canticleSecond | safe }}</div>
+<div data-rite="i" hidden>{{ section.canticleSecondI | safe }}</div>
 </div>
 <div id="evening-lessons">
 <h3 id="evening-gospel">The Gospel Reading</h3>
@@ -43,48 +51,72 @@
 {{ rite.word() }}
 </div>
 <div data-when="time">
-{{ rite.magnificatOrNunc() }}
+<div data-rite="ii">{{ rite.magnificatOrNunc() }}</div>
+<div data-rite="i" hidden>{{ ritei.magnificatOrNunc() }}</div>
 </div>
 {% else %}
-{{ rite.openingSentences(section.opening) }}
-{{ rite.confession("morning") }}
+<div data-rite="ii">{{ rite.openingSentences(section.opening) }}</div>
+<div data-rite="i" hidden>{{ ritei.openingSentences(section.opening) }}</div>
+<div data-rite="ii">{{ rite.confession("morning") }}</div>
+<div data-rite="i" hidden>{{ ritei.confession("morning") }}</div>
 <p><strong>The Invitatory and Psalter</strong></p>
+<div data-rite="ii">
 <p><em>All stand</em><br>
 <em>Officiant</em> Lord, open our lips.<br>
 <em class="response">And our mouth shall proclaim your praise.</em></p>
 {{ rite.gloria() }}
+</div>
+<div data-rite="i" hidden>
+<p><em>All stand</em><br>
+<em>Officiant</em> O Lord, open thou our lips.<br>
+<em class="response">And our mouth shall show forth thy praise.</em></p>
+{{ ritei.gloria() }}
+</div>
 {% if not section.lent %}<p><em>Except in Lent,</em> Alleluia <em>may be added.</em></p>{% endif %}
-{% if section.proper %}{{ rite.properAntiphons() }}{% endif %}
-{{ rite.venite() }}
+{% if section.proper %}
+<div data-rite="ii">{{ rite.properAntiphons() }}</div>
+<div data-rite="i" hidden>{{ ritei.properAntiphons() }}</div>
+{% endif %}
+<div data-rite="ii">{{ rite.venite() }}</div>
+<div data-rite="i" hidden>{{ ritei.venite() }}</div>
 <h3 id="morning-psalms">The Psalm or Psalms Appointed</h3>
 {% if section.psalms %}{{ section.psalms | safe }}{% else %}<p><em>No psalms.</em></p>{% endif %}
 <div data-when="all" hidden>
 {% if section.otherPsalms %}{{ section.otherPsalms | safe }}{% endif %}
 </div>
 <p><em>At the end of the Psalms is sung or said</em></p>
-{{ rite.gloria() }}
+<div data-rite="ii">{{ rite.gloria() }}</div>
+<div data-rite="i" hidden>{{ ritei.gloria() }}</div>
 <h3 id="morning-lessons">The Lessons</h3>
 {% if section.ot %}{{ section.ot | safe }}{{ rite.word() }}{% endif %}
-{{ section.canticleFirst | safe }}
+<div data-rite="ii">{{ section.canticleFirst | safe }}</div>
+<div data-rite="i" hidden>{{ section.canticleFirstI | safe }}</div>
 {% if section.nt %}{{ section.nt | safe }}{{ rite.word() }}{% endif %}
-{{ section.canticleSecond | safe }}
+<div data-rite="ii">{{ section.canticleSecond | safe }}</div>
+<div data-rite="i" hidden>{{ section.canticleSecondI | safe }}</div>
 <div data-when="all" hidden>
 <p><strong>The Gospel Reading</strong></p>
 {% if section.gospel %}{{ section.gospel | safe }}{{ rite.word() }}{% endif %}
 </div>
 {% endif %}
-{{ rite.creed() }}
+<div data-rite="ii">{{ rite.creed() }}</div>
+<div data-rite="i" hidden>{{ ritei.creed() }}</div>
 <h3>The Prayers</h3>
 <em>The People stand or kneel</em></p>
-{{ rite.lordsPrayers() }}
-{{ rite.suffrages(section.id) }}
+<div data-rite="ii">{{ rite.lordsPrayers() }}</div>
+<div data-rite="i" hidden>{{ ritei.lordsPrayers() }}</div>
+<div data-rite="ii">{{ rite.suffrages(section.id) }}</div>
+<div data-rite="i" hidden>{{ ritei.suffrages(section.id) }}</div>
 <p><em>The Officiant then says the following Collects</em></p>
 <h3>The Collect of the Day</h3>
 <div class="collect" data-rite="ii">{{ section.collectIi | safe }}</div>
 <div class="collect" data-rite="i" hidden>{{ section.collectI | safe }}</div>
-{{ rite.fixedCollect(section.id, section.dow) }}
-{{ rite.mission(section.id) }}
-{{ rite.closing(section.easter) }}
+<div data-rite="ii">{{ rite.fixedCollect(section.id, section.dow) }}</div>
+<div data-rite="i" hidden>{{ ritei.fixedCollect(section.id, section.dow) }}</div>
+<div data-rite="ii">{{ rite.mission(section.id) }}</div>
+<div data-rite="i" hidden>{{ ritei.mission(section.id) }}</div>
+<div data-rite="ii">{{ rite.closing(section.easter) }}</div>
+<div data-rite="i" hidden>{{ ritei.closing(section.easter) }}</div>
 </section>
 {% endfor %}
 {% endif %}

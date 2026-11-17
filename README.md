@@ -52,7 +52,7 @@ The `[hidden]` rule in `site/assets/site.css` keeps `!important`. Bootstrap woul
 - A Sunday lectionary page for each of those Sundays, Revised Common Lectionary first and the 1979 lectionary after it.
 - Collects, prefaces, canticles, the thirty-day psalter, and a holy-day list.
 
-The date index is `site/_data/days.json`. It was exported from the PHP classes `BCP\ChurchCalendar` and `BCP\DailyOffice`. Those classes are not in this tree. Rebuilding the index means using the commit that still has them. It is not a new Easter calculation.
+The date index is `site/_data/days.json`. It was exported from the PHP classes `BCP\ChurchCalendar` and `BCP\DailyOffice`. Those classes are not in this tree. Rebuilding the index means using the commit that still has them. It is not a new Easter calculation. Office pages and the date form stop on 31 December 2032 because that file stops there. A later year is another export of the same index, then a rebuild. The site does not invent dates past the index.
 
 Pages embed the King James Version so they can be read with scripts turned off. The browser then asks for the translation saved in preferences. NRSV is that default. Book id 67 and above is read from the RSV chapter files when they are present.
 
@@ -88,7 +88,7 @@ Codes listed under `copyrighted` in `policy.json` stay out of git. `site/bible/`
 
 The header, footer, and menu are `site/_includes/layout.njk`. Menu entries come from `site/_data/catalog.json`. The blue theme is `public/themes/bcp/css/theme-blue-2.css`. Small adjustments are `site/assets/site.css`.
 
-Morning and evening wording is `site/_includes/office.njk` and `site/_includes/rite-ii.njk`. Sunday headings are `site/_includes/lectionary.njk`. Which lessons are chosen is still `site/lib/render.js`. The Rite II canticle table is in that file.
+Morning and evening wording is `site/_includes/office.njk`, `site/_includes/rite-ii.njk`, and `site/_includes/rite-i.njk`. Sunday headings are `site/_includes/lectionary.njk`. Which lessons are chosen is still `site/lib/render.js`. The canticle tables for both rites are in that file.
 
 ### Another language, or Compline
 
@@ -98,4 +98,4 @@ Spanish collects, prefaces, and canticles are already pages. Spanish morning and
 
 ## Not in this build
 
-Rite I and Spanish morning and evening prayer, feast and seasonal invitatory antiphons, and the noonday office. Morning and Evening Prayer keep every opening sentence, prayer for mission, and closing sentence in the page and, when scripts run, show one of each, chosen on each load. An ordinary weekday prints the three invitatory antiphons. Canticle rotation follows the Rite II table when all readings are shown; the evening default is the Song of Mary or the Song of Simeon. Compline is the rite page, not a dated office. Church-year dates are the exported index in `site/_data/days.json`.
+Spanish morning and evening prayer, feast and seasonal invitatory antiphons, and the noonday office. Morning and Evening Prayer are Rite II unless the preference is Rite I. Both rites are in the same page. Each keeps every opening sentence, prayer for mission, and closing sentence, and, when scripts run, shows one of each, chosen on each load. An ordinary weekday prints the three invitatory antiphons. Canticle rotation follows that rite's table when all readings are shown; the evening default is the Song of Mary or the Song of Simeon. Compline is the rite page, not a dated office. Church-year dates are the exported index in `site/_data/days.json`.

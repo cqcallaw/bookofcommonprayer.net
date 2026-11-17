@@ -124,7 +124,7 @@ function applyPrefs(prefs) {
   const container = document.getElementById("maincontainer");
   if (container && prefs.fontSize) container.style.fontSize = `${prefs.fontSize}px`;
   const rite = prefs.prayerRite ? "i" : "ii";
-  document.querySelectorAll(".collect").forEach((node) => {
+  document.querySelectorAll("[data-rite]").forEach((node) => {
     node.hidden = node.dataset.rite !== rite;
   });
   if (prefs.lectionaryType) {
