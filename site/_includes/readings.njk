@@ -5,7 +5,7 @@
 {% else %}
 <h1>Daily Office Readings</h1>
 <h2>{{ office.title }}</h2>
-<p class="week season-{{ office.color }}"><strong>{{ office.week }}</strong></p>
+{% if office.color %}<h3 class="{{ office.color }}">{{ office.week }}</h3>{% elif office.week %}<p><strong>{{ office.week }}</strong></p>{% endif %}
 <p>Week of {{ office.sunday }}. Daily Office Year {{ office.year }}. Lectionary Year {{ office.lectionaryYear }}.</p>
 <p>Lessons for the morning and the evening are both listed here. The prayers are on the <a href="{{ office.path }}">Daily Office</a> page.</p>
 <p>
