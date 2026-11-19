@@ -1,6 +1,7 @@
 {# Spoken Rite II. The live office prints one random choice for the opening
    sentences, the weekday collect, the prayer for mission, and the closing
-   sentence. This page prints every choice those slots can return. #}
+   sentence. This page prints every choice those slots can return. When
+   scripts run, one of each is shown. #}
 
 {% macro gloria() %}
 <div class="row paired-choice">
@@ -385,23 +386,25 @@ That this evening may be holy, good, and peaceful,<br>
 {% endmacro %}
 
 {% macro weekdayCollects(which) %}
+<div data-opening="collect">
 {% if which == "morning" %}
-{{ namedCollect("A Collect for the Renewal of Life", "O God, the King eternal, whose light divides the day from the night and turns the shadow of death into the morning: Drive far from us all wrong desires, incline our hearts to keep your law, and guide our feet into the way of peace; that, having done your will with cheerfulness during the day, we may, when night comes, rejoice to give you thanks; through Jesus Christ our Lord.") }}
-<p><em>or this</em></p>
-{{ namedCollect("A Collect for Peace", "O God, the author of peace and lover of concord, to know you is eternal life and to serve you is perfect freedom: Defend us, your humble servants, in all assaults of our enemies; that we, surely trusting in your defense, may not fear the power of any adversaries; through the might of Jesus Christ our Lord.") }}
-<p><em>or this</em></p>
-{{ namedCollect("A Collect for Grace", "Lord God, almighty and everlasting Father, you have brought us in safety to this new day: Preserve us with your mighty power, that we may not fall into sin, nor be overcome by adversity; and in all we do, direct us to the fulfilling of your purpose; through Jesus Christ our Lord.") }}
-<p><em>or this</em></p>
-{{ namedCollect("A Collect for Guidance", "Heavenly Father, in you we live and move and have our being: We humbly pray you so to guide and govern us by your Holy Spirit, that in all the cares and occupations of our life we may not forget you, but may remember that we are ever walking in your sight; through Jesus Christ our Lord.") }}
+<div data-sentence>{{ namedCollect("A Collect for the Renewal of Life", "O God, the King eternal, whose light divides the day from the night and turns the shadow of death into the morning: Drive far from us all wrong desires, incline our hearts to keep your law, and guide our feet into the way of peace; that, having done your will with cheerfulness during the day, we may, when night comes, rejoice to give you thanks; through Jesus Christ our Lord.") }}</div>
+<p data-sentence-or><em>or this</em></p>
+<div data-sentence>{{ namedCollect("A Collect for Peace", "O God, the author of peace and lover of concord, to know you is eternal life and to serve you is perfect freedom: Defend us, your humble servants, in all assaults of our enemies; that we, surely trusting in your defense, may not fear the power of any adversaries; through the might of Jesus Christ our Lord.") }}</div>
+<p data-sentence-or><em>or this</em></p>
+<div data-sentence>{{ namedCollect("A Collect for Grace", "Lord God, almighty and everlasting Father, you have brought us in safety to this new day: Preserve us with your mighty power, that we may not fall into sin, nor be overcome by adversity; and in all we do, direct us to the fulfilling of your purpose; through Jesus Christ our Lord.") }}</div>
+<p data-sentence-or><em>or this</em></p>
+<div data-sentence>{{ namedCollect("A Collect for Guidance", "Heavenly Father, in you we live and move and have our being: We humbly pray you so to guide and govern us by your Holy Spirit, that in all the cares and occupations of our life we may not forget you, but may remember that we are ever walking in your sight; through Jesus Christ our Lord.") }}</div>
 {% else %}
-{{ namedCollect("A Collect for Aid against Perils", "Be our light in the darkness, O Lord, and in your great mercy defend us from all perils and dangers of this night; for the love of your only Son, our Savior Jesus Christ.") }}
-<p><em>or this</em></p>
-{{ namedCollect("A Collect for Peace", "Most holy God, the source of all good desires, all right judgments, and all just works: Give to us, your servants, that peace which the world cannot give, so that our minds may be fixed on the doing of your will, and that we, being delivered from the fear of all enemies, may live in peace and quietness; through the mercies of Christ Jesus our Savior.") }}
-<p><em>or this</em></p>
-{{ namedCollect("A Collect for Protection", "O God, the life of all who live, the light of the faithful, the strength of those who labor, and the repose of the dead: We thank you for the blessings of the day that is past, and humbly ask for your protection through the coming night. Bring us in safety to the morning hours; through him who died and rose again for us, your Son our Savior Jesus Christ.") }}
-<p><em>or this</em></p>
-{{ namedCollect("A Collect for the Presence of Christ", "Lord Jesus, stay with us, for evening is at hand and the day is past; be our companion in the way, kindle our hearts, and awaken hope, that we may know you as you are revealed in Scripture and the breaking of bread. Grant this for the sake of your love.") }}
+<div data-sentence>{{ namedCollect("A Collect for Aid against Perils", "Be our light in the darkness, O Lord, and in your great mercy defend us from all perils and dangers of this night; for the love of your only Son, our Savior Jesus Christ.") }}</div>
+<p data-sentence-or><em>or this</em></p>
+<div data-sentence>{{ namedCollect("A Collect for Peace", "Most holy God, the source of all good desires, all right judgments, and all just works: Give to us, your servants, that peace which the world cannot give, so that our minds may be fixed on the doing of your will, and that we, being delivered from the fear of all enemies, may live in peace and quietness; through the mercies of Christ Jesus our Savior.") }}</div>
+<p data-sentence-or><em>or this</em></p>
+<div data-sentence>{{ namedCollect("A Collect for Protection", "O God, the life of all who live, the light of the faithful, the strength of those who labor, and the repose of the dead: We thank you for the blessings of the day that is past, and humbly ask for your protection through the coming night. Bring us in safety to the morning hours; through him who died and rose again for us, your Son our Savior Jesus Christ.") }}</div>
+<p data-sentence-or><em>or this</em></p>
+<div data-sentence>{{ namedCollect("A Collect for the Presence of Christ", "Lord Jesus, stay with us, for evening is at hand and the day is past; be our companion in the way, kindle our hearts, and awaken hope, that we may know you as you are revealed in Scripture and the breaking of bread. Grant this for the sake of your love.") }}</div>
 {% endif %}
+</div>
 {% endmacro %}
 
 {% macro fixedCollect(which, dow) %}

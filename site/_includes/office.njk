@@ -5,7 +5,7 @@
 <h1>{{ office.title }}</h1>
 <p>No daily office readings are stored for {{ office.week }} (year {{ office.year }}, id {{ office.id }}).</p>
 {% else %}
-{#Both rites for this date. Rite II is what a browser shows when scripts are off. Rite I is in the same page and is shown when the preference is Rite I. Evening Prayer opens on the evening psalms and the Gospel. Morning Prayer opens on the morning psalms and the first two lessons. The preference “all readings” shows the rest and, in the evening, replaces the Song of Mary or Simeon with the rotated canticles. Opening sentences, the prayer for mission, and the closing sentence are printed in full. Spanish offices are not on this page.#}
+{#Both rites for this date. Rite II is what a browser shows when scripts are off. Rite I is in the same page and is shown when the preference is Rite I. Evening Prayer opens on the evening psalms and the Gospel. Morning Prayer opens on the morning psalms and the first two lessons. The preference “all readings” shows the rest and, in the evening, replaces the Song of Mary or Simeon with the rotated canticles. Opening sentences, the weekday collect, the prayer for mission, and the closing sentence are printed in full. Spanish offices are not on this page.#}
 <h1>{{ office.title }}</h1>
 {% if office.color %}<h3 class="{{ office.color }}">{{ office.week }}</h3>{% elif office.week %}<p><strong>{{ office.week }}</strong></p>{% endif %}
 <p>Week of {{ office.sunday }}. Daily Office Year {{ office.year }}. Lectionary Year {{ office.lectionaryYear }}.</p>
