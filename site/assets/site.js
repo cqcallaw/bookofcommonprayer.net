@@ -297,3 +297,9 @@ wireToday(prefs);
 wireDateForm(prefs);
 wireSearch(prefs);
 wirePreferences(prefs);
+
+// The back button restores this page without running the module again.
+// Apply the rite saved in the meantime, and keep the sentence already chosen.
+window.addEventListener("pageshow", (event) => {
+  if (event.persisted) applyPrefs(loadPrefs());
+});
