@@ -12,7 +12,7 @@
 <p><a href="{{ office.path }}#morning">Morning Prayer</a> &nbsp;|&nbsp; <a href="{{ office.path }}#evening">Evening Prayer</a> &nbsp;|&nbsp; <a href="{{ office.path }}readings/">Readings only</a></p>
 {% for section in office.sections %}
 <section id="{{ section.id }}">
-<h2>{{ section.title }}</h2>
+<h2>Daily {{ section.title }}</h2>
 {% if section.id == "evening" %}
 <div data-rite="ii">{{ rite.openingSentences("evening") }}</div>
 <div data-rite="i" hidden>{{ ritei.openingSentences("evening") }}</div>
